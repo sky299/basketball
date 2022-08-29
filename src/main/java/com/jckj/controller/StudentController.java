@@ -16,6 +16,6 @@ public class StudentController {
 
     @RequestMapping("list")
     public JsonResult list(TStudentInfo tStudentInfo){
-        return JsonResult.success(studentService.list(tStudentInfo),studentService.count(tStudentInfo));
+        return JsonResult.success(studentService.list(tStudentInfo).getList(),studentService.count(tStudentInfo));
     }
 }

@@ -16,7 +16,7 @@ public interface StudentMapper {
     /**
      * 列表总数
      */
-    Integer count(PageDto dto);
+    Integer count(PageDto pageDto);
 
     /**
      * 详情
@@ -37,9 +37,4 @@ public interface StudentMapper {
      * 删除
      */
     void remove(Integer id);
-
-    /**
-     * 列表总数
-     */
-    Integer count(TStudentInfo tStudentInfo);
 }

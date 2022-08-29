@@ -12,6 +12,8 @@ public class TStudentInfo extends PageDto {
 
     private Long studentPay;
 
+    private String birthday;
+
     private String studentEnroll;
 
     private String studentPhoto;
@@ -27,6 +29,34 @@ public class TStudentInfo extends PageDto {
     private Long createTime;
 
     private Long updateTime;
+
+    private String createTimeStr;
+
+    private String updateTimeStr;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getCreateTimeStr() {
+        return createTimeStr;
+    }
+
+    public void setCreateTimeStr(String createTimeStr) {
+        this.createTimeStr = createTimeStr;
+    }
+
+    public String getUpdateTimeStr() {
+        return updateTimeStr;
+    }
+
+    public void setUpdateTimeStr(String updateTimeStr) {
+        this.updateTimeStr = updateTimeStr;
+    }
 
     public Integer getId() {
         return id;

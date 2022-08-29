@@ -14,14 +14,13 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
 
-
     @Override
-    public PageVo list(PageDto dto) {
-        Integer count = studentMapper.count(dto);
-        if(count ==0) {
+    public PageVo list(PageDto pageDto) {
+        Integer count = studentMapper.count(pageDto);
+        if (count == 0) {
             return PageVo.successPage();
         }
-        return PageVo.successPage(studentMapper.list(dto),count);
+        return PageVo.successPage(studentMapper.list(pageDto), count);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Integer count(TStudentInfo tStudentInfo) {
-        return studentMapper.count(tStudentInfo);
+    public Integer count(PageDto pageDto) {
+        return studentMapper.count(pageDto);
     }
 }
