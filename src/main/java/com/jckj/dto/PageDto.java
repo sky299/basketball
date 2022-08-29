@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @date: 2022年8月12日 上午11:21:42
  */
 public class PageDto implements Serializable {
-
 	private static final long serialVersionUID = 5172649115384573373L;
 	/**
 	 * 默认每页显示数
