@@ -15,7 +15,14 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("list")
-    public JsonResult list(TStudentInfo tStudentInfo){
-        return JsonResult.success(studentService.list(tStudentInfo).getList(),studentService.count(tStudentInfo));
+    public JsonResult list(int page,int limit,TStudentInfo tStudentInfo) {
+        tStudentInfo.setPageNum(page);
+        tStudentInfo.setPageRow(limit);
+        return JsonResult.success(studentService.list(tStudentInfo).getList(), studentService.count(tStudentInfo));
     }
+
+//    @RequestMapping("info")
+//    public JsonResult info(){
+//        return JsonResult.success();
+//    }
 }
