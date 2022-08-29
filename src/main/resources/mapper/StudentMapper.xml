@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.model.TStudentInfo">
+    <select id="list" parameterType="com.jckj.dto.PageDto" resultType="com.jckj.model.TStudentInfo">
+        select id,
+        student_id as studentId,
+        student_name as studentName,
+        student_pay as studentPay,
+        student_enroll as studentEnroll,
+        student_photo as studentPhoto,
+        gender,
+        class_name as className,
+        student_status as studentStatus,
+        is_delete as isDelete,
+        FROM_UNIXTIME(create_time/1000,'%Y-%m-%d %H:%m:%s') as createTime,
+        FROM_UNIXTIME(update_time/1000,'%Y-%m-%d %H:%m:%s') as updateTime
+        from t_stduent_info
+        where is_delete = 0
+        <trim suffixOverrides="and">
+            <if test="studentName != null and studentName != ''">
+                and student_name like concat('%',#{studentName},'%')
+            </if>
+        </trim>
+        order by id desc limit #{page}, #{limit};
+    </select>
+
+    <select id="count" parameterType="com.jckj.dto.PageDto" resultType="java.lang.Integer">
+        select
+        count(1)
+        from t_stduent_info
+        where is_delete = 0
+        <trim suffixOverrides="and">
+            <if test="studentName != null and studentName != ''">
+                and student_name like concat('%',#{studentName},'%')
+            </if>
+        </trim>
+    </select>
+
+</mapper>

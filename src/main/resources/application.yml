@@ -3,17 +3,17 @@ server:
 #配置spring
 spring:
   redis:
-    host: sjk.com
+    host: localhost
     database: 0
     port: 6379
-    password: admin_123
+    password: 396780
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://sjk.com:3306/test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+      url: jdbc:mysql://localhost:3306/basketball?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
       username: root
-      password: root 
+      password: 396780
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
@@ -53,6 +53,8 @@ spring:
           wall:
               config:
                   multi-statement-allow: true
+  resources:
+    static-locations: classpath:/templates/
 #mybatis配置
 mybatis:
   type-aliases-package: com.jckj.model
