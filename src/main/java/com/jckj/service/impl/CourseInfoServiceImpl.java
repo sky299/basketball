@@ -1,6 +1,5 @@
 package com.jckj.service.impl;
 
-import com.jckj.dto.PageDto;
 import com.jckj.mapper.CourseInfoMapper;
 import com.jckj.model.CourseInfo;
 import com.jckj.service.CourseInfoService;
@@ -23,12 +22,31 @@ public class CourseInfoServiceImpl implements CourseInfoService {
     @Override
     public PageVo list(CourseInfo courseInfo) {
         List<CourseInfo> listCourseInfo = courseInfoMapper.findAll(courseInfo);
-        PageVo pageVo = PageVo.successPage(listCourseInfo);
-        return pageVo;
+        return PageVo.successPage(listCourseInfo);
     }
 
     @Override
-    public Integer count(CourseInfo courseInfo) {
+    public CourseInfo findById(Integer id) {
+        return courseInfoMapper.findById(id);
+    }
+
+    @Override
+    public int count(CourseInfo courseInfo) {
         return courseInfoMapper.count(courseInfo);
+    }
+
+    @Override
+    public int add(CourseInfo courseInfo) {
+        return 0;
+    }
+
+    @Override
+    public int delete(Integer id) {
+        return 0;
+    }
+
+    @Override
+    public int update(CourseInfo courseInfo) {
+        return 0;
     }
 }

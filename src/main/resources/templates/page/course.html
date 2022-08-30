@@ -164,7 +164,22 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/edit.html',
+                    content: '../page/course/edit.html',
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#courseName').val(data.courseName);
+                        body.find('#courseTime').val(data.courseTime);
+                        body.find('#photo').val(data.phone);
+                        body.find('#courseIntroduce').val(data.courseIntroduce);
+                        body.find('#coursePrice').val(data.coursePrice);
+                        body.find('#tocourseBiginTime').val(data.tocourseBiginTime);
+                        body.find('#tocourseFinishTime').val(data.tocourseFinishTime);
+                        body.find('#enrollTotal').val(data.enrollTotal);
+                        body.find('#isShaky').val(data.isShaky);
+                        body.find('#courseState').val(data.courseState);
+                        body.find('#schoolName').val(data.schoolName);
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

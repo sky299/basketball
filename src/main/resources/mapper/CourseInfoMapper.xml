@@ -4,7 +4,7 @@
 <mapper namespace="com.jckj.mapper.CourseInfoMapper">
 
     <!-- 列表 -->
-    <select id="findAll" parameterType="com.jckj.dto.PageDto" resultType="com.jckj.model.CourseInfo">
+    <select id="findAll" parameterType="com.jckj.model.CourseInfo" resultType="com.jckj.model.CourseInfo">
         select
         id,
         course_name courseName,
@@ -21,6 +21,24 @@
         from t_course_info
         where is_delete=0
         limit #{dataNum},#{limit}
+    </select>
+    <select id="findById" resultType="com.jckj.model.CourseInfo">
+    	select
+    	id,
+        course_name courseName,
+        course_time courseTime,
+        photo,
+        course_introduce courseIntroduce,
+        course_price coursePrice,
+        tocourse_bigin_time tocourseBiginTime,
+        tocourse_finish_time tocourseFinishTime,
+        enroll_total enrollTotal,
+        is_shaky isShaky,
+        course_state courseState,
+        school_name schoolName
+    	from t_course_info
+        where is_delete=0
+        and id=#{id}
     </select>
     <select id="count" parameterType="com.jckj.model.CourseInfo" resultType="java.lang.Integer">
         select count(1) from t_course_info where is_delete=0

@@ -12,11 +12,11 @@ public class JsonResult implements Serializable {
     /**
      * 状态码 200 ok , 500 error
      */
-    private int code = 200;
+    private int code = 0;
     /**
      * 状态码对应的信息
      */
-    private String msg = "ok";
+    private String msg = "";
     /**
      * 正常数据
      */
@@ -32,7 +32,6 @@ public class JsonResult implements Serializable {
         this.data = data;
     }
 
-
     public JsonResult(int code, String msg) {
         this.code = code;
         this.msg = msg;
@@ -46,6 +45,11 @@ public class JsonResult implements Serializable {
     public JsonResult(int code, String msg, Object data, int count) {
         this.code = code;
         this.msg = msg;
+        this.data = data;
+        this.count = count;
+    }
+
+    public JsonResult(Object data, int count) {
         this.data = data;
         this.count = count;
     }
@@ -69,7 +73,6 @@ public class JsonResult implements Serializable {
         return new JsonResult(data);
     }
 
-
     /**
      * 返回成功
      *
@@ -78,7 +81,7 @@ public class JsonResult implements Serializable {
      * @return
      */
     public static JsonResult success(Object data, int count) {
-        return new JsonResult(0, "", data, count);
+        return new JsonResult(data, count);
     }
 
     /**
