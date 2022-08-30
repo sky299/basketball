@@ -21,9 +21,9 @@ public class CourseInfoServiceImpl implements CourseInfoService {
     private CourseInfoMapper courseInfoMapper;
 
     @Override
-    public PageVo list(PageDto dto) {
-        List<CourseInfo> listCourseInfo = courseInfoMapper.findAll(dto);
-        PageVo pageVo = PageVo.successPage(listCourseInfo, 10);
+    public PageVo list(CourseInfo courseInfo) {
+        List<CourseInfo> listCourseInfo = courseInfoMapper.findAll(courseInfo);
+        PageVo pageVo = PageVo.successPage(listCourseInfo,courseInfoMapper.count(courseInfo));
         return pageVo;
     }
 

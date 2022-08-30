@@ -28,4 +28,5 @@ public class CourseController {
         courseInfo.setPageRow(limit);
         return JsonResult.success(courseInfoService.list(courseInfo).getList(),courseInfoService.count(courseInfo));
     }
+
 }

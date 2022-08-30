@@ -226,25 +226,4 @@ public class CourseInfo extends PageDto implements Serializable {
 
     public CourseInfo() {
     }
-
-    @Override
-    public String toString() {
-        return "CourseInfo{" +
-                "id=" + id +
-                ", courseName='" + courseName + '\'' +
-                ", courseTime=" + courseTime +
-                ", photo='" + photo + '\'' +
-                ", courseIntroduce='" + courseIntroduce + '\'' +
-                ", coursePrice='" + coursePrice + '\'' +
-                ", tocourseBiginTime=" + tocourseBiginTime +
-                ", tocourseFinishTime=" + tocourseFinishTime +
-                ", enrollTotal='" + enrollTotal + '\'' +
-                ", isShaky=" + isShaky +
-                ", courseState=" + courseState +
-                ", schoolName='" + schoolName + '\'' +
-                ", isDelete=" + isDelete +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
-    }
 }
