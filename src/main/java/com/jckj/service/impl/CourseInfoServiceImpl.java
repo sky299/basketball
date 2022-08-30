@@ -23,7 +23,7 @@ public class CourseInfoServiceImpl implements CourseInfoService {
     @Override
     public PageVo list(CourseInfo courseInfo) {
         List<CourseInfo> listCourseInfo = courseInfoMapper.findAll(courseInfo);
-        PageVo pageVo = PageVo.successPage(listCourseInfo,courseInfoMapper.count(courseInfo));
+        PageVo pageVo = PageVo.successPage(listCourseInfo);
         return pageVo;
     }
 

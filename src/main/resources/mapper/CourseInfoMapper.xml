@@ -20,7 +20,7 @@
         school_name schoolName
         from t_course_info
         where is_delete=0
-        limit #{dataNum},#{pageRow}
+        limit #{dataNum},#{limit}
     </select>
     <select id="count" parameterType="com.jckj.model.CourseInfo" resultType="java.lang.Integer">
         select count(1) from t_course_info where is_delete=0

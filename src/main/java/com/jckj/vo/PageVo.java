@@ -24,19 +24,18 @@ public class PageVo implements Serializable {
     /**
      * 数据总个数
      */
-    private Integer totalCount;
+    private Integer count;
 
     public static PageVo successPage() {
         PageVo vo = new PageVo();
         vo.setList(Collections.emptyList());
-        vo.setTotalCount(0);
+        vo.setCount(0);
         return vo;
     }
 
-    public static PageVo successPage(List<?> list, Integer totalCount) {
+    public static PageVo successPage(List<?> list) {
         PageVo vo = new PageVo();
         vo.setList(list);
-        vo.setTotalCount(totalCount);
         return vo;
     }
 
@@ -57,11 +56,11 @@ public class PageVo implements Serializable {
         this.list = list;
     }
 
-    public Integer getTotalCount() {
-        return totalCount;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setTotalCount(Integer totalCount) {
-        this.totalCount = totalCount;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
