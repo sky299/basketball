@@ -25,12 +25,12 @@ public class PageDto implements Serializable {
 	/**
 	 * 每页显示条数
 	 */
-	private Integer pageRow = ROW;
+	private Integer limit = ROW;
 
 	/**
 	 * 页码
 	 */
-	private Integer pageNum = NUM;
+	private Integer page = NUM;
 
 	/**
 	 * sql分页起始位置
@@ -57,43 +57,43 @@ public class PageDto implements Serializable {
 
 	/**
 	 *
-	 * @param pageNum 页码
-	 * @param pageRow 每页显示数
+	 * @param page 页码
+	 * @param limit 每页显示数
 	 */
-	public PageDto(Integer pageNum, Integer pageRow) {
-		if (pageNum != null && pageNum > ZERO) {
-			this.pageNum = pageNum;
+	public PageDto(Integer page, Integer limit) {
+		if (page != null && page > ZERO) {
+			this.page = page;
 		}
-		if (pageRow != null && pageRow > ZERO) {
-			this.pageRow = pageRow;
+		if (limit != null && limit > ZERO) {
+			this.limit = limit;
 		}
-		this.dataNum = (this.pageNum - NUM) * this.pageRow;
+		this.dataNum = (this.page - NUM) * this.limit;
 	}
 
-	public Integer getPageRow() {
-		return pageRow;
+	public Integer getLimit() {
+		return limit;
 	}
 
-	public void setPageRow(Integer pageRow) {
-		if (pageRow == null || pageRow <NUM) {
+	public void setLimit(Integer limit) {
+		if (limit == null || limit <NUM) {
 			return;
 		}
-		this.pageRow = pageRow;
+		this.limit = limit;
 	}
 
-	public Integer getPageNum() {
-		return pageNum;
+	public Integer getPage() {
+		return page;
 	}
 
-	public void setPageNum(Integer pageNum) {
-		if (pageNum == null || pageNum <NUM) {
+	public void setPage(Integer page) {
+		if (page == null || page <NUM) {
 			return;
 		}
-		this.pageNum = pageNum;
+		this.page = page;
 	}
 
 	public Integer getDataNum() {
-		return pageNum.equals(NUM)  ? dataNum : (this.getPageNum() - NUM) * this.getPageRow();
+		return page.equals(NUM)  ? dataNum : (this.getPage() - NUM) * this.getLimit();
 	}
 
 	public void setDataNum(Integer dataNum) {

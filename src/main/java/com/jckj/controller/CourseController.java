@@ -23,9 +23,7 @@ public class CourseController {
      * 列表
      */
     @RequestMapping("findAll")
-    public JsonResult list(Integer page, Integer limit, CourseInfo courseInfo) {
-        courseInfo.setPageNum(page);
-        courseInfo.setPageRow(limit);
+    public JsonResult list(CourseInfo courseInfo) {
         return JsonResult.success(courseInfoService.list(courseInfo).getList(),courseInfoService.count(courseInfo));
     }
 
