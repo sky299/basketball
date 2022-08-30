@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @date: 2022/8/29 16:41
  * @description:
  */
-public class School extends PageDto {
+public class School extends PageDto{
     /**
      *校区id
      */

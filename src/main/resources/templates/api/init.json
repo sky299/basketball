@@ -34,20 +34,56 @@
           "target": "_self"
         },
         {
-          "title": "表格示例",
-          "href": "page/table.html",
+          "title": "班级模块",
+          "href": "",
           "icon": "fa fa-file-text",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "班级管理",
+              "href": "page/grade.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            }
+          ]
         },
         {
-          "title": "表单示例",
+          "title": "报名模块",
           "href": "",
-          "icon": "fa fa-calendar",
+          "icon": "fa fa-file-text",
           "target": "_self",
           "child": [
             {
               "title": "普通表单",
               "href": "page/form.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "风采模块",
+          "href": "",
+          "icon": "fa fa-file-text",
+          "target": "_self",
+          "child": [
+            {
+              "title": "普通表单",
+              "href": "page/form.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "校区模块",
+          "href": "",
+          "icon": "fa fa-calendar",
+          "target": "_self",
+          "child": [
+            {
+              "title": "校区管理",
+              "href": "page/school.html",
               "icon": "fa fa-list-alt",
               "target": "_self"
             },

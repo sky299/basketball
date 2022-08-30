@@ -10,7 +10,7 @@ import java.util.Date;
  * @date: 2022/8/29 14:10
  * @description:
  */
-public class Grade extends PageDto {
+public class Grade extends PageDto{
     /**
      *班级id
      */
