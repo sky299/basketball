@@ -134,24 +134,9 @@
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 },
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
-                {field: 'studentPhoto', title: '头像', width: 80},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
                 {field: 'studentStatus', width: 80, title: '学员状态'},
-                {
-                    field: 'createTime',
-                    width: 150,
-                    title: '创建时间',
-                    sort: true,
-                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
-                },
-                {
-                    field: 'updateTime',
-                    width: 150,
-                    title: '更新时间',
-                    sort: true,
-                    templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
-                },
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -250,7 +235,7 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: 'info?studentId=' + data.id,
+                    content: 'info.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(info);

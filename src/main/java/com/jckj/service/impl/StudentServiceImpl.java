@@ -7,20 +7,22 @@ import com.jckj.service.StudentService;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentMapper studentMapper;
 
     @Override
-    public PageVo list(PageDto pageDto) {
-        Integer count = studentMapper.count(pageDto);
+    public PageVo list(TStudentInfo tStudentInfo) {
+        Integer count = studentMapper.count(tStudentInfo);
         if (count == 0) {
             return PageVo.successPage();
         }
-        return PageVo.successPage(studentMapper.list(pageDto), count);
+        return PageVo.successPage(studentMapper.list(tStudentInfo), count);
     }
 
     @Override

@@ -1,35 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
 </head>
 <body>
-<table border="1">
-    <tr>
-        <td>学员编号</td>
-        <td>学员姓名</td>
-        <td>学员生日</td>
-        <td>所在校区</td>
-        <td>学员头像</td>
-        <td>学员性别</td>
-        <td>所在班级</td>
-        <td>分班状态(0为未分班，1为已分班)</td>
-        <td>创建时间</td>
-        <td>修改时间</td>
-    </tr>
-    <tr th:each="student:${stu}">
-        <td th:text="${student.id}"></td>
-        <td th:text="${student.studentName}"></td>
-        <td th:text="${student.studentPay}"></td>
-        <td th:text="${student.studentEnroll}"></td>
-        <td th:text="${student.studentPhoto}"></td>
-        <td th:text="${student.gender}"></td>
-        <td th:text="${student.className}"></td>
-        <td th:text="${student.studentStatus}"></td>
-        <td th:text="${#dates.format(student.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        <td th:text="${#dates.format(student.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-    </tr>
-</table>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table
+
+        table.render({
+            elem: '#currentTableId',
+            url: 'list',
+            toolbar: '#toolbarDemo',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [[
+                {type: "checkbox", width: 50},
+                {field: 'studentId', width: 80, title: 'ID', sort: true},
+                {field: 'studentName', width: 100, title: '学员姓名'},
+                {
+                    field: 'studentPay',
+                    width: 100,
+                    title: '学员生日',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                },
+                {field: 'studentEnroll', width: 100, title: '所在校区'},
+                {field: 'studentPhoto', title: '头像', width: 80},
+                {field: 'gender', width: 80, title: '性别', sort: true},
+                {field: 'className', width: 80, title: '所在班级'},
+                {field: 'studentStatus', width: 80, title: '学员状态'},
+                {
+                    field: 'createTime',
+                    width: 150,
+                    title: '创建时间',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                },
+                {
+                    field: 'updateTime',
+                    width: 150,
+                    title: '更新时间',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                }
+            ]],
+            limits: [10, 15, 20, 25, 50, 100],
+            limit: 15,
+            page: true,
+            skin: 'line'
+        });
+    });
+</script>
 </body>
 </html>

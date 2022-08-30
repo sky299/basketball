@@ -1,8 +1,6 @@
 package com.jckj.model;
 
-import com.jckj.dto.PageDto;
-
-public class TOrderInfo extends PageDto {
+public class TOrderInfo {
 
     private Integer id;
 

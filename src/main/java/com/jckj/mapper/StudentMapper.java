@@ -11,7 +11,7 @@ public interface StudentMapper {
     /**
      * 列表
      */
-    List<TStudentInfo> list(PageDto dto);
+    List<TStudentInfo> list(TStudentInfo tStudentInfo);
 
     /**
      * 列表总数

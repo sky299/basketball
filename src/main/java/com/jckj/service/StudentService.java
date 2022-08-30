@@ -5,23 +5,26 @@ import com.jckj.model.TStudentInfo;
 import com.jckj.vo.PageVo;
 
 public interface StudentService {
-
     /**
      * 列表
      */
-    PageVo list(PageDto pageDto);
+    PageVo list(TStudentInfo tStudentInfo);
+
     /**
      * 详情
      */
     TStudentInfo info(Integer id);
+
     /**
      * 新增
      */
     void add(TStudentInfo tStudentInfo);
+
     /**
      * 修改
      */
     void update(TStudentInfo tStudentInfo);
+
     /**
      * 删除
      */
