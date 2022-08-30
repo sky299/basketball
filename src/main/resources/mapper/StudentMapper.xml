@@ -5,17 +5,17 @@
 
     <select id="list" parameterType="com.jckj.dto.PageDto" resultType="com.jckj.model.TStudentInfo">
         select id,
-        student_id as studentId,
-        student_name as studentName,
-        FROM_UNIXTIME(student_pay/1000,'%Y-%m-%d %H:%m:%s') as birthday,
-        student_enroll as studentEnroll,
-        student_photo as studentPhoto,
-        gender,
-        class_name as className,
-        student_status as studentStatus,
-        is_delete as isDelete,
-        FROM_UNIXTIME(create_time/1000,'%Y-%m-%d %H:%m:%s') as createTimeStr,
-        FROM_UNIXTIME(update_time/1000,'%Y-%m-%d %H:%m:%s') as updateTimeStr
+               student_id     as studentId,
+               student_name   as studentName,
+               student_pay    as studentPay,
+               student_enroll as studentEnroll,
+               student_photo  as studentPhoto,
+               gender,
+               class_name     as className,
+               student_status as studentStatus,
+               is_delete      as isDelete,
+               create_time    as createTime,
+               update_time    as updateTime
         from t_student_info
         where is_delete = 0
         <trim suffixOverrides="and">
@@ -30,6 +30,23 @@
         select count(1)
         from t_student_info
         where is_delete = 0;
+    </select>
+
+    <select id="info" parameterType="int" resultType="com.jckj.model.TStudentInfo">
+        select id,
+               student_id     as studentId,
+               student_name   as studentName,
+               student_pay    as studentPay,
+               student_enroll as studentEnroll,
+               student_photo  as studentPhoto,
+               gender,
+               class_name     as className,
+               student_status as studentStatus,
+               is_delete      as isDelete,
+               create_time    as createTime,
+               update_time    as updateTime
+        from t_student_info
+        where id = #{id};
     </select>
 
 </mapper>

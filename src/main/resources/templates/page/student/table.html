@@ -79,7 +79,9 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -88,8 +90,8 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加</button>
+                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除</button>
             </div>
         </script>
 
@@ -98,6 +100,8 @@
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="details">学员详情</a>
+            <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="order">支付信息</a>
         </script>
 
     </div>
@@ -107,7 +111,7 @@
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
-            table = layui.table;
+            table = layui.table
 
         table.render({
             elem: '#currentTableId',
@@ -122,14 +126,32 @@
                 {type: "checkbox", width: 50},
                 {field: 'studentId', width: 80, title: 'ID', sort: true},
                 {field: 'studentName', width: 100, title: '学员姓名'},
-                {field: 'birthday', width: 100, title: '学员生日', sort: true},
+                {
+                    field: 'studentPay',
+                    width: 100,
+                    title: '学员生日',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                },
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
                 {field: 'studentPhoto', title: '头像', width: 80},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
                 {field: 'studentStatus', width: 80, title: '学员状态'},
-                {field: 'createTimeStr', width: 150, title: '创建时间', sort: true},
-                {field: 'updateTimeStr', width: 150, title: '更新时间', sort: true},
+                {
+                    field: 'createTime',
+                    width: 150,
+                    title: '创建时间',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                },
+                {
+                    field: 'updateTime',
+                    width: 150,
+                    title: '更新时间',
+                    sort: true,
+                    templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                },
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -167,7 +189,7 @@
                     title: '添加用户',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: '../page/table/add.html',
@@ -190,12 +212,11 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
                     shade: 0.2,
-                    maxmin:true,
+                    maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: '../page/table/edit.html',
@@ -209,9 +230,34 @@
                     obj.del();
                     layer.close(index);
                 });
+            } else if (obj.event === 'order') {
+                // $.ajax({
+                //     type: 'post',
+                //     url: 'studentOrderInfo',
+                //     data: {'studentId': data.id},
+                //     success: function (data) {
+                //
+                //     },
+                //     error: function (data) {
+                //
+                //     }
+                // })
+            } else if (obj.event === 'details') {
+                var info = layer.open({
+                    title: '学员详情',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: 'info?studentId=' + data.id,
+                });
+                $(window).on("resize", function () {
+                    layer.full(info);
+                });
+                return false;
             }
         });
-
     });
 </script>
 

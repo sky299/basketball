@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>学员编号</td>
+        <td>学员姓名</td>
+        <td>学员生日</td>
+        <td>所在校区</td>
+        <td>学员头像</td>
+        <td>学员性别</td>
+        <td>所在班级</td>
+        <td>分班状态(0为未分班，1为已分班)</td>
+        <td>创建时间</td>
+        <td>修改时间</td>
+    </tr>
+    <tr th:each="student:${stu}">
+        <td th:text="${student.id}"></td>
+        <td th:text="${student.studentName}"></td>
+        <td th:text="${student.studentPay}"></td>
+        <td th:text="${student.studentEnroll}"></td>
+        <td th:text="${student.studentPhoto}"></td>
+        <td th:text="${student.gender}"></td>
+        <td th:text="${student.className}"></td>
+        <td th:text="${student.studentStatus}"></td>
+        <td th:text="${#dates.format(student.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td th:text="${#dates.format(student.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+    </tr>
+</table>
+</body>
+</html>
