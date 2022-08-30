@@ -39,6 +39,13 @@ public class PageVo implements Serializable {
         return vo;
     }
 
+    public static PageVo successPage(List<?> list,int count) {
+        PageVo vo = new PageVo();
+        vo.setList(list);
+        vo.setCount(count);
+        return vo;
+    }
+
 
     public Integer getTotalPage() {
         return totalPage;

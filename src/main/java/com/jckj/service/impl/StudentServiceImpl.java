@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.UUID;
+
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {
@@ -18,11 +21,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public PageVo list(TStudentInfo tStudentInfo) {
-        Integer count = studentMapper.count(tStudentInfo);
-        if (count == 0) {
-            return PageVo.successPage();
-        }
-        return PageVo.successPage(studentMapper.list(tStudentInfo), count);
+        return PageVo.successPage(studentMapper.list(tStudentInfo));
     }
 
     @Override
@@ -32,6 +31,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void add(TStudentInfo tStudentInfo) {
+        tStudentInfo.setDelete(false);
+        tStudentInfo.setStudentId(UUID.randomUUID().toString());
+        tStudentInfo.setCreateTime(System.currentTimeMillis());
+        tStudentInfo.setUpdateTime(System.currentTimeMillis());
         studentMapper.add(tStudentInfo);
     }
 

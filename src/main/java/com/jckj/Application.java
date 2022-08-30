@@ -10,7 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
@@ -20,6 +20,7 @@ import org.springframework.core.env.Environment;
  */
 @SpringBootApplication
 @MapperScan("com.jckj.mapper")
+@EnableTransactionManagement
 public class Application {
 	private final static Logger logger = LoggerFactory.getLogger(Application.class);
 	public static void main(String[] args) {

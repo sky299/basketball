@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>layui</title>
@@ -133,6 +133,7 @@
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 },
+                {field: 'studentPhoto', width: 100, title: '头像',templet: '#imgtem'},
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
@@ -177,7 +178,7 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: 'add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -245,6 +246,8 @@
         });
     });
 </script>
-
+<script type="text/html" id="imgtem">
+    <img src="E:/upload/d/2/29ae3712-d665-47ed-88b3-32ad296678f6_1.jpg">
+</script>
 </body>
 </html>

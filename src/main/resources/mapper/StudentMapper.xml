@@ -44,4 +44,11 @@
         where id = #{id};
     </select>
 
+    <insert id="add" parameterType="com.jckj.model.TStudentInfo">
+        insert into t_student_info (student_id, student_name, student_pay, student_enroll, student_photo, gender,
+                                    class_name, student_status, is_delete, create_time, update_time)
+        values (#{studentId}, #{studentName}, #{studentPay}, #{studentEnroll}, #{studentPhoto}, #{gender}, #{className},
+                #{studentStatus}, #{isDelete}, #{createTime}, #{updateTime});
+    </insert>
+
 </mapper>
