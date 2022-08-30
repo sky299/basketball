@@ -19,6 +19,7 @@ public class CourseController {
 
     @Autowired
     private CourseInfoService courseInfoService;
+
     /**
      * 列表
      */
