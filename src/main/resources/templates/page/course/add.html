@@ -67,7 +67,10 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
+        $.ajax({
+            url:"/course/add",
+            type:"post",
+        });
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var index = layer.alert(JSON.stringify(data.field), {
