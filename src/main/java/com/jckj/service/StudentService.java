@@ -9,7 +9,7 @@ public interface StudentService {
     /**
      * 列表
      */
-    PageVo list(PageDto dto);
+    PageVo list(PageDto pageDto);
     /**
      * 详情
      */
@@ -30,5 +30,5 @@ public interface StudentService {
     /**
      * 列表总数
      */
-    Integer count(TStudentInfo tStudentInfo);
+    Integer count(PageDto pageDto);
 }
