@@ -28,4 +28,12 @@ public interface SchoolService {
      */
 
     public Integer count(School school);
+
+    /**
+     * @param school
+     * @return Integer
+     * 添加
+     */
+
+    public Integer insert(School school);
 }

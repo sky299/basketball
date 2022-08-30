@@ -13,4 +13,11 @@
         from t_school_info
         where is_delete = 0
     </select>
+    <insert id="insert" parameterType="com.jckj.model.School">
+        insert into
+            t_school_info
+            (school_name,school_address,school_introduce,school_phone,school_photo,create_time,update_time)
+            values
+            (#{schoolName},#{schoolAddress},#{schoolIntroduce},#{schoolPhone},#{schoolPhoto},#{createTime},#{updateTime})
+    </insert>
 </mapper>

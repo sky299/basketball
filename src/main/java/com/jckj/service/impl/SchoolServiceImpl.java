@@ -9,6 +9,8 @@ import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @author: SkLily
  * @date: 2022/8/29 15:05
@@ -40,5 +42,12 @@ public class SchoolServiceImpl implements SchoolService {
     @Override
     public Integer count(School school) {
         return schoolMapper.count(school);
+    }
+
+    @Override
+    public Integer insert(School school) {
+        school.setCreateTime(System.currentTimeMillis());
+        school.setUpdateTime(System.currentTimeMillis());
+        return schoolMapper.insert(school);
     }
 }

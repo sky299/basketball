@@ -43,7 +43,7 @@
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">查看详情</a>
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>&nbsp;&nbsp;
         </script>
 
@@ -62,7 +62,6 @@
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-    var uuid;
     var myjson ;
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
@@ -85,7 +84,7 @@
                 {field: 'schoolAddress',width: 150, title: '校区地址'},
                 {field: 'schoolIntroduce', width: 150, title: '校区介绍'},
                 {field: 'schoolPhone', width: 150, title: '校区电话'},
-                {field: 'schoolPhoto', width: 150, title: '校区照片'},
+                {field: 'schoolPhoto', width: 150, title: '校区照片',align: 'center', templet: '<div><img id="img" src="/Picture/{{d.schoolPhoto}}"></div>'},
                 {field: 'isDelete', width: 100, title: '是否删除',templet: function (d) {
                         if (d.isDelete == "0") {
                             return "否";
@@ -133,7 +132,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/add.jsp',
+                    content: '../page/school/add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -183,7 +182,6 @@
             var data = obj.data;
             myjson = data;
             if (obj.event === 'edit') {
-                uuid = data.uid;
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -191,7 +189,15 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/usershow.jsp',
+                    content: '../page/school/edit.html',
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#schoolName').val(data.schoolName);
+                        body.find('#schoolAddress').val(data.schoolAddress);
+                        body.find('#schoolIntroduce').val(data.schoolIntroduce);
+                        body.find('#schoolPhone').val(data.schoolPhone);
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
