@@ -19,27 +19,9 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">课程名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text" name="courseName" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -87,18 +69,30 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'courseName', width: 100, title: '课程名'},
+                {field: 'courseName', width: 50, title: '课程名'},
                 {field: 'courseTime', width: 100, title: '课程课时', sort: true,templet: "<div id='courseTime2'>{{layui.util.toDateString(d.courseTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
                 {field: 'photo', width: 100, title: '课程头像', templet: '<div><img id="img" src="/{{d.photo}}"></div>'},
                 {field: 'photo', width: 100, title: '头像名字'},
                 {field: 'courseIntroduce', title: '课程介绍', width: 80},
-                {field: 'coursePrice', width: 100, title: '课程价格', sort: true},
+                {field: 'coursePrice', width: 50, title: '课程价格', sort: true},
                 {field: 'tocourseBiginTime', width: 150, title: '上课开始时间', sort: true,templet: "<div>{{layui.util.toDateString(d.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
                 {field: 'tocourseFinishTime', width: 150, title: '上课结束时间',templet: "<div>{{layui.util.toDateString(d.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
                 {field: 'enrollTotal', width: 50, title: '购买人数', sort: true},
-                {field: 'isShaky', width: 50, title: '是否为活动课程', sort: true},
-                {field: 'courseState', width: 50, title: '课程状态', sort: true},
-                {field: 'schoolName', width: 100, title: '校区名', sort: true},
+                {field: 'isShaky', width: 50, title: '是否为活动课程', sort: true,templet: function (d) {
+                        if (d.isShaky == 0) {
+                            return "否";
+                        } else {
+                            return "是";
+                        }
+                    }},
+                {field: 'courseState', width: 50, title: '课程状态', sort: true,templet: function (d) {
+                        if (d.courseState == 0) {
+                            return "上架";
+                        } else {
+                            return "下架";
+                        }
+                    }},
+                {field: 'schoolName', width: 50, title: '校区名', sort: true},
                 {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -120,7 +114,7 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    courseName: data.field.courseName
                 }
             }, 'data');
 
@@ -190,15 +184,30 @@
                         var body = layer.getChildFrame('body',index);
                         body.find('#id').val(data.id);
                         body.find('#courseName').val(data.courseName);
-                        body.find('#courseTime').val(data.courseTime);
+                        var toDateString = layui.util.toDateString(data.courseTime, 'yyyy-MM-dd HH:mm:ss');
+                        body.find('#courseTime').val(toDateString);
                         body.find('#photo').val(data.photo);
                         body.find('#courseIntroduce').val(data.courseIntroduce);
                         body.find('#coursePrice').val(data.coursePrice);
-                        body.find('#tocourseBiginTime').val(data.tocourseBiginTime);
-                        body.find('#tocourseFinishTime').val(data.tocourseFinishTime);
+                        var tocourseBiginTime = layui.util.toDateString(data.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss');
+                        body.find('#tocourseBiginTime').val(tocourseBiginTime);
+                        var tocourseFinishTime = layui.util.toDateString(data.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss');
+                        body.find('#tocourseFinishTime').val(tocourseFinishTime);
                         body.find('#enrollTotal').val(data.enrollTotal);
-                        body.find('#isShaky').val(data.isShaky);
-                        body.find('#courseState').val(data.courseState);
+                        var shaky = data.isShaky;
+                        if (shaky == 0){
+                            shaky="否";
+                        }else {
+                            shaky="是";
+                        }
+                        body.find('#isShaky').val(shaky);
+                        var courseState = data.courseState;
+                        if (courseState == 0) {
+                            courseState="上架";
+                        }else {
+                            courseState="下架";
+                        }
+                        body.find('#courseState').val(courseState);
                         body.find('#schoolName').val(data.schoolName);
                     }
                 });

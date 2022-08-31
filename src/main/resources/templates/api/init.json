@@ -96,48 +96,36 @@
           "target": "_self",
           "child": [
             {
-              "title": "课程表",
+              "title": "课程管理",
               "href": "page/course.html",
               "icon": "fa fa-stumbleupon-circle",
-              "target": "_self"
-            },
-            {
-              "title": "登录-2",
-              "href": "page/salts.html",
-              "icon": "fa fa-viacoin",
-              "target": "_self"
-            },
-            {
-              "title": "登录-3",
-              "href": "page/login-3.html",
-              "icon": "fa fa-tags",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "异常页面",
+          "title": "销课模块",
           "href": "",
           "icon": "fa fa-home",
           "target": "_self",
           "child": [
             {
-              "title": "404页面",
-              "href": "page/404.html",
+              "title": "销课管理",
+              "href": "page/salts.html",
               "icon": "fa fa-hourglass-end",
               "target": "_self"
             }
           ]
         },
         {
-          "title": "其它界面",
+          "title": "公共模块",
           "href": "",
           "icon": "fa fa-snowflake-o",
           "target": "",
           "child": [
             {
-              "title": "按钮示例",
-              "href": "page/button.html",
+              "title": "关于我们",
+              "href": "page/photoinfo.html",
               "icon": "fa fa-snowflake-o",
               "target": "_self"
             },

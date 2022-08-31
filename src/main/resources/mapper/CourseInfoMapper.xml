@@ -20,6 +20,7 @@
         school_name schoolName
         from t_course_info
         where is_delete=0
+        <if test="courseName != null">and course_name like '%${courseName}%'</if>
         limit #{dataNum},#{limit}
     </select>
     <select id="findById" resultType="com.jckj.model.CourseInfo">
@@ -38,10 +39,11 @@
         school_name schoolName
     	from t_course_info
         where is_delete=0
+        <if test="course_name != null">course_name</if>
         and id=#{id}
     </select>
     <select id="count" parameterType="com.jckj.model.CourseInfo" resultType="java.lang.Integer">
-        select count(1) from t_course_info where is_delete=0
+        select count(1) from t_course_info where is_delete=0 <if test="courseName != null">and course_name like '%${courseName}%'</if>
     </select>
 
     <!-- 新增 -->
@@ -70,7 +72,6 @@
         where id=#{id}
     </update>
 
-
     <!-- 删除 -->
     <update id="delete" parameterType="com.jckj.model.CourseInfo">
 		update t_course_info set is_delete=1,
@@ -78,13 +79,3 @@
 		where id=#{id}
 	</update>
 </mapper>
-        <!-- 修改 -->
-<!--<update id="update" parameterType="com.jckj.model.Demo">-->
-<!--update t_demo-->
-<!--<trim prefix="set " suffixOverrides=",">-->
-<!--    <if test="name !=null">name=#{name},</if>-->
-<!--    <if test="createTime !=null">create_time=#{createTime},</if>-->
-<!--    <if test="updateTime !=null">update_time=#{updateTime},</if>-->
-<!--</trim>-->
-<!--where id=#{id}-->
-<!--</update>-->

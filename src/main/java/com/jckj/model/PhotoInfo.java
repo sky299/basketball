@@ -1,12 +1,14 @@
 package com.jckj.model;
 
+import com.jckj.dto.PageDto;
+
 import java.io.Serializable;
 
 /**
  * @author 柳江
  * @since 2022-08-29
  */
-public class PhotoInfo implements Serializable {
+public class PhotoInfo extends PageDto implements Serializable {
 
     /**
      * 关于我们id

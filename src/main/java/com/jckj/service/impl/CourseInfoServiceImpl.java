@@ -5,6 +5,7 @@ import com.jckj.model.CourseInfo;
 import com.jckj.service.CourseInfoService;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -18,8 +19,11 @@ import java.util.List;
  * @date 2022/8/29 15:39
  * @describe:
  */
+
 @Service
+@Transactional
 public class CourseInfoServiceImpl implements CourseInfoService {
+
     @Resource
     private CourseInfoMapper courseInfoMapper;
 
