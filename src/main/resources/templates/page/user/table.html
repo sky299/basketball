@@ -82,7 +82,6 @@
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="details">学员详情</a>
         </script>
 
     </div>
@@ -105,19 +104,20 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'studentName', width: 100, title: '学员姓名'},
+                {field: 'userPwd', width: 100, title: '密码'},
                 {
-                    field: 'studentPay',
+                    field: 'birthday',
                     width: 100,
-                    title: '学员生日',
+                    title: '生日',
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 },
-                {field: 'studentPhoto', width: 100, title: '头像',templet: '#imgtem'},
-                {field: 'studentEnroll', width: 100, title: '所在校区'},
-                {field: 'gender', width: 80, title: '性别', sort: true},
-                {field: 'className', width: 80, title: '所在班级'},
-                {field: 'studentStatus', width: 80, title: '学员状态'},
+                {field: 'userPhoto', width: 100, title: '头像',templet: '#imgtem'},
+                {field: 'userName', width: 100, title: '姓名'},
+                {field: 'welfare', width: 80, title: '积分', sort: true},
+                {field: 'userRole', width: 80, title: '用户类型'},
+                {field: 'userSex', width: 80, title: '性别'},
+                {field: 'userPhone', width: 80, title: '手机号'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -152,7 +152,7 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加学员',
+                    title: '添加用户',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
@@ -179,13 +179,13 @@
             var data = obj.data;
             if (obj.event === 'edit') {
                 var index = layer.open({
-                    title: '编辑学员',
+                    title: '编辑用户',
                     type: 2,
                     shade: 0.2,
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: 'page/student/edit.html',
+                    content: 'page/user/edit.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -203,37 +203,12 @@
 
                     }
                 })
-            } else if (obj.event === 'details') {
-                $.ajax({
-                    type: 'post',
-                    url: 'info',
-                    data: {'id': data.id},
-                    success: function (data) {
-                        window.location.href = "info.html"
-                    },
-                    error: function (data) {
-
-                    }
-                })
-                // var info = layer.open({
-                //     title: '学员详情',
-                //     type: 2,
-                //     shade: 0.2,
-                //     maxmin: true,
-                //     shadeClose: true,
-                //     area: ['100%', '100%'],
-                //     content: 'info?id='+data.id,
-                // });
-                // $(window).on("resize", function () {
-                //     layer.full(info);
-                // });
-                // return false;
             }
         });
     });
 </script>
 <script type="text/html" id="imgtem">
-    <img src="{{d.studentPhoto}}">
+    <img src="{{d.userPhoto}}">
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 package com.jckj.controller;
 
-import com.jckj.model.TStudentInfo;
-import com.jckj.service.StudentService;
+import com.jckj.model.TUserInfo;
+import com.jckj.service.UserService;
 import com.jckj.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,39 +15,34 @@ import java.io.IOException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("page/student")
-public class StudentController {
+@RequestMapping("page/user")
+public class UserController {
 
     @Autowired
-    private StudentService studentService;
+    private UserService userService;
 
     @RequestMapping("list")
-    public JsonResult list(TStudentInfo tStudentInfo) {
-        return JsonResult.success(studentService.list(tStudentInfo).getList(),studentService.count(tStudentInfo));
+    public JsonResult list(TUserInfo tUserInfo) {
+        return JsonResult.success(userService.list(tUserInfo).getList(), userService.count(tUserInfo));
     }
 
-    @RequestMapping("info")
-    public JsonResult info(Integer id){
-        return JsonResult.success(studentService.info(id));
+    @PostMapping("remove")
+    public JsonResult remove(Integer id) {
+        userService.remove(id);
+        return JsonResult.success();
     }
 
     @PostMapping("add")
-    public JsonResult add(TStudentInfo tStudentInfo,@RequestParam("photo") MultipartFile photo) throws IOException {
+    public JsonResult add(TUserInfo tUserInfo, @RequestParam("photo") MultipartFile photo) throws IOException {
         if (photo != null) {
             String photoName = UUID.randomUUID() + "_" + photo.getOriginalFilename();
             int hashCode = photo.hashCode();
             String dir = Integer.toHexString(hashCode);
             String path = "E:/upload/" + dir.charAt(0) + "/" + dir.charAt(1) + "/" + photoName;
             photo.transferTo(new File(path));
-            tStudentInfo.setStudentPhoto(dir.charAt(0) + "/" + dir.charAt(1) + "/" + photoName);
+            tUserInfo.setUserPhoto(dir.charAt(0) + "/" + dir.charAt(1) + "/" + photoName);
         }
-        studentService.add(tStudentInfo);
-        return JsonResult.success();
-    }
-
-    @PostMapping("remove")
-    public JsonResult remove(Integer id){
-        studentService.remove(id);
+        userService.add(tUserInfo);
         return JsonResult.success();
     }
 }

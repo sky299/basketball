@@ -5,7 +5,7 @@ import com.jckj.model.TOrderInfo;
 
 import java.util.List;
 
-public interface TOrderService {
+public interface OrderService {
     /**
      * 列表
      */

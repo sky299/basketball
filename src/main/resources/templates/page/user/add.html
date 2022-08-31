@@ -18,57 +18,64 @@
 <div class="layui-form layuimini-form">
 
     <div class="layui-form-item">
-        <label class="layui-form-label required">学员姓名</label>
+        <label class="layui-form-label required">用户姓名</label>
         <div class="layui-input-block">
-            <input type="text" name="studentName" lay-verify="required" lay-reqtext="学员姓名不能为空" placeholder="请输入学员姓名"
+            <input type="text" name="userName" lay-verify="required" lay-reqtext="姓名不能为空" placeholder="请输入姓名"
                    class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">学员生日</label>
+        <label class="layui-form-label required">用户密码</label>
         <div class="layui-input-block">
-            <input type="text" name="studentPay" id="studentPay" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label required">所在校区</label>
-        <div class="layui-input-block">
-            <input type="text" name="studentEnroll" lay-verify="required" lay-reqtext="所在校区不能为空" placeholder="请输入所在校区"
+            <input type="text" name="userPwd" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码"
                    class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">学员头像</label>
+        <label class="layui-form-label">生日</label>
         <div class="layui-input-block">
-            <input type="file" name="studentPhoto" id="studentPhoto" class="layui-input">
+            <input type="text" name="birthday" id="birthday" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">头像</label>
+        <div class="layui-input-block">
+            <input type="file" name="userPhoto" id="userPhoto" lay-verify="required" lay-reqtext="请上传头像" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户积分</label>
+        <div class="layui-input-block">
+            <input type="text" name="welfare" value="0" placeholder="请输入用户积分" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label required">性别</label>
         <div class="layui-input-block">
-            <input type="radio" name="gender" value="男" title="男" checked="">
-            <input type="radio" name="gender" value="女" title="女">
+            <input type="radio" name="userSex" value="男" title="男" checked="">
+            <input type="radio" name="userSex" value="女" title="女">
         </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">所在班级</label>
+        <label class="layui-form-label required">手机号</label>
         <div class="layui-input-block">
-            <input type="text" name="className" class="layui-input" placeholder="请输入所在班级">
+            <input type="text" name="userPhone" class="layui-input" lay-verify="required|phone" lay-reqtext="手机号不能为空" placeholder="请输入手机号">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label required">分班状态</label>
+        <label class="layui-form-label required">类型</label>
         <div class="layui-input-block">
-            <select name="studentStatus">
+            <select name="userRole">
                 <option value=""></option>
-                <option value="0">未分班</option>
-                <option value="1">已分班</option>
+                <option value="0">家长</option>
+                <option value="1">教练</option>
             </select>
         </div>
     </div>
@@ -88,22 +95,23 @@
             laydate = layui.laydate;
 
         laydate.render({
-            elem: '#studentPay'
+            elem: '#birthday'
         })
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var birthday = $("#studentPay").val()
-            var studentPay = new Date(birthday).getTime()
+            var birthday = $("#birthday").val()
+            var userPay = new Date(birthday).getTime()
 
             var formData = new FormData();
-            formData.append("studentName", data.field.studentName);
-            formData.append("studentPay", studentPay);
-            formData.append("studentEnroll", data.field.studentEnroll);
-            formData.append("photo", $("#studentPhoto")[0].files[0]);
-            formData.append("gender", data.field.gender);
-            formData.append("className", data.field.className);
-            formData.append("studentStatus", data.field.studentStatus);
+            formData.append("userName", data.field.userName);
+            formData.append("birthday", userPay);
+            formData.append("welfare",data.field.welfare);
+            formData.append("userPwd", data.field.userPwd);
+            formData.append("photo", $("#userPhoto")[0].files[0]);
+            formData.append("userSex", data.field.userSex);
+            formData.append("userPhone", data.field.userPhone);
+            formData.append("userRole", data.field.userRole);
             $.ajax({
                 type: 'post',
                 url: 'add',
@@ -113,6 +121,7 @@
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
+                    layui.table.reload()
                 },
                 error: function (data) {
 

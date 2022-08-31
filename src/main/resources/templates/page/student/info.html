@@ -24,7 +24,6 @@
 
         table.render({
             elem: '#currentTableId',
-            url: 'info?id=' + id,
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -47,20 +46,6 @@
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
                 {field: 'studentStatus', width: 80, title: '学员状态'},
-                {
-                    field: 'createTime',
-                    width: 150,
-                    title: '创建时间',
-                    sort: true,
-                    templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
-                },
-                {
-                    field: 'updateTime',
-                    width: 150,
-                    title: '更新时间',
-                    sort: true,
-                    templet: "<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"
-                }
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,

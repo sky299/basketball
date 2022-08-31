@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -40,6 +39,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void update(TStudentInfo tStudentInfo) {
+        tStudentInfo.setUpdateTime(System.currentTimeMillis());
         studentMapper.update(tStudentInfo);
     }
 

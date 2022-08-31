@@ -3,14 +3,14 @@ package com.jckj.service.impl;
 import com.jckj.dto.PageDto;
 import com.jckj.mapper.OrderMapper;
 import com.jckj.model.TOrderInfo;
-import com.jckj.service.TOrderService;
+import com.jckj.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TOrderServiceImpl implements TOrderService {
+public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
