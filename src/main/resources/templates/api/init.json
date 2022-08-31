@@ -54,8 +54,8 @@
           "target": "_self",
           "child": [
             {
-              "title": "普通表单",
-              "href": "page/form.html",
+              "title": "报名管理",
+              "href": "page/enroll.html",
               "icon": "fa fa-list-alt",
               "target": "_self"
             }
@@ -68,8 +68,8 @@
           "target": "_self",
           "child": [
             {
-              "title": "普通表单",
-              "href": "page/form.html",
+              "title": "风采管理",
+              "href": "page/mien.html",
               "icon": "fa fa-list-alt",
               "target": "_self"
             }
@@ -85,12 +85,6 @@
               "title": "校区管理",
               "href": "page/school.html",
               "icon": "fa fa-list-alt",
-              "target": "_self"
-            },
-            {
-              "title": "分步表单",
-              "href": "page/form-step.html",
-              "icon": "fa fa-navicon",
               "target": "_self"
             }
           ]

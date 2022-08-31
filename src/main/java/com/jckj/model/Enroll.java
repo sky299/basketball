@@ -1,11 +1,13 @@
 package com.jckj.model;
 
+import com.jckj.dto.PageDto;
+
 /**
  * @author: SkLily
  * @date: 2022/8/30 9:33
  * @description:
  */
-public class Enroll {
+public class Enroll extends PageDto {
     /**
      *报名id
      */

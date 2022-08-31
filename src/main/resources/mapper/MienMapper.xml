@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.MienMapper">
+    <select id="list" parameterType="com.jckj.model.Mien" resultType="com.jckj.model.Mien">
+        select id,student_id studentId,mien_photo mienPhoto,mien_video mienVideo,mien_status mienStatus,school_name schoolName,is_delete isDelete,create_time createTime,update_time updateTime from t_mien_info
+        where is_delete=0
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="count" parameterType="com.jckj.model.Mien" resultType="java.lang.Integer">
+        select
+        count(1)
+        from t_mien_info
+        where is_delete = 0
+    </select>
+    <insert id="insert" parameterType="com.jckj.model.Mien">
+        insert into
+        t_mien_info
+        (student_id,mien_photo,mien_video,mien_status,school_name,create_time,update_time)
+        values
+        (#{studentId},#{mienPhoto},#{mienVideo},#{mienStatus},#{schoolName},#{createTime},#{updateTime})
+    </insert>
+    <update id="update" parameterType="com.jckj.model.Mien">
+        update t_mien_info set
+        student_id=#{studentId},mien_photo=#{mienPhoto},mien_video=#{mienVideo},mien_status=#{mienStatus},school_name=#{schoolName},update_time=#{updateTime}
+        where id=#{id}
+    </update>
+    <update id="delete" parameterType="com.jckj.model.Mien">
+        update t_mien_info set
+        is_delete = 1
+        where id=#{id}
+    </update>
+</mapper>

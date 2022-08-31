@@ -19,7 +19,7 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">班级名称</label>
+                            <label class="layui-form-label">名称</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="product_name" autocomplete="off" class="layui-input">
                             </div>
@@ -71,7 +71,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/grade/list',
+            url: '/mien/list',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -81,16 +81,14 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 50,height: 100, title: 'ID'},
-                {field: 'gradeName', width: 150, title: '班级名'},
-                {field: 'gradeTime',width: 150, title: '上课时间'},
-                {field: 'coachName', width: 150, title: '教练姓名'},
-                {field: 'gradePhoto', width: 150, title: '班级照片'},
-                {field: 'gradeDescribe', width: 150, title: '班级介绍'},
-                {field: 'gradeStatus', width: 100, title: '班级状态',templet: function (d) {
-                        if (d.gradeStatus == "0") {
-                            return "开班";
+                {field: 'studentId', width: 150, title: '学员id'},
+                {field: 'mienPhoto',width: 150, title: '风采照片'},
+                {field: 'mienVideo', width: 150, title: '风采视频'},
+                {field: 'mienStatus', width: 150, title: '是否隐私',templet: function (d) {
+                        if (d.mienStatus == "0") {
+                            return "否";
                         } else {
-                            return "关班";
+                            return "是";
                         }
                     }},
                 {field: 'schoolName', width: 150, title: '校区名'},
@@ -141,7 +139,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/grade/add.html',
+                    content: '../page/mien/add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -156,7 +154,7 @@
                     str += data[i].id+",";
                 }
                 $.ajax({
-                    url:'/grade/deletemore',
+                    url:'/mien/deletemore',
                     type:'post',
                     data:{
                         str:str
@@ -198,16 +196,14 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/grade/edit.html',
+                    content: '../page/mien/edit.html',
                     success:function() {
                         var body = layer.getChildFrame('body',index);
                         body.find('#id').val(data.id);
-                        body.find('#gradeName').val(data.gradeName);
-                        body.find('#gradeTime').val(data.gradeTime);
-                        body.find('#coachName').val(data.coachName);
-                        body.find('#gradePhoto').val(data.gradePhoto);
-                        body.find('#gradeDescribe').val(data.gradeDescribe);
-                        body.find('#gradeStatus').val(data.gradeStatus);
+                        body.find('#studentId').val(data.studentId);
+                        body.find('#mienPhoto').val(data.mienPhoto);
+                        body.find('#mienVideo').val(data.mienVideo);
+                        body.find('#mienStatus').val(data.mienStatus);
                         body.find('#schoolName').val(data.schoolName);
                     }
                 });
@@ -243,7 +239,7 @@
             if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url:'/grade/delete',
+                        url:'/mien/delete',
                         type:'post',
                         data:{
                             id:data.id

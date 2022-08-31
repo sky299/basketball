@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label required">学员姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="studentName" name="studentName" placeholder="请输入学员姓名" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户手机号</label>
+        <div class="layui-input-block">
+            <input type="text" id="userPhone" name="userPhone" placeholder="请输入用户手机号" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">付款方式</label>
+        <div class="layui-input-block">
+            <input type="text" id="pattern" name="pattern" class="layui-input" placeholder="请输入付款方式">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报名渠道</label>
+        <div class="layui-input-block">
+            <input type="text" id="canal" name="canal" placeholder="请输入报名渠道" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="classHour" name="classHour" placeholder="请输入课程时间" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">校区名</label>
+        <div class="layui-input-block">
+            <input type="text" id="schoolName" name="schoolName" placeholder="请输入校区名" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">报名状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="enrollState" name="enrollState" placeholder="请输入报名状态" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">课时</label>
+        <div class="layui-input-block">
+            <input type="text" id="courseHour" name="courseHour" placeholder="请输入课时" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">课程名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="courseName" name="courseName" placeholder="请输入课程名称" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">添加</button>
+        </div>
+    </div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var formData = new FormData();//form表单
+            formData.append("studentName",data.field.studentName);
+            formData.append("userPhone",data.field.userPhone);
+            formData.append("pattern",data.field.pattern);
+            formData.append("canal",data.field.canal);
+            formData.append("classHour",data.field.classHour);
+            formData.append("schoolName",data.field.schoolName);
+            formData.append("enrollState",data.field.enrollState);
+            formData.append("courseHour",data.field.courseHour);
+            formData.append("courseName",data.field.courseName);
+            $.ajax({
+                url:'/enroll/insert',
+                type:'post',
+                data:formData,
+                processData:false,
+                contentType:false,
+                success:function (data) {
+                    if(data==1){
+                        var index = layer.alert("添加成功", {
+                            title: '添加成功'
+                        }, function () {
+                            // 关闭弹出层
+                            layer.close(index);
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                            parent.layui.table.reload("currentTableId");
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>
