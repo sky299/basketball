@@ -6,8 +6,7 @@ import com.jckj.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 柳江
@@ -26,17 +25,30 @@ public class CourseController {
      */
     @RequestMapping("findAll")
     public JsonResult list(CourseInfo courseInfo) {
-        JsonResult success = JsonResult.success(courseInfoService.list(courseInfo).getList(), courseInfoService.count(courseInfo));
         return JsonResult.success(courseInfoService.list(courseInfo).getList(),courseInfoService.count(courseInfo));
     }
 
     /**
-     * @param id 课程id
+     * @param courseInfo 课程id
      * @return 根据课程id查询到的课程对象
      */
     @RequestMapping("findById")
-    public JsonResult courseInfo(Integer id){
-        return JsonResult.success(courseInfoService.findById(id));
+    public JsonResult courseInfo(CourseInfo courseInfo){
+        return JsonResult.success(courseInfoService.findById(courseInfo));
     }
 
+    @RequestMapping("delete")
+    public JsonResult delete(String id){
+        return JsonResult.success(courseInfoService.delete(id));
+    }
+
+    @RequestMapping("update")
+    public JsonResult update(CourseInfo courseInfo, MultipartFile img) {
+        return JsonResult.success(courseInfoService.update(courseInfo,img));
+    }
+
+    @RequestMapping("add")
+    public JsonResult add(CourseInfo courseInfo, MultipartFile img) {
+        return JsonResult.success(courseInfoService.add(courseInfo,img));
+    }
 }
