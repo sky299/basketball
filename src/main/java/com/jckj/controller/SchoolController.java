@@ -28,6 +28,7 @@ public class SchoolController {
     public JsonResult list(School school) {
         return JsonResult.success(schoolService.list(school).getList(),schoolService.count(school));
     }
+
     @RequestMapping("insert")
     public Integer insert(School school, MultipartFile img) throws IOException {
         if (img != null) {
@@ -40,5 +41,29 @@ public class SchoolController {
         }
         Integer insert = schoolService.insert(school);
         return insert;
+    }
+
+    @RequestMapping("update")
+    public Integer insert(School school){
+        Integer update = schoolService.update(school);
+        return update;
+    }
+
+    @RequestMapping("delete")
+    public Integer delete(School school){
+        Integer delete = schoolService.delete(school);
+        return delete;
+    }
+
+    @RequestMapping("deletemore")
+    public Integer deletemore(String str){
+        Integer delete = 0;
+        String[] strs = str.split(",");
+        for (String s : strs) {
+            School school = new School();
+            school.setId(Integer.parseInt(s));
+            delete += schoolService.delete(school);
+        }
+        return delete;
     }
 }

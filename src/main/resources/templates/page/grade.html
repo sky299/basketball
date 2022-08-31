@@ -141,7 +141,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/add.jsp',
+                    content: '../page/grade/add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -153,10 +153,10 @@
                 var str = "";
                 for (var i = 0; i < data.length; i++) {
                     flag++;
-                    str += data[i].oid+",";
+                    str += data[i].id+",";
                 }
                 $.ajax({
-                    url:'/ssmredisshiro/deletemore.do',
+                    url:'/grade/deletemore',
                     type:'post',
                     data:{
                         str:str
@@ -191,7 +191,6 @@
             var data = obj.data;
             myjson = data;
             if (obj.event === 'edit') {
-                uuid = data.uid;
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -199,7 +198,18 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/usershow.jsp',
+                    content: '../page/grade/edit.html',
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#gradeName').val(data.gradeName);
+                        body.find('#gradeTime').val(data.gradeTime);
+                        body.find('#coachName').val(data.coachName);
+                        body.find('#gradePhoto').val(data.gradePhoto);
+                        body.find('#gradeDescribe').val(data.gradeDescribe);
+                        body.find('#gradeStatus').val(data.gradeStatus);
+                        body.find('#schoolName').val(data.schoolName);
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -233,10 +243,10 @@
             if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url:'/ssmredisshiro/delete.do',
+                        url:'/grade/delete',
                         type:'post',
                         data:{
-                            oid:data.oid
+                            id:data.id
                         },
                         success:function (data) {
                             if(data==1){

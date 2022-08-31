@@ -13,4 +13,21 @@
         from t_grade_info
         where is_delete = 0
     </select>
+    <insert id="insert" parameterType="com.jckj.model.Grade">
+        insert into
+        t_grade_info
+        (grade_name,grade_time,coach_name,grade_photo,grade_describe,grade_status,school_name,create_time,update_time)
+        values
+        (#{gradeName},#{gradeTime},#{coachName},#{gradePhoto},#{gradeDescribe},#{gradeStatus},#{schoolName},#{createTime},#{updateTime})
+    </insert>
+    <update id="update" parameterType="com.jckj.model.Grade">
+        update t_grade_info set
+        grade_name=#{gradeName},grade_time=#{gradeTime},coach_name=#{coachName},grade_describe=#{gradeDescribe},grade_status=#{gradeStatus},school_name=#{schoolName},update_time=#{updateTime}
+        where id=#{id}
+    </update>
+    <update id="delete" parameterType="com.jckj.model.Grade">
+        update t_grade_info set
+        is_delete = 1
+        where id=#{id}
+    </update>
 </mapper>

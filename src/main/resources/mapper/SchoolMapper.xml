@@ -20,4 +20,14 @@
             values
             (#{schoolName},#{schoolAddress},#{schoolIntroduce},#{schoolPhone},#{schoolPhoto},#{createTime},#{updateTime})
     </insert>
+    <update id="update" parameterType="com.jckj.model.School">
+        update t_school_info set
+            school_name=#{schoolName},school_address=#{schoolAddress},school_introduce=#{schoolIntroduce},school_phone=#{schoolPhone},update_time=#{updateTime}
+            where id=#{id}
+    </update>
+    <update id="delete" parameterType="com.jckj.model.School">
+        update t_school_info set
+            is_delete = 1
+            where id=#{id}
+    </update>
 </mapper>

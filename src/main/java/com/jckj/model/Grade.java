@@ -22,7 +22,7 @@ public class Grade extends PageDto{
     /**
      *上课时间
      */
-    private Long gradeTime;
+    private String gradeTime;
     /**
      *教练姓名
      */
@@ -72,11 +72,11 @@ public class Grade extends PageDto{
         this.gradeName = gradeName;
     }
 
-    public Long getGradeTime() {
+    public String getGradeTime() {
         return gradeTime;
     }
 
-    public void setGradeTime(Long gradeTime) {
+    public void setGradeTime(String gradeTime) {
         this.gradeTime = gradeTime;
     }
 
@@ -147,7 +147,7 @@ public class Grade extends PageDto{
     public Grade() {
     }
 
-    public Grade(Integer id, String gradeName, Long gradeTime, String coachName, String gradePhoto, String gradeDescribe, Integer gradeStatus, String schoolName, Boolean isDelete, Long createTime, Long updateTime) {
+    public Grade(Integer id, String gradeName, String gradeTime, String coachName, String gradePhoto, String gradeDescribe, Integer gradeStatus, String schoolName, Boolean isDelete, Long createTime, Long updateTime) {
         this.id = id;
         this.gradeName = gradeName;
         this.gradeTime = gradeTime;

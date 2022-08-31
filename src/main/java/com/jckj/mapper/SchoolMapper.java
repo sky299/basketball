@@ -36,4 +36,20 @@ public interface SchoolMapper {
      */
 
     public Integer insert(School school);
+
+    /**
+     * @param school
+     * @return Integer
+     * 修改
+     */
+
+    public Integer update(School school);
+
+    /**
+     * @param school
+     * @return Integer
+     * 删除
+     */
+
+    public Integer delete(School school);
 }

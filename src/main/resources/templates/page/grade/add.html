@@ -17,38 +17,50 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <label class="layui-form-label required">ID</label>
+        <label class="layui-form-label required">班级名</label>
         <div class="layui-input-block">
-            <input type="text" id="id" name="id" placeholder="请输入ID" value="" class="layui-input">
+            <input type="text" id="gradeName" name="gradeName" placeholder="请输入班级名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">校区名</label>
+        <label class="layui-form-label">上课时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="gradeTime" name="gradeTime" placeholder="请输入上课时间" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">教练姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="coachName" name="coachName" class="layui-input" placeholder="请输入教练姓名">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级照片</label>
+        <div class="layui-input-block">
+            <input type="file" id="img" name="img" placeholder="请输入班级照片" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级介绍</label>
+        <div class="layui-input-block">
+            <input type="text" id="gradeDescribe" name="gradeDescribe" placeholder="请输入班级介绍" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">班级状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="gradeStatus" name="gradeStatus" placeholder="请输入班级状态" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">校区名</label>
         <div class="layui-input-block">
             <input type="text" id="schoolName" name="schoolName" placeholder="请输入校区名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">校区地址</label>
         <div class="layui-input-block">
-            <input type="text" id="schoolAddress" name="schoolAddress" placeholder="请输入校区地址" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">校区介绍</label>
-        <div class="layui-input-block">
-            <input type="text" id="schoolIntroduce" name="schoolIntroduce" class="layui-input" placeholder="请输入校区介绍">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">校区电话</label>
-        <div class="layui-input-block">
-            <input type="text" id="schoolPhone" name="schoolPhone" placeholder="请输入校区电话" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">修改</button>
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">添加</button>
         </div>
     </div>
 </div>
@@ -58,24 +70,28 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
+
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
+            formData.append("gradeName",data.field.gradeName);
+            formData.append("gradeTime",data.field.gradeTime);
+            formData.append("coachName",data.field.coachName);
+            var fileobj = $("#img")[0].files[0];
+            formData.append("img",fileobj);
+            formData.append("gradeDescribe",data.field.gradeDescribe);
+            formData.append("gradeStatus",data.field.gradeStatus);
             formData.append("schoolName",data.field.schoolName);
-            formData.append("schoolAddress",data.field.schoolAddress);
-            formData.append("schoolIntroduce",data.field.schoolIntroduce);
-            formData.append("schoolPhone",data.field.schoolPhone);
             $.ajax({
-                url:'/school/update',
+                url:'/grade/insert',
                 type:'post',
                 data:formData,
                 processData:false,
                 contentType:false,
                 success:function (data) {
                     if(data==1){
-                        var index = layer.alert("修改成功", {
-                            title: '修改成功'
+                        var index = layer.alert("添加成功", {
+                            title: '添加成功'
                         }, function () {
                             // 关闭弹出层
                             layer.close(index);

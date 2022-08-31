@@ -44,10 +44,40 @@ public class SchoolServiceImpl implements SchoolService {
         return schoolMapper.count(school);
     }
 
+    /**
+     * 添加
+     * @param school
+     * @return Integer
+     */
+
     @Override
     public Integer insert(School school) {
         school.setCreateTime(System.currentTimeMillis());
         school.setUpdateTime(System.currentTimeMillis());
         return schoolMapper.insert(school);
+    }
+
+    /**
+     * 修改
+     * @param school
+     * @return Integer
+     */
+
+    @Override
+    public Integer update(School school) {
+        school.setUpdateTime(System.currentTimeMillis());
+        return schoolMapper.update(school);
+    }
+
+    /**
+     * 删除
+     * @param school
+     * @return Integer
+     */
+
+    @Override
+    public Integer delete(School school) {
+        school.setUpdateTime(System.currentTimeMillis());
+        return schoolMapper.delete(school);
     }
 }

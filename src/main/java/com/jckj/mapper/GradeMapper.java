@@ -2,6 +2,7 @@ package com.jckj.mapper;
 
 import com.jckj.dto.PageDto;
 import com.jckj.model.Grade;
+import com.jckj.model.School;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,4 +30,27 @@ public interface GradeMapper{
 
     public Integer count(Grade grade);
 
+    /**
+     * @param grade
+     * @return Integer
+     * 添加
+     */
+
+    public Integer insert(Grade grade);
+
+    /**
+     * @param grade
+     * @return Integer
+     * 修改
+     */
+
+    public Integer update(Grade grade);
+
+    /**
+     * @param grade
+     * @return Integer
+     * 删除
+     */
+
+    public Integer delete(Grade grade);
 }

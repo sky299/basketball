@@ -144,10 +144,10 @@
                 var str = "";
                 for (var i = 0; i < data.length; i++) {
                     flag++;
-                    str += data[i].oid+",";
+                    str += data[i].id+",";
                 }
                 $.ajax({
-                    url:'/ssmredisshiro/deletemore.do',
+                    url:'/school/deletemore',
                     type:'post',
                     data:{
                         str:str
@@ -231,10 +231,10 @@
             if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
                     $.ajax({
-                        url:'/ssmredisshiro/delete.do',
+                        url:'/school/delete',
                         type:'post',
                         data:{
-                            oid:data.oid
+                            id:data.id
                         },
                         success:function (data) {
                             if(data==1){

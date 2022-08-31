@@ -30,4 +30,28 @@ public interface GradeService {
      */
 
     public Integer count(Grade grade);
+
+    /**
+     * @param grade
+     * @return Integer
+     * 添加
+     */
+
+    public Integer insert(Grade grade);
+
+    /**
+     * @param grade
+     * @return Integer
+     * 修改
+     */
+
+    public Integer update(Grade grade);
+
+    /**
+     * @param grade
+     * @return Integer
+     * 删除
+     */
+
+    public Integer delete(Grade grade);
 }
