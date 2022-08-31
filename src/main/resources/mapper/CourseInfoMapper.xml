@@ -44,54 +44,47 @@
         select count(1) from t_course_info where is_delete=0
     </select>
 
-    <!-- 总数 -->
-<!--    <select id="count" parameterType="com.jckj.dto.PageDto" resultType="java.lang.Integer">-->
-<!--        select-->
-<!--        count(1)-->
-<!--        from t_demo-->
-<!--        where is_delete=0-->
-<!--        <if test="name !=null and name !=''">-->
-<!--            and name like concat('%',#{name},'%')-->
-<!--        </if>-->
-<!--    </select>-->
-
-    <!-- 详情 -->
-<!--    <select id="info" resultType="com.jckj.model.Demo">-->
-<!--		select-->
-<!--		id,name,create_time,update_time-->
-<!--		from t_demo-->
-<!--		where id=#{id}-->
-<!--	</select>-->
-
     <!-- 新增 -->
-<!--    <insert id="add" parameterType="com.jckj.model.Demo" useGeneratedKeys="true" keyProperty="id">-->
-<!--        insert into t_demo-->
-<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
-<!--            <if test="name !=null">name,</if>-->
-<!--            <if test="createTime !=null">create_time,</if>-->
-<!--            <if test="updateTime !=null">update_time,</if>-->
-<!--        </trim>-->
-<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
-<!--            <if test="name !=null">#{name},</if>-->
-<!--            <if test="createTime !=null">#{createTime},</if>-->
-<!--            <if test="updateTime !=null">#{updateTime},</if>-->
-<!--        </trim>-->
-<!--    </insert>-->
+    <insert id="add" parameterType="com.jckj.model.CourseInfo">
+        insert into t_course_info
+        (course_name,course_time,photo,course_introduce,course_price,tocourse_bigin_time,tocourse_finish_time,enroll_total,is_shaky,school_name,create_time,update_time)
+        values
+        (#{courseName},#{courseTime},#{photo},#{courseIntroduce},#{coursePrice},#{tocourseBiginTime},#{tocourseFinishTime},#{enrollTotal},#{isShaky},#{schoolName},#{createTime},#{updateTime})
+
+    </insert>
 
     <!-- 修改 -->
-<!--    <update id="update" parameterType="com.jckj.model.Demo">-->
-<!--        update t_demo-->
-<!--        <trim prefix="set " suffixOverrides=",">-->
-<!--            <if test="name !=null">name=#{name},</if>-->
-<!--            <if test="createTime !=null">create_time=#{createTime},</if>-->
-<!--            <if test="updateTime !=null">update_time=#{updateTime},</if>-->
-<!--        </trim>-->
-<!--        where id=#{id}-->
-<!--    </update>-->
+    <update id="update" parameterType="com.jckj.model.CourseInfo">
+        update t_course_info set
+        <if test="courseName != null">course_name=#{courseName},</if>
+        <if test="courseTime != null">course_time=#{courseTime},</if>
+        <if test="photo != null">photo=#{photo},</if>
+        <if test="courseIntroduce != null">course_introduce=#{courseIntroduce},</if>
+        <if test="coursePrice != null">course_price=#{coursePrice},</if>
+        <if test="tocourseBiginTime != null">tocourse_bigin_time=#{tocourseBiginTime},</if>
+        <if test="tocourseFinishTime != null">tocourse_finish_time=#{tocourseFinishTime},</if>
+        <if test="enrollTotal != null">enroll_total=#{enrollTotal},</if>
+        <if test="isShaky != null">is_shaky=#{isShaky},</if>
+        <if test="schoolName != null">school_name=#{schoolName},</if>
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
 
     <!-- 删除 -->
-<!--    <update id="remove">-->
-<!--		update t_demo set is_delete=1-->
-<!--		where id=#{id}-->
-<!--	</update>-->
+    <update id="delete" parameterType="com.jckj.model.CourseInfo">
+		update t_course_info set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
 </mapper>
+        <!-- 修改 -->
+<!--<update id="update" parameterType="com.jckj.model.Demo">-->
+<!--update t_demo-->
+<!--<trim prefix="set " suffixOverrides=",">-->
+<!--    <if test="name !=null">name=#{name},</if>-->
+<!--    <if test="createTime !=null">create_time=#{createTime},</if>-->
+<!--    <if test="updateTime !=null">update_time=#{updateTime},</if>-->
+<!--</trim>-->
+<!--where id=#{id}-->
+<!--</update>-->

@@ -206,7 +206,23 @@ public class CourseInfo extends PageDto implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public CourseInfo(Integer id, String courseName, Long courseTime, String photo, String courseIntroduce, String coursePrice, Long tocourseBiginTime, Long tocourseFinishTime, String enrollTotal, Integer isShaky, Integer courseState, String schoolName, Integer isDelete, Long createTime, Long updateTime) {
+    public CourseInfo(String courseName, Long courseTime, String photo, String courseIntroduce, String coursePrice, Long tocourseBiginTime, Long tocourseFinishTime, String enrollTotal, Integer isShaky, Integer courseState, String schoolName, Integer isDelete, Long createTime, Long updateTime) {
+        this.courseName = courseName;
+        this.courseTime = courseTime;
+        this.photo = photo;
+        this.courseIntroduce = courseIntroduce;
+        this.coursePrice = coursePrice;
+        this.tocourseBiginTime = tocourseBiginTime;
+        this.tocourseFinishTime = tocourseFinishTime;
+        this.enrollTotal = enrollTotal;
+        this.isShaky = isShaky;
+        this.courseState = courseState;
+        this.schoolName = schoolName;
+        this.isDelete = isDelete;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+    public CourseInfo(Integer id,String courseName, Long courseTime, String photo, String courseIntroduce, String coursePrice, Long tocourseBiginTime, Long tocourseFinishTime, String enrollTotal, Integer isShaky, Integer courseState, String schoolName, Integer isDelete, Long createTime, Long updateTime) {
         this.id = id;
         this.courseName = courseName;
         this.courseTime = courseTime;
@@ -223,7 +239,6 @@ public class CourseInfo extends PageDto implements Serializable {
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
-
     public CourseInfo() {
     }
 }

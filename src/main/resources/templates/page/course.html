@@ -68,6 +68,8 @@
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
+
+    var json;
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
@@ -86,12 +88,13 @@
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
                 {field: 'courseName', width: 100, title: '课程名'},
-                {field: 'courseTime', width: 100, title: '课程课时', sort: true},
-                {field: 'photo', width: 100, title: '课程头像'},
+                {field: 'courseTime', width: 100, title: '课程课时', sort: true,templet: "<div id='courseTime2'>{{layui.util.toDateString(d.courseTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+                {field: 'photo', width: 100, title: '课程头像', templet: '<div><img id="img" src="/{{d.photo}}"></div>'},
+                {field: 'photo', width: 100, title: '头像名字'},
                 {field: 'courseIntroduce', title: '课程介绍', width: 80},
                 {field: 'coursePrice', width: 100, title: '课程价格', sort: true},
-                {field: 'tocourseBiginTime', width: 150, title: '上课开始时间', sort: true},
-                {field: 'tocourseFinishTime', width: 150, title: '上课结束时间'},
+                {field: 'tocourseBiginTime', width: 150, title: '上课开始时间', sort: true,templet: "<div>{{layui.util.toDateString(d.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+                {field: 'tocourseFinishTime', width: 150, title: '上课结束时间',templet: "<div>{{layui.util.toDateString(d.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
                 {field: 'enrollTotal', width: 50, title: '购买人数', sort: true},
                 {field: 'isShaky', width: 50, title: '是否为活动课程', sort: true},
                 {field: 'courseState', width: 50, title: '课程状态', sort: true},
@@ -144,7 +147,25 @@
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                var flag = 0;
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    flag++;
+                    str += data[i].id+",";
+                }
+                $.ajax({
+                    url:"/course/delete",
+                    type:"post",
+                    data:{id:str},
+                    success:function (data) {
+                        if (data != 0){
+                            alert("删除了"+data.data+"条数据")
+                        }else {
+                            alert("删除失败")
+                        }
+                        window.location.reload();
+                    }
+                });
             }
         });
 
@@ -156,7 +177,7 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-
+                json = JSON.stringify(data);
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -170,7 +191,7 @@
                         body.find('#id').val(data.id);
                         body.find('#courseName').val(data.courseName);
                         body.find('#courseTime').val(data.courseTime);
-                        body.find('#photo').val(data.phone);
+                        body.find('#photo').val(data.photo);
                         body.find('#courseIntroduce').val(data.courseIntroduce);
                         body.find('#coursePrice').val(data.coursePrice);
                         body.find('#tocourseBiginTime').val(data.tocourseBiginTime);
@@ -187,6 +208,11 @@
                 return false;
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
+                    $.ajax({
+                        url:"/course/delete",
+                        type:"post",
+                        data:{id:data.id}
+                    });
                     obj.del();
                     layer.close(index);
                 });
