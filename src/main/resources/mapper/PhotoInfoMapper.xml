@@ -8,4 +8,10 @@
     <select id="count" resultType="java.lang.Integer">
         select count(1) from t_photo_info where is_delete=0
     </select>
+    <update id="update" parameterType="com.jckj.model.PhotoInfo">
+        update t_photo_info set
+        about=#{about},
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
 </mapper>

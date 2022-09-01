@@ -17,73 +17,13 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程名</label>
+        <input id="id" name="id" readonly>
+        <label class="layui-form-label required">关于我们</label>
         <div class="layui-input-block">
-            <input id="id" name="id" readonly>
-            <input type="text" id="courseName" name="courseName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程课时</label>
-        <div class="layui-input-block">
-            <input type="text" id="courseTime" name="courseTime" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程头像</label>
-        <div class="layui-input-block">
-            <input id="photo" name="photo" readonly>
+            <input id="about" name="about" readonly>
             <img id="img" src="">
 <!--            <video width="320" height="240" controls loop src="/WeChat_20220831130256.mp4"></video>-->
             <input type="file" id="imgs" name="img" lay-reqtext="课程头像" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程介绍</label>
-        <div class="layui-input-block">
-            <input type="text" id="courseIntroduce" name="courseIntroduce" lay-reqtext="课程介绍" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程价格</label>
-        <div class="layui-input-block">
-            <input type="text" id="coursePrice" name="coursePrice" lay-reqtext="课程价格" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">上课开始时间</label>
-        <div class="layui-input-block">
-            <input type="text" id="tocourseBiginTime" name="tocourseBiginTime" lay-reqtext="上课开始时间" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">上课结束时间</label>
-        <div class="layui-input-block">
-            <input type="text" id="tocourseFinishTime" name="tocourseFinishTime" lay-reqtext="上课结束时间" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">购买人数</label>
-        <div class="layui-input-block">
-            <input type="text" id="enrollTotal" name="enrollTotal" lay-reqtext="购买人数" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">活动课程</label>
-        <div class="layui-input-block">
-            <input type="text" id="isShaky" name="isShaky" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程状态</label>
-        <div class="layui-input-block">
-            <input type="text" id="courseState" name="courseState" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">校区名</label>
-        <div class="layui-input-block">
-            <input type="text" id="schoolName" name="schoolName" lay-verify="required" lay-reqtext="校区名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -100,44 +40,19 @@
             layer = layui.layer,
             $ = layui.$;
 
-    layui.use('laydate',function () {
-        var laydate = layui.laydate;
-        laydate.render({
-             elem:'#courseTime',
-             type:'datetime'
-        }),
-        laydate.render({
-            elem:'#tocourseBiginTime',
-            type:'datetime'
-        }),
-        laydate.render({
-            elem:'#tocourseFinishTime',
-            type:'datetime'
-        })
-    });
         $(function () {
             //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
             var parent_json = eval('('+parent.json+')');
-            $("img").attr("src","/"+parent_json.photo+"");
+            $("img").attr("src","/"+parent_json.about+"");
         });
 
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
             formData.append("id",data.field.id);
-            formData.append("courseName",data.field.courseName);
-            formData.append("courseTime",data.field.courseTime);
-            formData.append("courseIntroduce",data.field.courseIntroduce);
-            formData.append("coursePrice",data.field.coursePrice);
-            formData.append("tocourseBiginTime",data.field.tocourseBiginTime);
-            formData.append("tocourseFinishTime",data.field.tocourseFinishTime);
-            formData.append("enrollTotal",data.field.enrollTotal);
-            formData.append("isShaky",data.field.isShaky);
-            formData.append("courseState",data.field.courseState);
-            formData.append("schoolName",data.field.schoolName);
             var fileobj = $("#imgs")[0].files[0];
             formData.append("img",fileobj);
                 $.ajax({
-                    url:"/course/update",
+                    url:"/photoInfo/update",
                     type:"post",
                     data:formData,
                     processData:false,

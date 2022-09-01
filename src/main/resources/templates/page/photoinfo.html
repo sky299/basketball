@@ -13,37 +13,37 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
 
-        <fieldset class="table-search-fieldset">
-            <legend>搜索信息</legend>
-            <div style="margin: 10px 10px 10px 10px">
-                <form class="layui-form layui-form-pane" action="">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">关于我们</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="courseName" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </fieldset>
+<!--        <fieldset class="table-search-fieldset">-->
+<!--            <legend>搜索信息</legend>-->
+<!--            <div style="margin: 10px 10px 10px 10px">-->
+<!--                <form class="layui-form layui-form-pane" action="">-->
+<!--                    <div class="layui-form-item">-->
+<!--                        <div class="layui-inline">-->
+<!--                            <label class="layui-form-label">关于我们</label>-->
+<!--                            <div class="layui-input-inline">-->
+<!--                                <input type="text" name="courseName" autocomplete="off" class="layui-input">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline">-->
+<!--                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </fieldset>-->
 
-        <script type="text/html" id="toolbarDemo">
-            <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
-            </div>
-        </script>
+<!--        <script type="text/html" id="toolbarDemo">-->
+<!--            <div class="layui-btn-container">-->
+<!--                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>-->
+<!--                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>-->
+<!--            </div>-->
+<!--        </script>-->
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+<!--            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>-->
         </script>
 
     </div>
@@ -111,7 +111,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/course/add.html',
+                    content: '',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -126,7 +126,7 @@
                     str += data[i].id+",";
                 }
                 $.ajax({
-                    url:"/course/delete",
+                    url:"/photoInfo/delete",
                     type:"post",
                     data:{id:str},
                     success:function (data) {
@@ -158,36 +158,12 @@
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: '../page/photoInfo/edit.html',
-                    // success:function() {
-                    //     var body = layer.getChildFrame('body',index);
-                    //     body.find('#id').val(data.id);
-                    //     body.find('#courseName').val(data.courseName);
-                    //     var toDateString = layui.util.toDateString(data.courseTime, 'yyyy-MM-dd HH:mm:ss');
-                    //     body.find('#courseTime').val(toDateString);
-                    //     body.find('#photo').val(data.photo);
-                    //     body.find('#courseIntroduce').val(data.courseIntroduce);
-                    //     body.find('#coursePrice').val(data.coursePrice);
-                    //     var tocourseBiginTime = layui.util.toDateString(data.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss');
-                    //     body.find('#tocourseBiginTime').val(tocourseBiginTime);
-                    //     var tocourseFinishTime = layui.util.toDateString(data.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss');
-                    //     body.find('#tocourseFinishTime').val(tocourseFinishTime);
-                    //     body.find('#enrollTotal').val(data.enrollTotal);
-                    //     var shaky = data.isShaky;
-                    //     if (shaky == 0){
-                    //         shaky="否";
-                    //     }else {
-                    //         shaky="是";
-                    //     }
-                    //     body.find('#isShaky').val(shaky);
-                    //     var courseState = data.courseState;
-                    //     if (courseState == 0) {
-                    //         courseState="上架";
-                    //     }else {
-                    //         courseState="下架";
-                    //     }
-                    //     body.find('#courseState').val(courseState);
-                    //     body.find('#schoolName').val(data.schoolName);
-                    // }
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#about').val(data.about);
+
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

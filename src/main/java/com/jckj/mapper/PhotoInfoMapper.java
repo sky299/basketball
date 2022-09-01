@@ -12,4 +12,6 @@ public interface PhotoInfoMapper {
 
     public Integer count();
 
+    public Integer update(PhotoInfo photoInfo);
+
 }
