@@ -35,5 +35,54 @@ public class PhotoInfo extends PageDto implements Serializable {
      */
     private Long updateTime;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public PhotoInfo(Integer id, String about, Boolean isDelete, Long createTime, Long updateTime) {
+        this.id = id;
+        this.about = about;
+        this.isDelete = isDelete;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public PhotoInfo() {
+    }
 }

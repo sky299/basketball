@@ -1,6 +1,7 @@
 package com.jckj.mapper;
 
 import com.jckj.model.CourseInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @date 2022/8/29 15:30
  * @describe:
  */
+@Repository
 public interface CourseInfoMapper {
 
     /**

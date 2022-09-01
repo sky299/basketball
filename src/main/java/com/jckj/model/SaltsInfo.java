@@ -1,12 +1,14 @@
 package com.jckj.model;
 
+import com.jckj.dto.PageDto;
+
 import java.io.Serializable;
 
 /**
  * @author 柳江
  * @since 2022-08-29
  */
-public class SaltsInfo implements Serializable {
+public class SaltsInfo extends PageDto implements Serializable {
 
     /**
      * 销课表
@@ -53,5 +55,104 @@ public class SaltsInfo implements Serializable {
      */
     private String saltsName;
 
+    /**
+     * 学生id
+     */
+   private Integer studentId;
 
+    public SaltsInfo(Integer id, String studentName, Long saltsTime, String saltsCause, Boolean saltsType, Boolean isDelete, Long createTime, Long updateTime, String saltsName,Integer studentId) {
+        this.id = id;
+        this.studentName = studentName;
+        this.saltsTime = saltsTime;
+        this.saltsCause = saltsCause;
+        this.saltsType = saltsType;
+        this.isDelete = isDelete;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.saltsName = saltsName;
+        this.studentId = studentId;
+    }
+
+    public SaltsInfo() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public Long getSaltsTime() {
+        return saltsTime;
+    }
+
+    public void setSaltsTime(Long saltsTime) {
+        this.saltsTime = saltsTime;
+    }
+
+    public String getSaltsCause() {
+        return saltsCause;
+    }
+
+    public void setSaltsCause(String saltsCause) {
+        this.saltsCause = saltsCause;
+    }
+
+    public Boolean getSaltsType() {
+        return saltsType;
+    }
+
+    public void setSaltsType(Boolean saltsType) {
+        this.saltsType = saltsType;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getSaltsName() {
+        return saltsName;
+    }
+
+    public void setSaltsName(String saltsName) {
+        this.saltsName = saltsName;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
 }

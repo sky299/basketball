@@ -19,9 +19,9 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">学员姓名</label>
+                            <label class="layui-form-label">学员id</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="studentName" autocomplete="off" class="layui-input">
+                                <input type="text" name="studentId" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -34,16 +34,16 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
-                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>
+<!--                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>-->
+<!--                <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button>-->
             </div>
         </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
         <script type="text/html" id="currentTableBar">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+<!--            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>-->
+<!--            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>-->
         </script>
 
     </div>
@@ -59,7 +59,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/photoInfo/findAll',
+            url: '/salts/findAll',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -69,18 +69,18 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'student_name', width: 50, title: '学员姓名'},
-                {field: 'salts_time', width: 100, title: '销课时间', sort: true,templet: "<div>{{layui.util.toDateString(d.salts_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
-                {field: 'salts_cause', width: 100, title: '销课原因'},
-                {field: 'salts_type', title: '销课类型', width: 80, sort:true, templet: function (d) {
+                {field: 'studentName', width: 100,sort: true ,title: '学员姓名'},
+                {field: 'saltsTime', width: 200, title: '销课时间', sort: true,templet: "<div>{{layui.util.toDateString(d.salts_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
+                {field: 'saltsCause', width: 200, sort: true, title: '销课原因'},
+                {field: 'saltsType', title: '销课类型', width: 100, sort:true, templet: function (d) {
                         if (d.salts_type == 0) {
                             return "销课";
                         } else {
                             return "加课";
                         }
                     }},
-                {field: 'salts_name', width: 50, title: '销课人', sort: true},
-                {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
+                {field: 'saltsName', width: 100, title: '销课人', sort: true},
+                {field: 'studentId', width: 100, title: '学生id', sort: true}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -101,7 +101,7 @@
                     curr: 1
                 }
                 , where: {
-                    studentName: data.field.studentName
+                    studentId: data.field.studentId
                 }
             }, 'data');
 

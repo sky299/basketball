@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.SaltsMapper">
+    <select id="findAll" parameterType="com.jckj.model.SaltsInfo" resultType="com.jckj.model.SaltsInfo">
+        select
+        id,
+        student_name studentName,
+        salts_time saltsTime,
+        salts_cause saltsCause,
+        salts_type saltsType,
+        salts_name saltsName,
+        student_id studentId
+        from t_salts_info
+        where
+        is_delete=0
+        <if test="studentId != null ">and student_id=#{studentId}</if>
+    </select>
+    <select id="count" parameterType="com.jckj.model.SaltsInfo" resultType="java.lang.Integer">
+        select count(1) from t_salts_info where is_delete=0 <if test="studentId != null ">and student_id=#{studentId}</if>
+    </select>
+</mapper>
