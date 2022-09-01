@@ -5,19 +5,33 @@
 
     <select id="list" parameterType="com.jckj.model.TStudentInfo" resultType="com.jckj.model.TStudentInfo">
         select id,
-               student_id     as studentId,
-               student_name   as studentName,
-               student_pay    as studentPay,
-               student_enroll as studentEnroll,
-               student_photo  as studentPhoto,
-               gender,
-               class_name     as className,
-               student_status as studentStatus,
-               is_delete      as isDelete,
-               create_time    as createTime,
-               update_time    as updateTime
+        student_id as studentId,
+        student_name as studentName,
+        student_pay as studentPay,
+        student_enroll as studentEnroll,
+        student_photo as studentPhoto,
+        gender,
+        class_name as className,
+        student_status as studentStatus,
+        is_delete as isDelete,
+        create_time as createTime,
+        update_time as updateTime
         from t_student_info
-        where is_delete = 0
+        <trim prefix="where" suffixOverrides="and">
+            is_delete = 0
+            <if test="studentName != null and studentName != ''">
+                and student_name like concat('%',#{studentName},'%')
+            </if>
+            <if test="studentEnroll != null and studentEnroll != ''">
+                and student_enroll like concat('%',#{studentEnroll},'%')
+            </if>
+            <if test="className != null and className != ''">
+                and class_name like concat('%',#{className},'%')
+            </if>
+            <if test="studentStatus != null">
+                and student_status = #{studentStatus}
+            </if>
+        </trim>
         order by id desc limit #{dataNum}, #{limit};
     </select>
 

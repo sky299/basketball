@@ -53,4 +53,13 @@ public class StudentController {
         studentService.remove(id);
         return JsonResult.success();
     }
+
+    @PostMapping("bathDelete")
+    public JsonResult bathDelete(String id){
+        String[] split = id.split(",");
+        for (String s : split) {
+            studentService.remove(Integer.parseInt(s));
+        }
+        return JsonResult.success();
+    }
 }

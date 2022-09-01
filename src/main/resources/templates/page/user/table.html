@@ -31,6 +31,18 @@
                             </div>
                         </div>
                         <div class="layui-inline">
+                            <label class="layui-form-label">用户类型</label>
+                            <div class="layui-input-inline">
+                                <select name="userRole">
+                                    <option value=""></option>
+                                    <option value="0">家长</option>
+                                    <option value="1">教练</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary" lay-submit
                                     lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
                             </button>
@@ -82,7 +94,7 @@
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 },
-                {field: 'userPhoto', width: 100, title: '头像',templet: '#imgtem'},
+                {field: 'userPhoto', width: 100, title: '头像', templet: '#imgtem'},
                 {field: 'userName', width: 100, title: '姓名'},
                 {field: 'welfare', width: 80, title: '积分', sort: true},
                 {field: 'userRole', width: 80, title: '用户类型'},
@@ -98,18 +110,15 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    userName: data.field.userName,
+                    userPhone: data.field.userPhone,
+                    userRole: data.field.userRole
                 }
             }, 'data');
 
@@ -135,8 +144,25 @@
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                    , data = checkStatus.data, id = '';
+                if (data.length > 0) {
+                    for (let i in data) {
+                        id += data[i].id + ",";
+                    }
+                    layer.confirm('确定删除选中的用户？', {icon: 3, title: '提示信息'}, function (index) {
+                        $.ajax({
+                            type: 'post',
+                            url: 'bathDelete',
+                            data: {'id': id},
+                            success: function (data) {
+                                obj.del();
+                                layer.close(index);
+                            }
+                        });
+                    });
+                } else {
+                    layer.msg("请选择需要删除的用户");
+                }
             }
         });
 
@@ -162,6 +188,7 @@
                 let s = date.getSeconds();
                 return Y + M + D + h + m + s;
             }
+
             var data = obj.data;
             if (obj.event === 'edit') {
                 var index = layer.open({
@@ -172,8 +199,8 @@
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: 'edit.html',
-                    success:function() {
-                        var body = layer.getChildFrame('body',index);
+                    success: function () {
+                        var body = layer.getChildFrame('body', index);
                         body.find('#id').val(data.id);
                         body.find('#userName').val(data.userName);
                         body.find('#birthday').val(toDateString(data.birthday));
@@ -190,7 +217,7 @@
                 $.ajax({
                     type: 'post',
                     url: 'remove',
-                    data: {'id':data.id},
+                    data: {'id': data.id},
                     success: function (data) {
                         obj.del();
                     },

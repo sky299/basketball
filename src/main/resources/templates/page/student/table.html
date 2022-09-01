@@ -25,12 +25,6 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">学员生日</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="studentPay" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
                             <label class="layui-form-label">所在校区</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="studentEnroll" autocomplete="off" class="layui-input">
@@ -45,7 +39,11 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">分班状态</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="studentStatus" autocomplete="off" class="layui-input">
+                                <select name="studentStatus">
+                                    <option value=""></option>
+                                    <option value="0">未分班</option>
+                                    <option value="1">已分班</option>
+                                </select>
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -70,7 +68,6 @@
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
-            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="details">学员详情</a>
         </script>
 
     </div>
@@ -105,7 +102,7 @@
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
-                {field: 'studentStatus', width: 80, title: '学员状态'},
+                {field: 'studentStatus', width: 80, title: '分班状态'},
                 {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -116,18 +113,16 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
-
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    studentName: data.field.studentName,
+                    studentEnroll: data.field.studentEnroll,
+                    className: data.field.className,
+                    studentStatus: data.field.studentStatus
                 }
             }, 'data');
 
@@ -153,8 +148,25 @@
                 });
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                    , data = checkStatus.data, id = ''
+                if (data.length > 0) {
+                    for (var i in data) {
+                        id += data[i].id + ",";
+                    }
+                    layer.confirm('确定删除选中的学员？', {icon: 3, title: '提示信息'}, function (index) {
+                        $.ajax({
+                            type: 'post',
+                            url: 'bathDelete',
+                            data: {'id': id},
+                            success: function (data) {
+                                obj.del();
+                                layer.close(index);
+                            }
+                        });
+                    });
+                } else {
+                    layer.msg("请选择需要删除的学员");
+                }
             }
         });
 
@@ -221,20 +233,6 @@
 
                     }
                 })
-            } else if (obj.event === 'details') {
-                var info = layer.open({
-                    title: '学员详情',
-                    type: 2,
-                    shade: 0.2,
-                    maxmin: true,
-                    shadeClose: true,
-                    area: ['100%', '100%'],
-                    content: 'info.html'
-                });
-                $(window).on("resize", function () {
-                    layer.full(info);
-                });
-                return false;
             }
         });
     });

@@ -48,4 +48,13 @@ public class UserController {
         userService.add(tUserInfo);
         return JsonResult.success();
     }
+
+    @PostMapping("bathDelete")
+    public JsonResult bathDelete(String id){
+        String[] split = id.split(",");
+        for (String s : split) {
+            userService.remove(Integer.parseInt(s));
+        }
+        return JsonResult.success();
+    }
 }

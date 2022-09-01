@@ -4,19 +4,30 @@
 <mapper namespace="com.jckj.mapper.UserMapper">
     <select id="list" parameterType="com.jckj.model.TUserInfo" resultType="com.jckj.model.TUserInfo">
         select id,
-               user_pwd    as userPwd,
-               user_name   as userName,
-               birthday,
-               welfare,
-               user_role   as userRole,
-               user_sex    as userSex,
-               user_photo  as userPhoto,
-               user_phone  as userPhone,
-               is_delete   as isDelete,
-               create_time as createTime,
-               update_time as updateTime
+        user_pwd as userPwd,
+        user_name as userName,
+        birthday,
+        welfare,
+        user_role as userRole,
+        user_sex as userSex,
+        user_photo as userPhoto,
+        user_phone as userPhone,
+        is_delete as isDelete,
+        create_time as createTime,
+        update_time as updateTime
         from t_user_info
-        where is_delete = 0
+        <trim prefix="where" suffixOverrides="and">
+            is_delete = 0
+            <if test="userPhone != null">
+                and user_phone like concat('%',#{userPhone},'%')
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="userRole != null">
+                and user_role like concat('%',#{userRole},'%')
+            </if>
+        </trim>
         order by id desc limit #{dataNum}, #{limit};
     </select>
 
@@ -48,7 +59,7 @@
             user_photo  = #{userPhoto},
             user_phone  = #{userPhone},
             update_time = #{updateTime}
-        where id    = #{id};
+        where id = #{id};
     </update>
 
 </mapper>
