@@ -130,8 +130,8 @@
               "target": "_self"
             },
             {
-              "title": "弹出层",
-              "href": "page/layer.html",
+              "title": "公共风采",
+              "href": "page/openstyle.html",
               "icon": "fa fa-shield",
               "target": "_self"
             }

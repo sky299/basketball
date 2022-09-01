@@ -19,9 +19,27 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">课程名</label>
+                            <label class="layui-form-label">用户姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="courseName" autocomplete="off" class="layui-input">
+                                <input type="text" name="username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户性别</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sex" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户城市</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="city" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户职业</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="classify" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -50,8 +68,6 @@
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-
-    var json;
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
@@ -59,7 +75,7 @@
 
         table.render({
             elem: '#currentTableId',
-            url: '/course/findAll',
+            url: '/openstyle/findAll',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print', {
                 title: '提示',
@@ -69,31 +85,18 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'courseName', width: 50, title: '课程名'},
-                {field: 'courseTime', width: 100, title: '课程课时', sort: true,templet: "<div id='courseTime2'>{{layui.util.toDateString(d.courseTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
-                {field: 'photo', width: 100, title: '课程头像', templet: '<div><img id="img" src="/{{d.photo}}"></div>'},
-                {field: 'photo', width: 100, title: '头像名字'},
-                {field: 'courseIntroduce', title: '课程介绍', width: 80},
-                {field: 'coursePrice', width: 50, title: '课程价格', sort: true},
-                {field: 'tocourseBiginTime', width: 150, title: '上课开始时间', sort: true,templet: "<div>{{layui.util.toDateString(d.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
-                {field: 'tocourseFinishTime', width: 150, title: '上课结束时间',templet: "<div>{{layui.util.toDateString(d.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
-                {field: 'enrollTotal', width: 50, title: '购买人数', sort: true},
-                {field: 'isShaky', width: 50, title: '是否为活动课程', sort: true,templet: function (d) {
-                        if (d.isShaky == 0) {
-                            return "否";
-                        } else {
-                            return "是";
-                        }
-                    }},
-                {field: 'courseState', width: 50, title: '课程状态', sort: true,templet: function (d) {
-                        if (d.courseState == 0) {
-                            return "上架";
-                        } else {
-                            return "下架";
-                        }
-                    }},
-                {field: 'schoolName', width: 50, title: '校区名', sort: true},
-                {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
+                {field: 'studentName', width: 100, title: '学员姓名'},
+                {field: 'schoolId', width: 100, title: '所属校区', sort: true},
+                {field: 'picture', width: 100, title: '学员风采图片',sort: true,templet: '<div><img id="img" src="/{{d.picture}}"></div>'},
+                {field: 'video', width:320, height:240, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="/{{d.video}}"></video></div>'},
+                {field: 'shows', width: 100, title: '是否展示', sort: true ,templet: function (d) {
+            if (d.shows == 0) {
+                return "否";
+            } else {
+                return "是";
+            }
+        }},
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -114,7 +117,7 @@
                     curr: 1
                 }
                 , where: {
-                    courseName: data.field.courseName
+                    searchParams: result
                 }
             }, 'data');
 
@@ -133,7 +136,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/course/add.html',
+                    content: '../page/table/add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -141,25 +144,7 @@
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                var flag = 0;
-                var str = "";
-                for (var i = 0; i < data.length; i++) {
-                    flag++;
-                    str += data[i].id+",";
-                }
-                $.ajax({
-                    url:"/course/delete",
-                    type:"post",
-                    data:{id:str},
-                    success:function (data) {
-                        if (data != 0){
-                            alert("删除了"+data.data+"条数据")
-                        }else {
-                            alert("删除失败")
-                        }
-                        window.location.reload();
-                    }
-                });
+                layer.alert(JSON.stringify(data));
             }
         });
 
@@ -171,7 +156,7 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-                json = JSON.stringify(data);
+
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -179,23 +164,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/course/edit.html',
-                    success:function() {
-                        var body = layer.getChildFrame('body',index);
-                        body.find('#id').val(data.id);
-                        body.find('#courseName').val(data.courseName);
-                        var toDateString = layui.util.toDateString(data.courseTime, 'yyyy-MM-dd HH:mm:ss');
-                        body.find('#courseTime').val(toDateString);
-                        body.find('#photo').val(data.photo);
-                        body.find('#courseIntroduce').val(data.courseIntroduce);
-                        body.find('#coursePrice').val(data.coursePrice);
-                        var tocourseBiginTime = layui.util.toDateString(data.tocourseBiginTime, 'yyyy-MM-dd HH:mm:ss');
-                        body.find('#tocourseBiginTime').val(tocourseBiginTime);
-                        var tocourseFinishTime = layui.util.toDateString(data.tocourseFinishTime, 'yyyy-MM-dd HH:mm:ss');
-                        body.find('#tocourseFinishTime').val(tocourseFinishTime);
-                        body.find('#enrollTotal').val(data.enrollTotal);
-                        body.find('#schoolName').val(data.schoolName);
-                    }
+                    content: '../page/table/edit.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -203,11 +172,6 @@
                 return false;
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
-                    $.ajax({
-                        url:"/course/delete",
-                        type:"post",
-                        data:{id:data.id}
-                    });
                     obj.del();
                     layer.close(index);
                 });

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.OpenStyleMapper">
+
+    <!-- 列表 -->
+    <select id="findAll" parameterType="com.jckj.model.OpenStyle" resultType="com.jckj.model.OpenStyle">
+        select
+        id,
+        student_name studentName,
+        school_id schoolId,
+        picture,
+        video,
+        is_show shows
+        from t_open_style
+        where is_delete=0
+        <if test="studentName != null">and student_name like '%${studentName}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="findById" resultType="com.jckj.model.OpenStyle">
+        select
+        id,
+        student_name studentName,
+        school_id schoolId,
+        picture,
+        video,
+        is_show show
+        from t_open_style
+        where is_delete=0
+        and id=#{id}
+    </select>
+    <select id="count" parameterType="com.jckj.model.OpenStyle" resultType="java.lang.Integer">
+        select count(1) from t_open_style where is_delete=0 <if test="studentName != null">and student_name like '%${studentName}%'</if>
+    </select>
+
+    <!-- 新增 -->
+    <insert id="add" parameterType="com.jckj.model.OpenStyle">
+        insert into t_open_style
+        (student_name,school_id,picture,video,is_show,create_time,update_time)
+        values
+        (#{studentName},#{schoolId},#{picture},#{video},#{show},#{createTime},#{updateTime})
+
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.jckj.model.OpenStyle">
+        update t_open_style set
+        <if test="studentName != null">student_name=#{studentName},</if>
+        <if test="schoolId != null">school_id=#{schoolId},</if>
+        <if test="picture != null">picture=#{picture},</if>
+        <if test="video != null">video=#{video},</if>
+        <if test="show != null">is_show=#{show},</if>
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="com.jckj.model.OpenStyle">
+		update t_open_style set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
+</mapper>

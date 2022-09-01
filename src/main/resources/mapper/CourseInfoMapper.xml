@@ -67,6 +67,7 @@
         <if test="tocourseFinishTime != null">tocourse_finish_time=#{tocourseFinishTime},</if>
         <if test="enrollTotal != null">enroll_total=#{enrollTotal},</if>
         <if test="isShaky != null">is_shaky=#{isShaky},</if>
+        <if test="courseState != null">course_state=#{courseState},</if>
         <if test="schoolName != null">school_name=#{schoolName},</if>
         update_time=#{updateTime}
         where id=#{id}

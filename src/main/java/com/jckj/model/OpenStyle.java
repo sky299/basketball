@@ -1,23 +1,23 @@
 package com.jckj.model;
 
+import com.jckj.dto.PageDto;
+
 import java.io.Serializable;
 
 /**
  * @author 柳江
  * @since 2022-08-29
  */
-public class OpenStyle implements Serializable {
-
-
+public class OpenStyle extends PageDto implements Serializable {
     /**
      * 主键
      */
     private Integer id;
 
     /**
-     * 学员id
+     * 学员姓名
      */
-    private Integer studentId;
+    private String studentName;
 
     /**
      * 所属校区
@@ -37,7 +37,7 @@ public class OpenStyle implements Serializable {
     /**
      * 是否展示（0-否，1-是）
      */
-    private Boolean isShow;
+    private Boolean shows;
 
     /**
      * 是否删除（0-否，1-是）
@@ -54,5 +54,90 @@ public class OpenStyle implements Serializable {
      */
     private Long updateTime;
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public Boolean getShows() {
+        return shows;
+    }
+
+    public void setShows(Boolean shows) {
+        this.shows = shows;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public OpenStyle(Integer id, String studentName, Integer schoolId, String picture, String video, Boolean shows, Boolean isDelete, Long createTime, Long updateTime) {
+        this.id = id;
+        this.studentName = studentName;
+        this.schoolId = schoolId;
+        this.picture = picture;
+        this.video = video;
+        this.shows = shows;
+        this.isDelete = isDelete;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
+    public OpenStyle() {
+    }
 }
