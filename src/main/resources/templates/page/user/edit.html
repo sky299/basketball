@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="id" id="id" readonly="readonly" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">用户姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="userName" id="userName" lay-verify="required" lay-reqtext="姓名不能为空"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">用户密码</label>
+        <div class="layui-input-block">
+            <input type="text" name="userPwd" id="userPwd" lay-verify="required" lay-reqtext="密码不能为空"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">生日</label>
+        <div class="layui-input-block">
+            <input type="text" name="birthday" id="birthday" class="layui-input" lay-verify="required"
+                   lay-reqtext="生日不能为空">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label required">用户积分</label>
+        <div class="layui-input-block">
+            <input type="text" name="welfare" id="welfare" lay-verify="required" lay-reqtext="用户积分不能为空"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label required">手机号</label>
+        <div class="layui-input-block">
+            <input type="text" name="userPhone" id="userPhone" class="layui-input" lay-verify="required|phone"
+                   lay-reqtext="手机号不能为空">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var birthday = $("#birthday").val()
+            var userPay = new Date(birthday).getTime()
+            $.ajax({
+                type: 'post',
+                url: 'update',
+                data: JSON.stringify({
+                    'id': data.field.id,
+                    'userName': data.field.userName,
+                    'birthday': userPay,
+                    'welfare': data.field.welfare,
+                    'userPwd': data.field.userPwd,
+                    'userPhone': data.field.userPhone
+                }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(iframeIndex);
+                    layui.table.reload()
+                },
+                error: function (data) {
+
+                }
+            })
+        });
+
+    });
+</script>
+</body>
+</html>

@@ -39,4 +39,16 @@
         where id = #{id}
     </update>
 
+    <update id="update" parameterType="com.jckj.model.TUserInfo">
+        update t_user_info
+        set user_pwd    = #{userPwd},
+            user_name   = #{userName},
+            birthday    = #{birthday},
+            welfare     = #{welfare},
+            user_photo  = #{userPhoto},
+            user_phone  = #{userPhone},
+            update_time = #{updateTime}
+        where id    = #{id};
+    </update>
+
 </mapper>

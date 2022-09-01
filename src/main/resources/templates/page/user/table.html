@@ -146,6 +146,22 @@
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
+            function toDateString(timestamp) {
+                if (typeof timestamp === 'string') {
+                    timestamp = Number(timestamp);
+                }
+                if (typeof timestamp !== 'number') {
+                    alert("输入参数无法识别为时间戳");
+                }
+                let date = new Date(timestamp);
+                let Y = date.getFullYear() + '-';
+                let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                let D = date.getDate() + ' ';
+                let h = date.getHours() + ':';
+                let m = date.getMinutes() + ':';
+                let s = date.getSeconds();
+                return Y + M + D + h + m + s;
+            }
             var data = obj.data;
             if (obj.event === 'edit') {
                 var index = layer.open({
@@ -155,7 +171,16 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: 'page/user/edit.html',
+                    content: 'edit.html',
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#userName').val(data.userName);
+                        body.find('#birthday').val(toDateString(data.birthday));
+                        body.find('#welfare').val(data.welfare);
+                        body.find('#userPwd').val(data.userPwd);
+                        body.find('#userPhone').val(data.userPhone);
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

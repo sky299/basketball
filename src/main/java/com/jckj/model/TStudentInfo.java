@@ -20,7 +20,7 @@ public class TStudentInfo extends PageDto {
 
     private String className;
 
-    private Boolean studentStatus;
+    private Integer studentStatus;
 
     private Boolean isDelete;
 
@@ -92,11 +92,11 @@ public class TStudentInfo extends PageDto {
         this.className = className;
     }
 
-    public Boolean getStudentStatus() {
+    public Integer getStudentStatus() {
         return studentStatus;
     }
 
-    public void setStudentStatus(Boolean studentStatus) {
+    public void setStudentStatus(Integer studentStatus) {
         this.studentStatus = studentStatus;
     }
 

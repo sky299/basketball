@@ -20,23 +20,21 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">用户姓名</label>
         <div class="layui-input-block">
-            <input type="text" name="userName" lay-verify="required" lay-reqtext="姓名不能为空" placeholder="请输入姓名"
-                   class="layui-input">
+            <input type="text" name="userName" lay-verify="required" lay-reqtext="姓名不能为空" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label required">用户密码</label>
         <div class="layui-input-block">
-            <input type="text" name="userPwd" lay-verify="required" lay-reqtext="密码不能为空" placeholder="请输入密码"
-                   class="layui-input">
+            <input type="text" name="userPwd" lay-verify="required" lay-reqtext="密码不能为空" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">生日</label>
+        <label class="layui-form-label required">生日</label>
         <div class="layui-input-block">
-            <input type="text" name="birthday" id="birthday" class="layui-input">
+            <input type="text" name="birthday" id="birthday" lay-verify="required" lay-reqtext="生日不能为空" class="layui-input">
         </div>
     </div>
 
@@ -50,7 +48,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户积分</label>
         <div class="layui-input-block">
-            <input type="text" name="welfare" value="0" placeholder="请输入用户积分" class="layui-input">
+            <input type="text" name="welfare" value="0" class="layui-input">
         </div>
     </div>
 
@@ -65,7 +63,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label required">手机号</label>
         <div class="layui-input-block">
-            <input type="text" name="userPhone" class="layui-input" lay-verify="required|phone" lay-reqtext="手机号不能为空" placeholder="请输入手机号">
+            <input type="text" name="userPhone" class="layui-input" lay-verify="required|phone" lay-reqtext="手机号不能为空">
         </div>
     </div>
 

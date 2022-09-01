@@ -101,7 +101,7 @@
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 },
-                {field: 'studentPhoto', width: 100, title: '头像',templet: '#imgtem'},
+                {field: 'studentPhoto', width: 100, title: '头像', templet: '#imgtem'},
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
@@ -164,6 +164,22 @@
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
+            function toDateString(timestamp) {
+                if (typeof timestamp === 'string') {
+                    timestamp = Number(timestamp);
+                }
+                if (typeof timestamp !== 'number') {
+                    alert("输入参数无法识别为时间戳");
+                }
+                let date = new Date(timestamp);
+                let Y = date.getFullYear() + '-';
+                let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                let D = date.getDate() + ' ';
+                let h = date.getHours() + ':';
+                let m = date.getMinutes() + ':';
+                let s = date.getSeconds();
+                return Y + M + D + h + m + s;
+            }
             var data = obj.data;
             if (obj.event === 'edit') {
                 var index = layer.open({
@@ -173,7 +189,21 @@
                     maxmin: true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: 'page/student/edit.html',
+                    content: 'edit.html',
+                    success: function () {
+                        var body = layer.getChildFrame('body', index);
+                        body.find('#id').val(data.id);
+                        body.find('#studentName').val(data.studentName);
+                        body.find('#studentPay').val(toDateString(data.studentPay));
+                        body.find('#studentEnroll').val(data.studentEnroll);
+                        body.find('#className').val(data.className);
+                        var numbers = body.find("#studentStatus").find("option");
+                        for (var j = 0; j < numbers.length; j++) {
+                            if ($(numbers[j]).val() == data.studentStatus) {
+                                $(numbers[j]).attr("selected", "true");
+                            }
+                        }
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -183,7 +213,7 @@
                 $.ajax({
                     type: 'post',
                     url: 'remove',
-                    data: {'id':data.id},
+                    data: {'id': data.id},
                     success: function (data) {
                         obj.del();
                     },
@@ -192,30 +222,19 @@
                     }
                 })
             } else if (obj.event === 'details') {
-                $.ajax({
-                    type: 'post',
-                    url: 'info',
-                    data: {'id': data.id},
-                    success: function (data) {
-                        window.location.href = "info.html"
-                    },
-                    error: function (data) {
-
-                    }
-                })
-                // var info = layer.open({
-                //     title: '学员详情',
-                //     type: 2,
-                //     shade: 0.2,
-                //     maxmin: true,
-                //     shadeClose: true,
-                //     area: ['100%', '100%'],
-                //     content: 'info?id='+data.id,
-                // });
-                // $(window).on("resize", function () {
-                //     layer.full(info);
-                // });
-                // return false;
+                var info = layer.open({
+                    title: '学员详情',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['100%', '100%'],
+                    content: 'info.html'
+                });
+                $(window).on("resize", function () {
+                    layer.full(info);
+                });
+                return false;
             }
         });
     });

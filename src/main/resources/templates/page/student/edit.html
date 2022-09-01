@@ -18,9 +18,17 @@
 <div class="layui-form layuimini-form">
 
     <div class="layui-form-item">
+        <label class="layui-form-label">学员编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="id" id="id" readonly="readonly" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label required">学员姓名</label>
         <div class="layui-input-block">
-            <input type="text" name="studentName" lay-verify="required" lay-reqtext="学员姓名不能为空" class="layui-input">
+            <input type="text" name="studentName" id="studentName" lay-verify="required" lay-reqtext="学员姓名不能为空"
+                   class="layui-input">
         </div>
     </div>
 
@@ -34,37 +42,23 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">所在校区</label>
         <div class="layui-input-block">
-            <input type="text" name="studentEnroll" lay-verify="required" lay-reqtext="所在校区不能为空" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label required">学员头像</label>
-        <div class="layui-input-block">
-            <input type="file" name="studentPhoto" id="studentPhoto" lay-verify="required" lay-reqtext="请上传头像" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label required">性别</label>
-        <div class="layui-input-block">
-            <input type="radio" name="gender" value="男" title="男" checked="">
-            <input type="radio" name="gender" value="女" title="女">
+            <input type="text" name="studentEnroll" id="studentEnroll" lay-verify="required" lay-reqtext="所在校区不能为空"
+                   class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">所在班级</label>
+        <label class="layui-form-label required">所在班级</label>
         <div class="layui-input-block">
-            <input type="text" name="className" class="layui-input">
+            <input type="text" name="className" id="className" lay-verify="required" lay-reqtext="所在班级不能为空" class="layui-input">
         </div>
     </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label required">分班状态</label>
         <div class="layui-input-block">
-            <select name="studentStatus">
-                <option value=""></option>
+            <select name="studentStatus" id="studentStatus">
+                <option value="-1"></option>
                 <option value="0">未分班</option>
                 <option value="1">已分班</option>
             </select>
@@ -77,36 +71,31 @@
         </div>
     </div>
 </div>
+</div>
 <script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
-            $ = layui.$,
-            laydate = layui.laydate;
-
-        laydate.render({
-            elem: '#studentPay'
-        })
+            $ = layui.$;
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var birthday = $("#studentPay").val()
             var studentPay = new Date(birthday).getTime()
-            var formData = new FormData();
-            formData.append("studentName", data.field.studentName);
-            formData.append("studentPay", studentPay);
-            formData.append("studentEnroll", data.field.studentEnroll);
-            formData.append("photo", $("#studentPhoto")[0].files[0]);
-            formData.append("gender", data.field.gender);
-            formData.append("className", data.field.className);
-            formData.append("studentStatus", data.field.studentStatus);
             $.ajax({
                 type: 'post',
-                url: 'add',
-                data: formData,
-                processData: false,
-                contentType: false,
+                url: 'update',
+                data: JSON.stringify({
+                    'id': data.field.id,
+                    'studentName': data.field.studentName,
+                    'studentPay': studentPay,
+                    'studentEnroll': data.field.studentEnroll,
+                    'className': data.field.className,
+                    'studentStatus': data.field.studentStatus
+                }),
+                dataType: 'json',
+                contentType: "application/json",
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
@@ -117,6 +106,7 @@
             })
             return false;
         });
+
     });
 </script>
 </body>
