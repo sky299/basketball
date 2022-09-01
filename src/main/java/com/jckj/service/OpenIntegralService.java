@@ -25,7 +25,6 @@ public interface OpenIntegralService {
 
     /**
      * 积分获取方式列表总数
-     * @param openIntegral 积分获取方式
      * @return 积分获取方式总数
      */
     public int count();

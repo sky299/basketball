@@ -124,13 +124,13 @@
           "target": "",
           "child": [
             {
-              "title": "关于我们",
+              "title": "关于我们管理",
               "href": "page/photoinfo.html",
               "icon": "fa fa-snowflake-o",
               "target": "_self"
             },
             {
-              "title": "公共风采",
+              "title": "公共风采管理",
               "href": "page/openstyle.html",
               "icon": "fa fa-shield",
               "target": "_self"
@@ -138,6 +138,36 @@
             {
               "title": "积分获取方式管理",
               "href": "page/openIntegral.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            },
+            {
+              "title": "帮助问题管理",
+              "href": "page/openProblem.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            },
+            {
+              "title": "帮助回答管理",
+              "href": "page/openAnswer.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            },
+            {
+              "title": "轮播图管理",
+              "href": "page/openRotation.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            },
+            {
+              "title": "校区管理",
+              "href": "page/openSchool.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
+            },
+            {
+              "title": "课程管理",
+              "href": "page/openCourse.html",
               "icon": "fa fa-shield",
               "target": "_self"
             }

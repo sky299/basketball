@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.OpenProblemMapper">
+
+    <!-- 列表 -->
+    <select id="findAll" parameterType="com.jckj.model.OpenProblem" resultType="com.jckj.model.OpenProblem">
+        select
+        id,
+        problem
+        from t_open_problem
+        where is_delete=0
+    </select>
+    <select id="findById" resultType="com.jckj.model.OpenProblem">
+        select
+        id,
+        problem
+        from t_open_problem
+        where is_delete=0
+        and id=#{id}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from t_open_problem where is_delete=0
+    </select>
+
+    <!-- 新增 -->
+    <insert id="add" parameterType="com.jckj.model.OpenProblem">
+        insert into t_open_problem
+        (problem,create_time,update_time)
+        values
+        (#{problem},#{createTime},#{updateTime})
+
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.jckj.model.OpenProblem">
+        update t_open_problem set
+        problem=#{problem},
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="com.jckj.model.OpenProblem">
+		update t_open_problem set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
+</mapper>
