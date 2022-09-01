@@ -84,13 +84,6 @@
                 {field: 'studentId', width: 150, title: '学员id'},
                 {field: 'mienPhoto',width: 150, title: '风采照片'},
                 {field: 'mienVideo', width: 150, title: '风采视频'},
-                {field: 'mienStatus', width: 150, title: '是否隐私',templet: function (d) {
-                        if (d.mienStatus == "0") {
-                            return "否";
-                        } else {
-                            return "是";
-                        }
-                    }},
                 {field: 'schoolName', width: 150, title: '校区名'},
                 {field: 'isDelete', width: 100, title: '是否删除',templet: function (d) {
                         if (d.isDelete == "0") {
@@ -203,7 +196,6 @@
                         body.find('#studentId').val(data.studentId);
                         body.find('#mienPhoto').val(data.mienPhoto);
                         body.find('#mienVideo').val(data.mienVideo);
-                        body.find('#mienStatus').val(data.mienStatus);
                         body.find('#schoolName').val(data.schoolName);
                     }
                 });

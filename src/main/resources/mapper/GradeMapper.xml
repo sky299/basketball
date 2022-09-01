@@ -3,8 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jckj.mapper.GradeMapper">
     <select id="list" parameterType="com.jckj.model.Grade" resultType="com.jckj.model.Grade">
-        select id,grade_name gradeName,grade_time gradeTime,coach_name coachName,grade_photo gradePhoto,grade_describe gradeDescribe,grade_status gradeStatus,school_name schoolName,is_delete isDelete,create_time createTime,update_time updateTime from t_grade_info
+        select id,
+               grade_name gradeName,
+               grade_time gradeTime,
+               coach_name coachName,
+               grade_photo gradePhoto,
+               grade_describe gradeDescribe,
+               grade_status gradeStatus,
+               school_name schoolName,
+               is_delete isDelete,
+               create_time createTime,
+               update_time updateTime
+        from t_grade_info
         where is_delete=0
+        <if test="gradeName != null">and grade_name like '%${gradeName}%'</if>
         limit #{dataNum},#{limit}
     </select>
     <select id="count" parameterType="com.jckj.model.Grade" resultType="java.lang.Integer">

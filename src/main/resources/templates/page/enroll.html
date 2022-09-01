@@ -19,9 +19,9 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">名称</label>
+                            <label class="layui-form-label">学员姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="product_name" autocomplete="off" class="layui-input">
+                                <input type="text" name="student_name" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -124,7 +124,7 @@
                     curr: 1
                 }
                 , where: {
-                    product_name:data.field.product_name,
+                    studentName:data.field.student_name,
                 }
             }, 'data');
 

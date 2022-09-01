@@ -3,8 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jckj.mapper.MienMapper">
     <select id="list" parameterType="com.jckj.model.Mien" resultType="com.jckj.model.Mien">
-        select id,student_id studentId,mien_photo mienPhoto,mien_video mienVideo,mien_status mienStatus,school_name schoolName,is_delete isDelete,create_time createTime,update_time updateTime from t_mien_info
+        select id,
+               student_id studentId,
+               mien_photo mienPhoto,
+               mien_video mienVideo,
+               mien_status mienStatus,
+               school_name schoolName,
+               is_delete isDelete,
+               create_time createTime,
+               update_time updateTime
+        from t_mien_info
         where is_delete=0
+        and mien_status=1
         limit #{dataNum},#{limit}
     </select>
     <select id="count" parameterType="com.jckj.model.Mien" resultType="java.lang.Integer">
@@ -22,7 +32,11 @@
     </insert>
     <update id="update" parameterType="com.jckj.model.Mien">
         update t_mien_info set
-        student_id=#{studentId},mien_photo=#{mienPhoto},mien_video=#{mienVideo},mien_status=#{mienStatus},school_name=#{schoolName},update_time=#{updateTime}
+        student_id=#{studentId},
+        mien_photo=#{mienPhoto},
+        mien_video=#{mienVideo},
+        school_name=#{schoolName},
+        update_time=#{updateTime}
         where id=#{id}
     </update>
     <update id="delete" parameterType="com.jckj.model.Mien">

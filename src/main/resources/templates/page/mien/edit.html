@@ -40,12 +40,6 @@
             <input type="file" id="video" name="video" class="layui-input" placeholder="请输入风采视频">
         </div>
     </div>
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">是否隐私</label>
-        <div class="layui-input-block">
-            <input type="text" id="mienStatus" name="mienStatus" class="layui-input" placeholder="请输入是否隐私">
-        </div>
-    </div>
     <div class="layui-form-item">
         <label class="layui-form-label">校区名</label>
         <div class="layui-input-block">
@@ -73,7 +67,6 @@
             formData.append("img",fileimg);
             var filevideo = $("#video")[0].files[0];
             formData.append("video",filevideo);
-            formData.append("mienStatus",data.field.mienStatus);
             formData.append("schoolName",data.field.schoolName);
             $.ajax({
                 url:'/mien/update',

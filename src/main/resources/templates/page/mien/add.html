@@ -35,6 +35,12 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">是否隐私</label>
+        <div class="layui-input-block">
+            <input type="checkbox" id="mienStatus" checked="" name="mienStatus" lay-skin="switch" value="true" lay-text="是|否">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">校区名</label>
         <div class="layui-input-block">
             <input type="text" id="schoolName" name="schoolName" placeholder="请输入校区名" value="" class="layui-input">
@@ -52,7 +58,6 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
@@ -61,6 +66,11 @@
             formData.append("img",fileimg);
             var filevideo = $("#video")[0].files[0];
             formData.append("video",filevideo);
+            var status = 0;
+            if(data.field.mienStatus=="true"){
+                status = 1;
+            }
+            formData.append("mienStatus",status);
             formData.append("schoolName",data.field.schoolName);
             $.ajax({
                 url:'/mien/insert',

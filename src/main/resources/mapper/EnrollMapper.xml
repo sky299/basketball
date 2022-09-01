@@ -3,10 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jckj.mapper.EnrollMapper">
     <select id="list" parameterType="com.jckj.model.Enroll" resultType="com.jckj.model.Enroll">
-        select id,student_name studentName,user_phone userPhone,pattern pattern,canal canal,class_hour classHour,
-               school_name schoolName,enroll_state enrollState,course_hour courseHour,course_name courseName,
-               is_delete isDelete,create_time createTime,update_time updateTime from t_enroll_info
+        select id,
+               student_name studentName,
+               user_phone userPhone,
+               pattern pattern,
+               canal canal,
+               class_hour classHour,
+               school_name schoolName,
+               enroll_state enrollState,
+               course_hour courseHour,
+               course_name courseName,
+               is_delete isDelete,
+               create_time createTime,
+               update_time updateTime
+        from t_enroll_info
         where is_delete=0
+        <if test="studentName != null">and student_name like '%${studentName}%'</if>
         limit #{dataNum},#{limit}
     </select>
     <select id="count" parameterType="com.jckj.model.Enroll" resultType="java.lang.Integer">
