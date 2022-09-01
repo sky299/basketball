@@ -4,12 +4,14 @@ import com.jckj.dto.PageDto;
 import com.jckj.mapper.OrderMapper;
 import com.jckj.model.TOrderInfo;
 import com.jckj.service.OrderService;
+import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -17,32 +19,35 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public List<TOrderInfo> list(PageDto dto) {
-        return null;
+    public PageVo list(PageDto dto) {
+        return PageVo.successPage(orderMapper.list(dto));
     }
 
     @Override
     public Integer count(PageDto pageDto) {
-        return null;
+        return orderMapper.count(pageDto);
     }
 
     @Override
     public TOrderInfo info(Integer id) {
-        return null;
+        return orderMapper.info(id);
     }
 
     @Override
     public void add(TOrderInfo tOrderInfo) {
-
+        tOrderInfo.setCreateTime(System.currentTimeMillis());
+        tOrderInfo.setUpdateTime(System.currentTimeMillis());
+        orderMapper.add(tOrderInfo);
     }
 
     @Override
     public void update(TOrderInfo tOrderInfo) {
-
+        tOrderInfo.setUpdateTime(System.currentTimeMillis());
+        orderMapper.update(tOrderInfo);
     }
 
     @Override
     public void remove(Integer id) {
-
+        orderMapper.remove(id);
     }
 }

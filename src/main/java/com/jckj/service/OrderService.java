@@ -2,14 +2,13 @@ package com.jckj.service;
 
 import com.jckj.dto.PageDto;
 import com.jckj.model.TOrderInfo;
-
-import java.util.List;
+import com.jckj.vo.PageVo;
 
 public interface OrderService {
     /**
      * 列表
      */
-    List<TOrderInfo> list(PageDto dto);
+    PageVo list(PageDto dto);
 
     /**
      * 列表总数

@@ -29,7 +29,7 @@
         },
         {
           "title": "订单管理",
-          "href": "page/setting.html",
+          "href": "page/order/table.html",
           "icon": "fa fa-gears",
           "target": "_self"
         },

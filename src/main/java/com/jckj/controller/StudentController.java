@@ -1,5 +1,6 @@
 package com.jckj.controller;
 
+import com.jckj.conf.QiniuFile;
 import com.jckj.model.TStudentInfo;
 import com.jckj.service.StudentService;
 import com.jckj.vo.JsonResult;
@@ -7,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("page/student")
@@ -29,15 +28,8 @@ public class StudentController {
     }
 
     @PostMapping("add")
-    public JsonResult add(TStudentInfo tStudentInfo,@RequestParam("photo") MultipartFile photo) throws IOException {
-        if (photo != null) {
-            String photoName = UUID.randomUUID() + "_" + photo.getOriginalFilename();
-            int hashCode = photo.hashCode();
-            String dir = Integer.toHexString(hashCode);
-            String path = "E:/upload/" + dir.charAt(0) + "/" + dir.charAt(1) + "/" + photoName;
-            photo.transferTo(new File(path));
-            tStudentInfo.setStudentPhoto(dir.charAt(0) + "/" + dir.charAt(1) + "/" + photoName);
-        }
+    public JsonResult add(TStudentInfo tStudentInfo, @RequestParam("photo") MultipartFile photo) throws IOException {
+        tStudentInfo.setStudentPhoto(QiniuFile.loadFile(photo.getBytes()));
         studentService.add(tStudentInfo);
         return JsonResult.success();
     }
