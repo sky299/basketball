@@ -52,23 +52,23 @@ public class OpenStyleController {
      * 风采信息修改
      * @param openStyle 风采信息对象
      * @param img 图片（风采信息照片）
-     * @param video 视频
+     * @param videos 视频
      * @return JaonResult
      */
     @RequestMapping("update")
-    public JsonResult update(OpenStyle openStyle, MultipartFile img,MultipartFile video) {
-        return JsonResult.success(openStyleService.update(openStyle,img,video));
+    public JsonResult update(OpenStyle openStyle, MultipartFile img,MultipartFile videos) {
+        return JsonResult.success(openStyleService.update(openStyle,img,videos));
     }
 
     /**
      * 风采信息添加功能
      * @param openStyle 风采信息对象
      * @param img 图片
-     * @param video 视频
+     * @param videos 视频
      * @return JaonResult
      */
     @RequestMapping("add")
-    public JsonResult add(OpenStyle openStyle, MultipartFile img,MultipartFile video) {
-        return JsonResult.success(openStyleService.add(openStyle,img,video));
+    public JsonResult add(OpenStyle openStyle, MultipartFile img,MultipartFile videos) {
+        return JsonResult.success(openStyleService.add(openStyle,img,videos));
     }
 }

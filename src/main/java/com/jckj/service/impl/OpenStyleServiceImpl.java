@@ -61,7 +61,7 @@ public class OpenStyleServiceImpl implements OpenStyleService {
                 String filepath = "E://upload//"+filename;
                 // 转存视频
                 video.transferTo(new File(filepath));
-                openStyle.setPicture(filename);
+                openStyle.setVideo(filename);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +85,7 @@ public class OpenStyleServiceImpl implements OpenStyleService {
     }
 
     @Override
-    public int update(OpenStyle openStyle, MultipartFile img,MultipartFile video) {
+    public int update(OpenStyle openStyle, MultipartFile img,MultipartFile videos) {
         try {
             Date date = new Date();
             long time = date.getTime();
@@ -98,13 +98,13 @@ public class OpenStyleServiceImpl implements OpenStyleService {
                 img.transferTo(new File(filepath));
                 openStyle.setPicture(filename);
             }
-            if (video != null){
+            if (videos != null){
                 // 设置视频路径
-                String filename = video.getOriginalFilename();
+                String filename = videos.getOriginalFilename();
                 String filepath = "E://upload//"+filename;
                 // 转存视频
-                video.transferTo(new File(filepath));
-                openStyle.setPicture(filename);
+                videos.transferTo(new File(filepath));
+                openStyle.setVideo(filename);
             }
         } catch (IOException e) {
             e.printStackTrace();

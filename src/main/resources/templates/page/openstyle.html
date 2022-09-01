@@ -68,6 +68,7 @@
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
+    var json;
     layui.use(['form', 'table'], function () {
         var $ = layui.jquery,
             form = layui.form,
@@ -86,7 +87,7 @@
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
                 {field: 'studentName', width: 100, title: '学员姓名'},
-                {field: 'schoolId', width: 100, title: '所属校区', sort: true},
+                {field: 'schoolName', width: 100, title: '所属校区', sort: true},
                 {field: 'picture', width: 100, title: '学员风采图片',sort: true,templet: '<div><img id="img" src="/{{d.picture}}"></div>'},
                 {field: 'video', width:320, height:240, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="/{{d.video}}"></video></div>'},
                 {field: 'shows', width: 100, title: '是否展示', sort: true ,templet: function (d) {
@@ -136,7 +137,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: '../page/openstyle/add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -144,7 +145,25 @@
             } else if (obj.event === 'delete') {  // 监听删除操作
                 var checkStatus = table.checkStatus('currentTableId')
                     , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                var flag = 0;
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    flag++;
+                    str += data[i].id+",";
+                }
+                $.ajax({
+                    url:"/openstyle/delete",
+                    type:"post",
+                    data:{id:str},
+                    success:function (data) {
+                        if (data != 0){
+                            alert("删除了"+data.data+"条数据")
+                        }else {
+                            alert("删除失败")
+                        }
+                        window.location.reload();
+                    }
+                });
             }
         });
 
@@ -156,7 +175,7 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-
+                json = JSON.stringify(data);
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -164,7 +183,14 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/edit.html',
+                    content: '../page/openstyle/edit.html',
+                    success:function() {
+                        var body = layer.getChildFrame('body',index);
+                        body.find('#id').val(data.id);
+                        body.find('#studentName').val(data.studentName);
+                        body.find('#picture').val(data.picture);
+                        body.find('#video').val(data.video);
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -172,6 +198,11 @@
                 return false;
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
+                    $.ajax({
+                        url:"/openstyle/delete",
+                        type:"post",
+                        data:{id:data.id}
+                    });
                     obj.del();
                     layer.close(index);
                 });

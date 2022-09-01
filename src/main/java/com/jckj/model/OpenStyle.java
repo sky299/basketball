@@ -22,7 +22,7 @@ public class OpenStyle extends PageDto implements Serializable {
     /**
      * 所属校区
      */
-    private Integer schoolId;
+    private String schoolName;
 
     /**
      * 学员风采图片
@@ -70,12 +70,12 @@ public class OpenStyle extends PageDto implements Serializable {
         this.studentName = studentName;
     }
 
-    public Integer getSchoolId() {
-        return schoolId;
+    public String getSchoolName() {
+        return schoolName;
     }
 
-    public void setSchoolId(Integer schoolId) {
-        this.schoolId = schoolId;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 
     public String getPicture() {
@@ -126,10 +126,10 @@ public class OpenStyle extends PageDto implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public OpenStyle(Integer id, String studentName, Integer schoolId, String picture, String video, Boolean shows, Boolean isDelete, Long createTime, Long updateTime) {
+    public OpenStyle(Integer id, String studentName, String schoolName, String picture, String video, Boolean shows, Boolean isDelete, Long createTime, Long updateTime) {
         this.id = id;
         this.studentName = studentName;
-        this.schoolId = schoolId;
+        this.schoolName = schoolName;
         this.picture = picture;
         this.video = video;
         this.shows = shows;
