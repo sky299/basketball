@@ -134,6 +134,12 @@
               "href": "page/openstyle.html",
               "icon": "fa fa-shield",
               "target": "_self"
+            },
+            {
+              "title": "积分获取方式管理",
+              "href": "page/openIntegral.html",
+              "icon": "fa fa-shield",
+              "target": "_self"
             }
           ]
         }
