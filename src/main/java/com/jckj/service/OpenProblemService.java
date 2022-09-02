@@ -1,6 +1,5 @@
 package com.jckj.service;
 
-import com.jckj.model.OpenIntegral;
 import com.jckj.model.OpenProblem;
 import com.jckj.vo.PageVo;
 

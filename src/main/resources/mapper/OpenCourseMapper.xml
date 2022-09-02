@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.OpenCourseMapper">
+
+    <!-- 列表 -->
+    <select id="findAll" parameterType="com.jckj.model.OpenCourse" resultType="com.jckj.model.OpenCourse">
+        select
+        id,
+        course_id courseId,
+        course_name courseName,
+        photo,
+        course_hour courseHour,
+        shaky_status shakyStatus,
+        price,
+        course_state courseState,
+        open_describe describes,
+        start_time startTime,
+        end_time endTime,
+        pay_number payNumber,
+        school_name schoolName,
+        is_show shows
+        from t_open_course
+        where is_delete=0
+        <if test="courseName != null">and course_name like '%${courseName}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="findById" resultType="com.jckj.model.OpenCourse">
+        select
+        id,
+        course_id courseId,
+        course_name courseName,
+        photo,
+        course_hour courseHour,
+        shaky_status shakyStatus,
+        price,
+        course_state courseState,
+        open_describe describes,
+        start_time startTime,
+        end_time endTime,
+        pay_number payNumber,
+        school_name schoolName,
+        is_show shows
+        from t_open_course
+        where is_delete=0
+        and id=#{id}
+    </select>
+    <select id="count" parameterType="com.jckj.model.OpenCourse" resultType="java.lang.Integer">
+        select count(1) from t_open_course where is_delete=0 <if test="courseName != null">and course_name like '%${courseName}%'</if>
+    </select>
+
+    <!-- 新增 -->
+    <insert id="add" parameterType="com.jckj.model.OpenCourse">
+        insert into t_open_course
+        (course_name,photo,course_hour,shaky_status,price,course_state,open_describe,start_time,end_time,pay_number,school_name,is_show,create_time,update_time)
+        values
+        (#{courseName},#{photo},#{courseHour},#{shakyStatus},#{price},#{courseState},#{describes},#{startTime},#{endTime},#{payNumber},#{schoolName},#{shows},#{createTime},#{updateTime})
+
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.jckj.model.CourseInfo">
+        update t_open_course set
+        <if test="courseName != null">course_name=#{courseName},</if>
+        <if test="photo != null">photo=#{photo},</if>
+        <if test="courseHour != null">course_hour=#{courseHour},</if>
+        <if test="shakyStatus != null">shaky_status=#{shakyStatus},</if>
+        <if test="price != null">price=#{price},</if>
+        <if test="courseState != null">course_state=#{courseState},</if>
+        <if test="describes != null">open_describe=#{describes},</if>
+        <if test="startTime != null">start_time=#{startTime},</if>
+        <if test="endTime != null">end_time=#{endTime},</if>
+        <if test="payNumber != null">pay_number=#{payNumber},</if>
+        <if test="schoolName != null">school_name=#{coursschoolNameeName},</if>
+        <if test="shows != null">is_show=#{shows},</if>
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="com.jckj.model.CourseInfo">
+		update t_open_course set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
+</mapper>

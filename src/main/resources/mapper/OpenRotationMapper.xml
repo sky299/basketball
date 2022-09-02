@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.OpenRotationMapper">
+
+    <!-- 列表 -->
+    <select id="findAll" parameterType="com.jckj.model.OpenRotation" resultType="com.jckj.model.OpenRotation">
+        select
+        id,
+        school_photo schoolPhoto,
+        is_show shows,
+        sequence
+        from t_open_rotation
+        where is_delete=0
+    </select>
+    <select id="findById" resultType="com.jckj.model.OpenRotation">
+        select
+        id,
+        school_photo schoolPhoto,
+        is_show shows,
+        sequence
+        from t_open_rotation
+        where is_delete=0
+        and id=#{id}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from t_open_rotation where is_delete=0
+    </select>
+
+    <!-- 新增 -->
+    <insert id="add" parameterType="com.jckj.model.OpenRotation">
+        insert into t_open_rotation
+        (school_photo,is_show,sequence,create_time,update_time)
+        values
+        (#{schoolPhoto},#{shows},#{sequence},#{createTime},#{updateTime})
+
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.jckj.model.OpenRotation">
+        update t_open_rotation set
+        <if test="schoolPhoto != null">school_photo=#{schoolPhoto},</if>
+        <if test="shows != null">is_show=#{shows},</if>
+        <if test="sequence != null">sequence=#{sequence},</if>
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="com.jckj.model.OpenRotation">
+		update t_open_rotation set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
+</mapper>

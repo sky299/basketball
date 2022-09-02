@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jckj.mapper.OpenSchoolMapper">
+
+    <!-- 列表 -->
+    <select id="findAll" parameterType="com.jckj.model.OpenSchool" resultType="com.jckj.model.OpenSchool">
+        select
+        id,
+        school_name schoolName,
+        open_describe describes,
+        phone,
+        address,
+        is_show shows,
+        school_photo schoolPhoto
+        from t_open_school
+        where is_delete=0
+        <if test="schoolName != null">and school_name like '%${schoolName}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="findById" resultType="com.jckj.model.OpenSchool">
+    	select
+    	id,
+        school_name schoolName,
+        open_describe describes,
+        phone,
+        address,
+        is_show shows,
+        school_photo schoolPhoto
+    	from t_open_school
+        where is_delete=0
+        and id=#{id}
+    </select>
+    <select id="count" parameterType="com.jckj.model.OpenSchool" resultType="java.lang.Integer">
+        select count(1) from t_open_school where is_delete=0 <if test="schoolName != null">and school_name like '%${schoolName}%'</if>
+    </select>
+
+    <!-- 新增 -->
+    <insert id="add" parameterType="com.jckj.model.OpenSchool">
+        insert into t_open_school
+        (school_name,open_describe,phone,address,is_show,school_photo,create_time,update_time)
+        values
+        (#{schoolName},#{describes},#{phone},#{address},#{shows},#{schoolPhoto},#{createTime},#{updateTime})
+
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.jckj.model.OpenSchool">
+        update t_open_school set
+        <if test="schoolName != null">school_name=#{schoolName},</if>
+        <if test="describes != null">open_describe=#{describes},</if>
+        <if test="phone != null">phone=#{phone},</if>
+        <if test="address != null">address=#{address},</if>
+        <if test="shows != null">is_show=#{shows},</if>
+        <if test="schoolPhoto != null">school_photo=#{schoolPhoto},</if>
+        update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="com.jckj.model.OpenSchool">
+		update t_open_school set is_delete=1,
+		update_time=#{updateTime}
+		where id=#{id}
+	</update>
+</mapper>

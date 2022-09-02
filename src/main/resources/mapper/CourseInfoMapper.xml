@@ -39,7 +39,6 @@
         school_name schoolName
     	from t_course_info
         where is_delete=0
-        <if test="course_name != null">course_name</if>
         and id=#{id}
     </select>
     <select id="count" parameterType="com.jckj.model.CourseInfo" resultType="java.lang.Integer">

@@ -23,7 +23,7 @@ public class OpenSchool extends PageDto implements Serializable {
     /**
      * 描述
      */
-    private String describe;
+    private String describes;
 
     /**
      * 联系电话
@@ -38,7 +38,7 @@ public class OpenSchool extends PageDto implements Serializable {
     /**
      * 是否展示（0-否，1-是）
      */
-    private Boolean isShow;
+    private Boolean shows;
 
     /**
      * 是否删除（0-否，1-是）
@@ -75,12 +75,12 @@ public class OpenSchool extends PageDto implements Serializable {
         this.schoolName = schoolName;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribes() {
+        return describes;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribes(String describes) {
+        this.describes = describes;
     }
 
     public String getPhone() {
@@ -99,12 +99,12 @@ public class OpenSchool extends PageDto implements Serializable {
         this.address = address;
     }
 
-    public Boolean getShow() {
-        return isShow;
+    public Boolean getShows() {
+        return shows;
     }
 
-    public void setShow(Boolean show) {
-        isShow = show;
+    public void setShows(Boolean shows) {
+        this.shows = shows;
     }
 
     public Boolean getDelete() {
@@ -139,13 +139,13 @@ public class OpenSchool extends PageDto implements Serializable {
         this.schoolPhoto = schoolPhoto;
     }
 
-    public OpenSchool(Integer id, String schoolName, String describe, String phone, String address, Boolean isShow, Boolean isDelete, Long createTime, Long updateTime, String schoolPhoto) {
+    public OpenSchool(Integer id, String schoolName, String describes, String phone, String address, Boolean shows, Boolean isDelete, Long createTime, Long updateTime, String schoolPhoto) {
         this.id = id;
         this.schoolName = schoolName;
-        this.describe = describe;
+        this.describes = describes;
         this.phone = phone;
         this.address = address;
-        this.isShow = isShow;
+        this.shows = shows;
         this.isDelete = isDelete;
         this.createTime = createTime;
         this.updateTime = updateTime;
