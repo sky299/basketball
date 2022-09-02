@@ -1,9 +1,9 @@
 package com.jckj.service.impl;
 
-import com.jckj.conf.QiniuFile;
 import com.jckj.mapper.MienMapper;
 import com.jckj.model.Mien;
 import com.jckj.service.MienService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

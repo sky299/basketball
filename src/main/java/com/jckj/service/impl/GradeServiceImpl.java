@@ -1,12 +1,12 @@
 package com.jckj.service.impl;
 
-import com.jckj.conf.QiniuFile;
 import com.jckj.dto.PageDto;
 import com.jckj.mapper.GradeMapper;
 import com.jckj.model.CourseInfo;
 import com.jckj.model.Grade;
 import com.jckj.model.School;
 import com.jckj.service.GradeService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

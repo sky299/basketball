@@ -1,6 +1,5 @@
 package com.jckj.controller;
 
-import com.jckj.conf.QiniuFile;
 import com.jckj.model.Mien;
 import com.jckj.service.MienService;
 import com.jckj.vo.JsonResult;
