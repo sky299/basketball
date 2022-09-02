@@ -1,5 +1,6 @@
 package com.jckj.service.impl;
 
+import com.jckj.conf.QiniuFile;
 import com.jckj.dto.PageDto;
 import com.jckj.mapper.GradeMapper;
 import com.jckj.model.CourseInfo;
@@ -9,7 +10,9 @@ import com.jckj.service.GradeService;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,14 +53,25 @@ public class GradeServiceImpl implements GradeService {
     /**
      * 添加
      * @param grade
+     * @param img
      * @return Integer
      */
 
     @Override
-    public Integer insert(Grade grade) {
+    public Integer insert(Grade grade, MultipartFile img) {
+        try {
+            if (img != null) {
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                grade.setGradePhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         grade.setCreateTime(System.currentTimeMillis());
         grade.setUpdateTime(System.currentTimeMillis());
-        return gradeMapper.insert(grade);
+        Integer insert = gradeMapper.insert(grade);
+        return insert;
     }
 
     /**
@@ -69,18 +83,26 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Integer update(Grade grade) {
         grade.setUpdateTime(System.currentTimeMillis());
-        return gradeMapper.update(grade);
+        Integer update = gradeMapper.update(grade);
+        return update;
     }
 
     /**
      * 删除
-     * @param grade
+     * @param str
      * @return Integer
      */
 
     @Override
-    public Integer delete(Grade grade) {
-        grade.setUpdateTime(System.currentTimeMillis());
-        return gradeMapper.delete(grade);
+    public Integer delete(String str) {
+        Integer delete = 0;
+        String[] strs = str.split(",");
+        for (String s : strs) {
+            Grade grade = new Grade();
+            grade.setId(Integer.parseInt(s));
+            grade.setUpdateTime(System.currentTimeMillis());
+            delete += gradeMapper.delete(grade);
+        }
+        return delete;
     }
 }

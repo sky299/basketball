@@ -39,4 +39,27 @@
             is_delete = 1 ,update_time=#{updateTime}
             where id=#{id}
     </update>
+    <select id="listOpenSchool" resultType="com.jckj.model.School">
+        select school_name schoolName,
+        school_address schoolAddress,
+        school_introduce schoolIntroduce,
+        school_phone schoolPhone,
+        school_photo schoolPhoto,
+        is_delete isDelete
+        from t_school_info
+        where is_delete=0
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="listFindBySchoolName" parameterType="java.lang.String" resultType="com.jckj.model.School">
+        select school_name schoolName,
+               school_address schoolAddress,
+               school_introduce schoolIntroduce,
+               school_phone schoolPhone,
+               school_photo schoolPhoto,
+               is_delete isDelete
+        from t_school_info
+        where is_delete=0
+        <if test="schoolName != null">and school_name like '%${schoolName}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
 </mapper>

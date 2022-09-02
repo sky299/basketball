@@ -84,7 +84,7 @@
                 {field: 'schoolAddress',width: 150, title: '校区地址'},
                 {field: 'schoolIntroduce', width: 150, title: '校区介绍'},
                 {field: 'schoolPhone', width: 150, title: '校区电话'},
-                {field: 'schoolPhoto', width: 150, title: '校区照片',align: 'center', templet: '<div><img id="img" src="/Picture/{{d.schoolPhoto}}"></div>'},
+                {field: 'schoolPhoto', width: 150, title: '校区照片',align: 'center', templet: '<div><img id="img" src="{{d.schoolPhoto}}"></div>'},
                 {field: 'isDelete', width: 100, title: '是否删除',templet: function (d) {
                         if (d.isDelete == "0") {
                             return "否";
@@ -152,7 +152,7 @@
                         str:str
                     },
                     success:function (data) {
-                        if(data==flag){
+                        if(data.data==flag){
                             var index = layer.alert("删除成功", {
                                 title: '删除成功'
                             }, function () {
@@ -236,7 +236,7 @@
                             id:data.id
                         },
                         success:function (data) {
-                            if(data==1){
+                            if(data.data==1){
                                 var index = layer.alert("删除成功", {
                                     title: '删除成功'
                                 }, function () {

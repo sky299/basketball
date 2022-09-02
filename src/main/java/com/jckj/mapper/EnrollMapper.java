@@ -12,25 +12,25 @@ import java.util.List;
 public interface EnrollMapper {
 
     /**
+     * 查询全部
      * @param enroll
      * @return List
-     * 查询全部
      */
 
     public List<Enroll> list(Enroll enroll);
 
     /**
+     * 查询全部条数
      * @param enroll
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(Enroll enroll);
 
     /**
+     * 添加
      * @param enroll
      * @return Integer
-     * 添加
      */
 
     public Integer insert(Enroll enroll);

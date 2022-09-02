@@ -29,40 +29,22 @@ public class GradeController {
         return JsonResult.success(gradeService.list(grade).getList(),gradeService.count(grade));
     }
     @RequestMapping("insert")
-    public Integer insert(Grade grade, MultipartFile img) throws IOException {
-        if (img != null) {
-            // 设置图片路径
-            String filename = img.getOriginalFilename();
-            String filepath = "E://Picture//g//"+filename;
-            // 转存图片
-            img.transferTo(new File(filepath));
-            grade.setGradePhoto(filename);
-        }
-        Integer insert = gradeService.insert(grade);
-        return insert;
+    public JsonResult insert(Grade grade, MultipartFile img){
+        return JsonResult.success(gradeService.insert(grade,img));
     }
 
     @RequestMapping("update")
-    public Integer insert(Grade grade){
-        Integer update = gradeService.update(grade);
-        return update;
+    public JsonResult insert(Grade grade){
+        return JsonResult.success(gradeService.update(grade));
     }
 
     @RequestMapping("delete")
-    public Integer delete(Grade grade){
-        Integer delete = gradeService.delete(grade);
-        return delete;
+    public JsonResult delete(String id){
+        return JsonResult.success(gradeService.delete(id));
     }
 
     @RequestMapping("deletemore")
-    public Integer deletemore(String str){
-        Integer delete = 0;
-        String[] strs = str.split(",");
-        for (String s : strs) {
-            Grade grade = new Grade();
-            grade.setId(Integer.parseInt(s));
-            delete += gradeService.delete(grade);
-        }
-        return delete;
+    public JsonResult deletemore(String str){
+        return JsonResult.success(gradeService.delete(str));
     }
 }

@@ -1,5 +1,6 @@
 package com.jckj.controller;
 
+import com.jckj.conf.QiniuFile;
 import com.jckj.model.Mien;
 import com.jckj.service.MienService;
 import com.jckj.vo.JsonResult;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @author: SkLily
@@ -28,64 +30,22 @@ public class MienController {
         return JsonResult.success(mienService.list(mien).getList(),mienService.count(mien));
     }
     @RequestMapping("insert")
-    public Integer insert(Mien mien, MultipartFile img,MultipartFile video) throws IOException {
-        if (img != null) {
-            // 设置图片路径
-            String filename = img.getOriginalFilename();
-            String filepath = "E://Picture//g//"+filename;
-            // 转存图片
-            img.transferTo(new File(filepath));
-            mien.setMienPhoto(filename);
-        }
-        if (video != null) {
-            // 设置视频路径
-            String filename = video.getOriginalFilename();
-            String filepath = "E://Picture//g//"+filename;
-            // 转存视频
-            video.transferTo(new File(filepath));
-            mien.setMienVideo(filename);
-        }
-        Integer insert = mienService.insert(mien);
-        return insert;
+    public JsonResult insert(Mien mien, MultipartFile img,MultipartFile video){
+        return JsonResult.success(mienService.insert(mien,img,video));
     }
 
     @RequestMapping("update")
-    public Integer update(Mien mien,MultipartFile img,MultipartFile video) throws IOException {
-        if (img != null) {
-            // 设置图片路径
-            String filename = img.getOriginalFilename();
-            String filepath = "E://Picture//g//"+filename;
-            // 转存图片
-            img.transferTo(new File(filepath));
-            mien.setMienPhoto(filename);
-        }
-        if (video != null) {
-            // 设置视频路径
-            String filename = video.getOriginalFilename();
-            String filepath = "E://Picture//g//"+filename;
-            // 转存视频
-            video.transferTo(new File(filepath));
-            mien.setMienVideo(filename);
-        }
-        Integer update = mienService.update(mien);
-        return update;
+    public JsonResult update(Mien mien,MultipartFile img,MultipartFile video){
+        return JsonResult.success(mienService.update(mien,img,video));
     }
 
     @RequestMapping("delete")
-    public Integer delete(Mien mien){
-        Integer delete = mienService.delete(mien);
-        return delete;
+    public JsonResult delete(String id){
+        return JsonResult.success(mienService.delete(id));
     }
 
     @RequestMapping("deletemore")
-    public Integer deletemore(String str){
-        Integer delete = 0;
-        String[] strs = str.split(",");
-        for (String s : strs) {
-            Mien mien = new Mien();
-            mien.setId(Integer.parseInt(s));
-            delete += mienService.delete(mien);
-        }
-        return delete;
+    public JsonResult deletemore(String str){
+        return JsonResult.success(mienService.delete(str));
     }
 }

@@ -11,25 +11,25 @@ import com.jckj.vo.PageVo;
 public interface EnrollService {
 
     /**
+     * 查询全部
      * @param enroll
      * @return List
-     * 查询全部
      */
 
     public PageVo list(Enroll enroll);
 
     /**
+     * 查询全部
      * @param enroll
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(Enroll enroll);
 
     /**
+     * 添加
      * @param enroll
      * @return Integer
-     * 添加
      */
 
     public Integer insert(Enroll enroll);

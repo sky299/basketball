@@ -15,41 +15,41 @@ import java.util.List;
 public interface GradeMapper{
 
     /**
+     * 查询全部
      * @param grade
      * @return List
-     * 查询全部
      */
 
     public List<Grade> list(Grade grade);
 
     /**
+     * 查询全部条数
      * @param grade
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(Grade grade);
 
     /**
+     * 添加
      * @param grade
      * @return Integer
-     * 添加
      */
 
     public Integer insert(Grade grade);
 
     /**
+     * 修改
      * @param grade
      * @return Integer
-     * 修改
      */
 
     public Integer update(Grade grade);
 
     /**
+     * 删除
      * @param grade
      * @return Integer
-     * 删除
      */
 
     public Integer delete(Grade grade);

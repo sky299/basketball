@@ -28,8 +28,7 @@ public class EnrollController {
         return JsonResult.success(enrollService.list(enroll).getList(),enrollService.count(enroll));
     }
     @RequestMapping("insert")
-    public Integer insert(Enroll enroll) throws IOException {
-        Integer insert = enrollService.insert(enroll);
-        return insert;
+    public JsonResult insert(Enroll enroll){
+        return JsonResult.success(enrollService.insert(enroll));
     }
 }

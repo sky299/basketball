@@ -80,10 +80,10 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'id', width: 50,height: 100, title: 'ID'},
-                {field: 'studentId', width: 150, title: '学员id'},
-                {field: 'mienPhoto',width: 150, title: '风采照片'},
-                {field: 'mienVideo', width: 150, title: '风采视频'},
+                {field: 'id', width: 50,height: 50, title: 'ID'},
+                {field: 'studentId', width: 50, title: '学员id'},
+                {field: 'mienPhoto',width: 100, title: '风采照片',templet: '<div><img id="img" src="{{d.mienPhoto}}"></div>'},
+                {field: 'mienVideo', width: 500, title: '风采视频',templet: '<div><video width="320" height="240" controls loop src="{{d.mienVideo}}"></video></div>'},
                 {field: 'schoolName', width: 150, title: '校区名'},
                 {field: 'isDelete', width: 100, title: '是否删除',templet: function (d) {
                         if (d.isDelete == "0") {
@@ -153,7 +153,7 @@
                         str:str
                     },
                     success:function (data) {
-                        if(data==flag){
+                        if(data.data==flag){
                             var index = layer.alert("删除成功", {
                                 title: '删除成功'
                             }, function () {
@@ -237,7 +237,7 @@
                             id:data.id
                         },
                         success:function (data) {
-                            if(data==1){
+                            if(data.data==1){
                                 var index = layer.alert("删除成功", {
                                     title: '删除成功'
                                 }, function () {

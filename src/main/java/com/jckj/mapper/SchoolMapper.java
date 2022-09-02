@@ -14,42 +14,60 @@ import java.util.List;
 public interface SchoolMapper {
 
     /**
+     * 查询全部
      * @param school
      * @return List
-     * 查询全部
      */
 
     public List<School> list(School school);
 
     /**
+     * 查询全部条数
      * @param school
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(School school);
 
     /**
+     * 添加校区
      * @param school
      * @return Integer
-     * 添加
      */
 
     public Integer insert(School school);
 
     /**
+     * 修改校区
      * @param school
      * @return Integer
-     * 修改
      */
 
     public Integer update(School school);
 
     /**
+     * 删除校区
      * @param school
      * @return Integer
-     * 删除
      */
 
     public Integer delete(School school);
+
+    /**
+     * 给公共校区模块
+     * 查询全部
+     * @param
+     * @return List
+     */
+
+    public List<School> listOpenSchool();
+
+    /**
+     * 给公共校区模块
+     * 根据校区名字查询
+     * @param schoolName
+     * @return List
+     */
+
+    public List<School> listFindBySchoolName(String schoolName);
 }
