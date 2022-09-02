@@ -4,6 +4,7 @@ import com.jckj.dto.PageDto;
 import com.jckj.mapper.OrderMapper;
 import com.jckj.model.TOrderInfo;
 import com.jckj.service.OrderService;
+import com.jckj.util.SequenceUtil;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void add(TOrderInfo tOrderInfo) {
+        tOrderInfo.setStudentId(SequenceUtil.nextId());
         tOrderInfo.setCreateTime(System.currentTimeMillis());
         tOrderInfo.setUpdateTime(System.currentTimeMillis());
         orderMapper.add(tOrderInfo);

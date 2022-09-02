@@ -1,8 +1,12 @@
 package com.jckj.model;
 
-public class TOrderInfo {
+import com.jckj.dto.PageDto;
+
+public class TOrderInfo extends PageDto {
 
     private Integer id;
+
+    private String orderId;
 
     private String userId;
 
@@ -24,6 +28,14 @@ public class TOrderInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getUserId() {

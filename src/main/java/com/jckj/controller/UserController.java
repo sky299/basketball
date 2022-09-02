@@ -1,6 +1,6 @@
 package com.jckj.controller;
 
-import com.jckj.conf.QiniuFile;
+import com.jckj.util.QiniuFile;
 import com.jckj.model.TUserInfo;
 import com.jckj.service.UserService;
 import com.jckj.vo.JsonResult;

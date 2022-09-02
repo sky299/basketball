@@ -104,13 +104,13 @@
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
                 var index = layer.open({
-                    title: '添加用户',
+                    title: '创建订单',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/add.html',
+                    content: 'add.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -130,7 +130,6 @@
         table.on('tool(currentTableFilter)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') {
-
                 var index = layer.open({
                     title: '编辑用户',
                     type: 2,
@@ -138,7 +137,7 @@
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: '../page/table/edit.html',
+                    content: 'edit.html',
                 });
                 $(window).on("resize", function () {
                     layer.full(index);

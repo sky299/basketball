@@ -1,6 +1,6 @@
 package com.jckj.controller;
 
-import com.jckj.conf.QiniuFile;
+import com.jckj.util.QiniuFile;
 import com.jckj.model.TStudentInfo;
 import com.jckj.service.StudentService;
 import com.jckj.vo.JsonResult;

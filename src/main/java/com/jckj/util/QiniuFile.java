@@ -1,4 +1,4 @@
-package com.jckj.conf;
+package com.jckj.util;
 
 import com.google.gson.Gson;
 import com.qiniu.common.QiniuException;
