@@ -44,4 +44,27 @@
         is_delete = 1 ,update_time=#{updateTime}
         where id=#{id}
     </update>
+    <select id="listOpenMien" parameterType="String" resultType="com.jckj.model.Mien">
+        select id,
+               student_id studentId,
+               mien_photo mienPhoto,
+               mien_video mienVideo,
+        from t_mien_info
+        where is_delete=0
+        and mien_status=1
+        <if test="schoolName != null">and school_name like '%${schoolName}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
+    <select id="listFindById" parameterType="Integer" resultType="com.jckj.model.Mien">
+        select
+        student_id studentId,
+        mien_photo mienPhoto,
+        mien_video mienVideo,
+        school_name schoolName
+        from t_mien_info
+        where is_delete=0
+        and mien_status=1
+        <if test="id != null">and id like '%${id}%'</if>
+        limit #{dataNum},#{limit}
+    </select>
 </mapper>

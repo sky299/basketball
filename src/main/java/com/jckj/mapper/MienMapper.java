@@ -12,42 +12,60 @@ import java.util.List;
 public interface MienMapper {
 
     /**
+     * 查询全部
      * @param mien
      * @return List
-     * 查询全部
      */
 
     public List<Mien> list(Mien mien);
 
     /**
+     * 查询全部条数
      * @param mien
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(Mien mien);
 
     /**
+     * 添加
      * @param mien
      * @return Integer
-     * 添加
      */
 
     public Integer insert(Mien mien);
 
     /**
+     * 修改
      * @param mien
      * @return Integer
-     * 修改
      */
 
     public Integer update(Mien mien);
 
     /**
+     * 删除
      * @param mien
      * @return Integer
-     * 删除
      */
 
     public Integer delete(Mien mien);
+
+    /**
+     * 给公共风采模块
+     * 查询全部
+     * @param schoolName
+     * @return List
+     */
+
+    public List<Mien> listOpenMien(String schoolName);
+
+    /**
+     * 给公共风采模块
+     * 根据id查询
+     * @param id
+     * @return List
+     */
+
+    public List<Mien> listFindById(Integer id);
 }

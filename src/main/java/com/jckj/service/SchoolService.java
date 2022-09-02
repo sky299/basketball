@@ -5,6 +5,7 @@ import com.jckj.model.CourseInfo;
 import com.jckj.model.Grade;
 import com.jckj.model.School;
 import com.jckj.vo.PageVo;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author: SkLily
@@ -30,26 +31,27 @@ public interface SchoolService {
     public Integer count(School school);
 
     /**
-     * @param school
-     * @return Integer
      * 添加
+     * @param school
+     * @param img
+     * @return Integer
      */
 
-    public Integer insert(School school);
+    public Integer insert(School school, MultipartFile img);
 
     /**
+     * 修改
      * @param school
      * @return Integer
-     * 修改
      */
 
     public Integer update(School school);
 
     /**
-     * @param school
-     * @return Integer
      * 删除
+     * @param str
+     * @return Integer
      */
 
-    public Integer delete(School school);
+    public Integer delete(String str);
 }

@@ -37,7 +37,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">是否隐私</label>
         <div class="layui-input-block">
-            <input type="checkbox" id="mienStatus" checked="" name="mienStatus" lay-skin="switch" value="true" lay-text="是|否">
+            <input type="checkbox" id="mienStatus" name="mienStatus" lay-skin="switch" value="true" lay-text="是|否">
         </div>
     </div>
     <div class="layui-form-item">
@@ -66,9 +66,9 @@
             formData.append("img",fileimg);
             var filevideo = $("#video")[0].files[0];
             formData.append("video",filevideo);
-            var status = 0;
+            var status = 1;
             if(data.field.mienStatus=="true"){
-                status = 1;
+                status = 0;
             }
             formData.append("mienStatus",status);
             formData.append("schoolName",data.field.schoolName);
@@ -79,7 +79,7 @@
                 processData:false,
                 contentType:false,
                 success:function (data) {
-                    if(data==1){
+                    if(data.data==1){
                         var index = layer.alert("添加成功", {
                             title: '添加成功'
                         }, function () {

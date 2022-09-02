@@ -30,40 +30,22 @@ public class SchoolController {
     }
 
     @RequestMapping("insert")
-    public Integer insert(School school, MultipartFile img) throws IOException {
-        if (img != null) {
-            // 设置图片路径
-            String filename = img.getOriginalFilename();
-            String filepath = "E://Picture//"+filename;
-            // 转存图片
-            img.transferTo(new File(filepath));
-            school.setSchoolPhoto(filename);
-        }
-        Integer insert = schoolService.insert(school);
-        return insert;
+    public JsonResult insert(School school, MultipartFile img){
+        return JsonResult.success(schoolService.insert(school,img));
     }
 
     @RequestMapping("update")
-    public Integer insert(School school){
-        Integer update = schoolService.update(school);
-        return update;
+    public JsonResult insert(School school){
+        return JsonResult.success(schoolService.update(school));
     }
 
     @RequestMapping("delete")
-    public Integer delete(School school){
-        Integer delete = schoolService.delete(school);
-        return delete;
+    public JsonResult delete(String id){
+        return JsonResult.success(schoolService.delete(id));
     }
 
     @RequestMapping("deletemore")
-    public Integer deletemore(String str){
-        Integer delete = 0;
-        String[] strs = str.split(",");
-        for (String s : strs) {
-            School school = new School();
-            school.setId(Integer.parseInt(s));
-            delete += schoolService.delete(school);
-        }
-        return delete;
+    public JsonResult deletemore(String str){
+        return JsonResult.success(schoolService.delete(str));
     }
 }

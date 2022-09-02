@@ -2,7 +2,9 @@ package com.jckj.service;
 
 import com.jckj.model.Mien;
 import com.jckj.vo.PageVo;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,42 +15,46 @@ import java.util.List;
 public interface MienService {
 
     /**
+     * 查询全部
      * @param mien
      * @return List
-     * 查询全部
      */
 
     public PageVo list(Mien mien);
 
     /**
+     * 查询全部
      * @param mien
      * @return Integer
-     * 查询全部
      */
 
     public Integer count(Mien mien);
 
     /**
-     * @param mien
-     * @return Integer
      * 添加
+     * @param mien
+     * @param img
+     * @param video
+     * @return Integer
      */
 
-    public Integer insert(Mien mien);
+    public Integer insert(Mien mien, MultipartFile img, MultipartFile video);
 
     /**
-     * @param mien
-     * @return Integer
      * 修改
+     * @param mien
+     * @param img
+     * @param video
+     * @return Integer
      */
 
-    public Integer update(Mien mien);
+    public Integer update(Mien mien,MultipartFile img,MultipartFile video);
 
     /**
-     * @param mien
-     * @return Integer
      * 删除
+     * @param str
+     * @return Integer
      */
 
-    public Integer delete(Mien mien);
+    public Integer delete(String str);
 }

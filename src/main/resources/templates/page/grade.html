@@ -84,7 +84,7 @@
                 {field: 'gradeName', width: 150, title: '班级名'},
                 {field: 'gradeTime',width: 150, title: '上课时间'},
                 {field: 'coachName', width: 150, title: '教练姓名'},
-                {field: 'gradePhoto', width: 150, title: '班级照片'},
+                {field: 'gradePhoto', width: 150, title: '班级照片',templet: '<div><img id="img" src="{{d.gradePhoto}}"></div>'},
                 {field: 'gradeDescribe', width: 150, title: '班级介绍'},
                 {field: 'gradeStatus', width: 100, title: '班级状态',templet: function (d) {
                         if (d.gradeStatus == "0") {
@@ -162,7 +162,7 @@
                         str:str
                     },
                     success:function (data) {
-                        if(data==flag){
+                        if(data.data==flag){
                             var index = layer.alert("删除成功", {
                                 title: '删除成功'
                             }, function () {
@@ -249,7 +249,7 @@
                             id:data.id
                         },
                         success:function (data) {
-                            if(data==1){
+                            if(data.data ==1){
                                 var index = layer.alert("删除成功", {
                                     title: '删除成功'
                                 }, function () {

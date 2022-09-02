@@ -5,6 +5,7 @@ import com.jckj.model.CourseInfo;
 import com.jckj.model.Grade;
 import com.jckj.model.TStudentInfo;
 import com.jckj.vo.PageVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
@@ -32,26 +33,27 @@ public interface GradeService {
     public Integer count(Grade grade);
 
     /**
-     * @param grade
-     * @return Integer
      * 添加
+     * @param grade
+     * @param img
+     * @return Integer
      */
 
-    public Integer insert(Grade grade);
+    public Integer insert(Grade grade, MultipartFile img);
 
     /**
+     * 修改
      * @param grade
      * @return Integer
-     * 修改
      */
 
     public Integer update(Grade grade);
 
     /**
-     * @param grade
-     * @return Integer
      * 删除
+     * @param str
+     * @return Integer
      */
 
-    public Integer delete(Grade grade);
+    public Integer delete(String str);
 }

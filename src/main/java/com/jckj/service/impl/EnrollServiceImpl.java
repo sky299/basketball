@@ -50,6 +50,7 @@ public class EnrollServiceImpl implements EnrollService {
     public Integer insert(Enroll enroll) {
         enroll.setCreateTime(System.currentTimeMillis());
         enroll.setUpdateTime(System.currentTimeMillis());
-        return enrollMapper.insert(enroll);
+        Integer insert = enrollMapper.insert(enroll);
+        return insert;
     }
 }

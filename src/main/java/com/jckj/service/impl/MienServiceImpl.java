@@ -1,11 +1,15 @@
 package com.jckj.service.impl;
 
+import com.jckj.conf.QiniuFile;
 import com.jckj.mapper.MienMapper;
 import com.jckj.model.Mien;
 import com.jckj.service.MienService;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author: SkLily
@@ -43,37 +47,78 @@ public class MienServiceImpl implements MienService {
     /**
      * 添加
      * @param mien
+     * @param img
+     * @param video
      * @return Integer
      */
 
     @Override
-    public Integer insert(Mien mien) {
+    public Integer insert(Mien mien, MultipartFile img, MultipartFile video){
+        try {
+            if (img != null) {
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                mien.setMienPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }
+            if (video != null) {
+                //上传到七牛云
+                String result = QiniuFile.loadFile(video.getBytes());
+                mien.setMienVideo("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mien.setCreateTime(System.currentTimeMillis());
         mien.setUpdateTime(System.currentTimeMillis());
-        return mienMapper.insert(mien);
+        Integer insert = mienMapper.insert(mien);
+        return insert;
     }
 
     /**
      * 修改
      * @param mien
+     * @param img
+     * @param video
      * @return Integer
      */
 
     @Override
-    public Integer update(Mien mien) {
+    public Integer update(Mien mien,MultipartFile img,MultipartFile video){
+        try {
+            if (img != null) {
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                mien.setMienPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }
+            if (video != null) {
+                //上传到七牛云
+                String result = QiniuFile.loadFile(video.getBytes());
+                mien.setMienVideo("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mien.setUpdateTime(System.currentTimeMillis());
-        return mienMapper.update(mien);
+        Integer update = mienMapper.update(mien);
+        return update;
     }
 
     /**
      * 删除
-     * @param mien
+     * @param str
      * @return Integer
      */
 
     @Override
-    public Integer delete(Mien mien) {
-        mien.setUpdateTime(System.currentTimeMillis());
-        return mienMapper.delete(mien);
+    public Integer delete(String str) {
+        Integer delete = 0;
+        String[] strs = str.split(",");
+        for (String s : strs) {
+            Mien mien = new Mien();
+            mien.setId(Integer.parseInt(s));
+            mien.setUpdateTime(System.currentTimeMillis());
+            delete += mienMapper.delete(mien);
+        }
+        return delete;
     }
 }

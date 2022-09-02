@@ -153,7 +153,7 @@
                         str:str
                     },
                     success:function (data) {
-                        if(data==flag){
+                        if(data.data==flag){
                             var index = layer.alert("删除成功", {
                                 title: '删除成功'
                             }, function () {
@@ -237,7 +237,7 @@
                             id:data.id
                         },
                         success:function (data) {
-                            if(data==1){
+                            if(data.data==1){
                                 var index = layer.alert("删除成功", {
                                     title: '删除成功'
                                 }, function () {
