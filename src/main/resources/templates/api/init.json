@@ -142,13 +142,13 @@
               "target": "_self"
             },
             {
-              "title": "帮助问题管理",
+              "title": "问题管理",
               "href": "page/openProblem.html",
               "icon": "fa fa-shield",
               "target": "_self"
             },
             {
-              "title": "帮助回答管理",
+              "title": "回答管理",
               "href": "page/openAnswer.html",
               "icon": "fa fa-shield",
               "target": "_self"

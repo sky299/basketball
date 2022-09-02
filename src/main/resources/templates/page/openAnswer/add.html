@@ -17,10 +17,9 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <label class="layui-form-label required">问题</label>
+        <label class="layui-form-label required">答案</label>
         <div class="layui-input-block">
-            <input id="id" name="id" readonly>
-            <input type="text" id="problem" name="problem" value="" class="layui-input">
+            <input type="text" id="answer" name="answer" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -29,7 +28,6 @@
         </div>
     </div>
 </div>
-</div>
 <script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form'], function () {
@@ -37,32 +35,33 @@
             layer = layui.layer,
             $ = layui.$;
 
+        //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
-            formData.append("answer",$("#answer").val());
+                var formData = new FormData();//form表单
+                formData.append("answer",data.field.answer);
                 $.ajax({
-                    url:"/openanswer/update",
+                    url:"/openanswer/add",
                     type:"post",
                     data:formData,
                     processData:false,
                     contentType:false,
                     success:function (data) {
                         if (data.data==1){
-                            var index = layer.alert("修改成功", {
-                                title: '修改成功'
-                            }, function () {
-                                // 关闭弹出层
-                                layer.close(index);
-                                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(iframeIndex);
-                                parent.layui.table.reload("currentTableId");
-                            });
+                            var index = layer.alert("添加成功", {
+                            title: '添加成功'
+                        }, function () {
+                            // 关闭弹出层
+                            layer.close(index);
+                            var iframeIndex = parent.layer.getFrameIndex(window.name);
+                            parent.layer.close(iframeIndex);
+                            parent.layui.table.reload("currentTableId");
+                        });
                         }
                     }
                 });
-            });
             return false;
+        });
+
     });
 </script>
 </body>

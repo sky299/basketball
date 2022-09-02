@@ -17,10 +17,10 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <label class="layui-form-label required">问题</label>
+        <label class="layui-form-label required">答案</label>
         <div class="layui-input-block">
             <input id="id" name="id" readonly>
-            <input type="text" id="problem" name="problem" value="" class="layui-input">
+            <input type="text" id="answer" name="answer" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -40,7 +40,7 @@
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
             formData.append("id",data.field.id);
-            formData.append("answer",$("#answer").val());
+            formData.append("answer",data.field.answer);
                 $.ajax({
                     url:"/openanswer/update",
                     type:"post",
