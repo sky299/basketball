@@ -13,9 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2022/9/2 13:52
  * @describe:
  */
-@RequestMapping(value = "openSchool")
+@RequestMapping("openSchool")
 @RestController
 public class OpenSchoolController {
+
     @Autowired
     private OpenSchoolService openSchoolService;
 

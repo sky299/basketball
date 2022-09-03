@@ -17,70 +17,42 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程名</label>
+        <label class="layui-form-label required">校区名称</label>
         <div class="layui-input-block">
-            <input type="text" id="courseName" name="courseName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
+            <input type="text" id="schoolName" name="schoolName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程课时</label>
+        <label class="layui-form-label required">描述</label>
         <div class="layui-input-block">
-            <input type="text" id="courseTime" name="courseTime" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
+            <input type="text" id="describes" name="describes" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程头像</label>
+        <label class="layui-form-label required">校区照片</label>
         <div class="layui-input-block">
-            <img id="photo">
-            <input type="file" id="img" name="img" lay-reqtext="课程头像" value="" class="layui-input">
+            <input type="file" id="img" name="img" lay-reqtext="校区照片" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程介绍</label>
+        <label class="layui-form-label required">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" id="courseIntroduce" name="courseIntroduce" lay-reqtext="课程介绍"value="" class="layui-input">
+            <input type="text" id="phone" name="phone" lay-reqtext="课程介绍"value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">课程价格</label>
+        <label class="layui-form-label required">地址</label>
         <div class="layui-input-block">
-            <input type="text" id="coursePrice" name="coursePrice" lay-reqtext="课程价格" value="" class="layui-input">
+            <input type="text" id="address" name="address" lay-reqtext="课程价格" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label required">上课开始时间</label>
+        <label class="layui-form-label required">是否展示</label>
         <div class="layui-input-block">
-            <input type="text" id="tocourseBiginTime" name="tocourseBiginTime" lay-reqtext="上课开始时间" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">上课结束时间</label>
-        <div class="layui-input-block">
-            <input type="text" id="tocourseFinishTime" name="tocourseFinishTime" lay-reqtext="上课结束时间" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">购买人数</label>
-        <div class="layui-input-block">
-            <input type="text" id="enrollTotal" name="enrollTotal" lay-reqtext="购买人数" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">活动课程</label>
-        <div class="layui-input-block">
-            <input type="text" id="isShaky" name="isShaky" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">课程状态</label>
-        <div class="layui-input-block">
-            <input type="text" id="courseState" name="courseState" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label required">校区名</label>
-        <div class="layui-input-block">
-            <input type="text" id="schoolName" name="schoolName" lay-verify="required" lay-reqtext="校区名" value="" class="layui-input">
+            <select id="shows">
+                <option value="否">否</option>
+                <option value="是">是</option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -95,31 +67,23 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-        layui.use('laydate',function () {
-            var laydate = layui.laydate;
-            laydate.render({
-                elem:'#send_time_str',
-                type:'datetime'
-            })
-        });
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
                 var formData = new FormData();//form表单
-                formData.append("courseName",data.field.courseName);
-                formData.append("courseTime",data.field.courseTime);
-                formData.append("courseIntroduce",data.field.courseIntroduce);
-                formData.append("coursePrice",data.field.coursePrice);
-                formData.append("tocourseBiginTime",data.field.tocourseBiginTime);
-                formData.append("tocourseFinishTime",data.field.tocourseFinishTime);
-                formData.append("enrollTotal",data.field.enrollTotal);
-                formData.append("isShaky",data.field.isShaky);
-                formData.append("courseState",data.field.courseState);
                 formData.append("schoolName",data.field.schoolName);
+                formData.append("describes",data.field.describes);
+                formData.append("phone",data.field.phone);
+                formData.append("address",data.field.address);
+            if ($("#shows").val() == "否"){
+                formData.append("shows","0");
+            }else {
+                formData.append("shows","1");
+            }
                 var fileobj = $("#img")[0].files[0];
                 formData.append("img",fileobj);
                 $.ajax({
-                    url:"/course/add",
+                    url:"/openSchool/add",
                     type:"post",
                     data:formData,
                     processData:false,
