@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("openCourse")
 @RestController
 public class OpenCourseController {
+
     @Autowired
     private OpenCourseInfoService opencourseInfoService;
 
