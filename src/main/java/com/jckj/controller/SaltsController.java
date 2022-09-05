@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SaltsController {
     @Autowired
     private SaltsService saltsService;
-    /**
-     * 查询销课记录
-     * @return JaonResult
-     */
+
     @RequestMapping("findAll")
     public JsonResult list(SaltsInfo saltsInfo) {
         return JsonResult.success(saltsService.list(saltsInfo).getList(),saltsService.count(saltsInfo));

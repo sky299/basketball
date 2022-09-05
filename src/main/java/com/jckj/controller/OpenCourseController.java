@@ -20,53 +20,26 @@ public class OpenCourseController {
     @Autowired
     private OpenCourseInfoService opencourseInfoService;
 
-    /**
-     * 公共课程查询全部
-     * @param openCourse 公共课程对象
-     * @return JaonResult
-     */
     @RequestMapping("findAll")
     public JsonResult list(OpenCourse openCourse) {
         return JsonResult.success(opencourseInfoService.list(openCourse).getList(),opencourseInfoService.count(openCourse));
     }
 
-    /**
-     * 公共课程详情查询
-     * @param openCourse 公共课程对象
-     * @return JaonResult
-     */
     @RequestMapping("findById")
     public JsonResult courseInfo(OpenCourse openCourse){
         return JsonResult.success(opencourseInfoService.findById(openCourse));
     }
 
-    /**
-     * 公共课程模块批量删除和删除
-     * @param id 公共课程id
-     * @return JaonResult
-     */
     @RequestMapping("delete")
     public JsonResult delete(String id){
         return JsonResult.success(opencourseInfoService.delete(id));
     }
 
-    /**
-     * 公共课程表修改
-     * @param openCourse 公共课程对象
-     * @param img 公共图片（课程照片）
-     * @return JaonResult
-     */
     @RequestMapping("update")
     public JsonResult update(OpenCourse openCourse, MultipartFile img) {
         return JsonResult.success(opencourseInfoService.update(openCourse,img));
     }
 
-    /**
-     * 公共课程添加功能
-     * @param openCourse 公共课程对象
-     * @param img 公共图片
-     * @return JaonResult
-     */
     @RequestMapping("add")
     public JsonResult add(OpenCourse openCourse, MultipartFile img) {
         return JsonResult.success(opencourseInfoService.add(openCourse,img));

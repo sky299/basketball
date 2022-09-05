@@ -37,9 +37,9 @@
                             </div>
                         </div>
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户职业</label>
+                            <label class="layui-form-label">是否展示</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="classify" autocomplete="off" class="layui-input">
+                                <input type="text" name="shows" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -118,7 +118,7 @@
                     curr: 1
                 }
                 , where: {
-                    searchParams: result
+                    shows: data.field.shows
                 }
             }, 'data');
 

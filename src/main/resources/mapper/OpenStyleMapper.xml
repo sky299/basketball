@@ -15,6 +15,7 @@
         from t_open_style
         where is_delete=0
         <if test="studentName != null">and student_name like '%${studentName}%'</if>
+        <if test="shows != null">and is_show=#{shows}</if>
         limit #{dataNum},#{limit}
     </select>
     <select id="findById" resultType="com.jckj.model.OpenStyle">
@@ -30,7 +31,9 @@
         and id=#{id}
     </select>
     <select id="count" parameterType="com.jckj.model.OpenStyle" resultType="java.lang.Integer">
-        select count(1) from t_open_style where is_delete=0 <if test="studentName != null">and student_name like '%${studentName}%'</if>
+        select count(1) from t_open_style where is_delete=0
+        <if test="studentName != null">and student_name like '%${studentName}%'</if>
+        <if test="shows != null">and is_show=#{shows}</if>
     </select>
 
     <!-- 新增 -->
