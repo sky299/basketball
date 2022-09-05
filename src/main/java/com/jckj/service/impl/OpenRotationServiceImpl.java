@@ -3,6 +3,7 @@ package com.jckj.service.impl;
 import com.jckj.mapper.OpenRotationMapper;
 import com.jckj.model.OpenRotation;
 import com.jckj.service.OpenRotationService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,12 +48,8 @@ public class OpenRotationServiceImpl implements OpenRotationService {
             openRotation.setCreateTime(time);
             openRotation.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openRotation.setSchoolPhoto(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openRotation.setSchoolPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,12 +79,8 @@ public class OpenRotationServiceImpl implements OpenRotationService {
             long time = date.getTime();
             openRotation.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openRotation.setSchoolPhoto(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openRotation.setSchoolPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();

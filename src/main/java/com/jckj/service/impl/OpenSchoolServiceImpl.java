@@ -3,6 +3,7 @@ package com.jckj.service.impl;
 import com.jckj.mapper.OpenSchoolMapper;
 import com.jckj.model.OpenSchool;
 import com.jckj.service.OpenSchoolService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,12 +49,8 @@ public class OpenSchoolServiceImpl implements OpenSchoolService {
             openSchool.setCreateTime(time);
             openSchool.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openSchool.setSchoolPhoto(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openSchool.setSchoolPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,12 +80,8 @@ public class OpenSchoolServiceImpl implements OpenSchoolService {
             long time = date.getTime();
             openSchool.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openSchool.setSchoolPhoto(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openSchool.setSchoolPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();

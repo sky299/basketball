@@ -3,12 +3,12 @@ package com.jckj.service.impl;
 import com.jckj.mapper.PhotoInfoMapper;
 import com.jckj.model.PhotoInfo;
 import com.jckj.service.PhotoInfoService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -42,12 +42,8 @@ public class PhotoInfoServiceImpl implements PhotoInfoService {
             long time = date.getTime();
             photoInfo.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                photoInfo.setAbout(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                photoInfo.setAbout("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();

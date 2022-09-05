@@ -3,6 +3,7 @@ package com.jckj.service.impl;
 import com.jckj.mapper.OpenCourseMapper;
 import com.jckj.model.OpenCourse;
 import com.jckj.service.OpenCourseInfoService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,12 +48,9 @@ public class OpenCourseInfoServiceImpl implements OpenCourseInfoService {
             openCourse.setCreateTime(time);
             openCourse.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openCourse.setPhoto(filename);
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                openCourse.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,12 +80,8 @@ public class OpenCourseInfoServiceImpl implements OpenCourseInfoService {
             long time = date.getTime();
             openCourse.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openCourse.setPhoto(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openCourse.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();

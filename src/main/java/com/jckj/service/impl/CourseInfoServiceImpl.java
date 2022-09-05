@@ -3,6 +3,7 @@ package com.jckj.service.impl;
 import com.jckj.mapper.CourseInfoMapper;
 import com.jckj.model.CourseInfo;
 import com.jckj.service.CourseInfoService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,12 +52,9 @@ public class CourseInfoServiceImpl implements CourseInfoService {
             courseInfo.setCreateTime(time);
             courseInfo.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                courseInfo.setPhoto(filename);
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                courseInfo.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,12 +84,9 @@ public class CourseInfoServiceImpl implements CourseInfoService {
             long time = date.getTime();
             courseInfo.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                courseInfo.setPhoto(filename);
+                //上传到七牛云
+                String result = QiniuFile.loadFile(img.getBytes());
+                courseInfo.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();

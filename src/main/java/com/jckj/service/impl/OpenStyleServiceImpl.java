@@ -3,6 +3,7 @@ package com.jckj.service.impl;
 import com.jckj.mapper.OpenStyleMapper;
 import com.jckj.model.OpenStyle;
 import com.jckj.service.OpenStyleService;
+import com.jckj.util.QiniuFile;
 import com.jckj.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,20 +49,12 @@ public class OpenStyleServiceImpl implements OpenStyleService {
             openStyle.setCreateTime(time);
             openStyle.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openStyle.setPicture(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openStyle.setPicture("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
             if (video != null){
-                // 设置视频路径
-                String filename = video.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存视频
-                video.transferTo(new File(filepath));
-                openStyle.setVideo(filename);
+                String result = QiniuFile.loadFile(video.getBytes());
+                openStyle.setVideo("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,20 +84,12 @@ public class OpenStyleServiceImpl implements OpenStyleService {
             long time = date.getTime();
             openStyle.setUpdateTime(time);
             if (img != null) {
-                // 设置图片路径
-                String filename = img.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存图片
-                img.transferTo(new File(filepath));
-                openStyle.setPicture(filename);
+                String result = QiniuFile.loadFile(img.getBytes());
+                openStyle.setPicture("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
             if (videos != null){
-                // 设置视频路径
-                String filename = videos.getOriginalFilename();
-                String filepath = "E://upload//"+filename;
-                // 转存视频
-                videos.transferTo(new File(filepath));
-                openStyle.setVideo(filename);
+                String result = QiniuFile.loadFile(videos.getBytes());
+                openStyle.setVideo("http://rhh643m33.hn-bkt.clouddn.com/" + result);
             }
         } catch (IOException e) {
             e.printStackTrace();
