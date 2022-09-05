@@ -65,7 +65,7 @@ public class OpenRotationController {
      * @return JaonResult
      */
     @RequestMapping("add")
-    public JsonResult add(OpenRotation openProblem, MultipartFile img) {
-        return JsonResult.success(openRotationService.add(openProblem,img));
+    public JsonResult add(OpenRotation openProblem) {
+        return JsonResult.success(openRotationService.add(openProblem));
     }
 }

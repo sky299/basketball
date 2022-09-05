@@ -41,19 +41,11 @@ public class OpenRotationServiceImpl implements OpenRotationService {
     }
 
     @Override
-    public int add(OpenRotation openRotation, MultipartFile img) {
-        try {
+    public int add(OpenRotation openRotation) {
             Date date = new Date();
             long time = date.getTime();
             openRotation.setCreateTime(time);
             openRotation.setUpdateTime(time);
-            if (img != null) {
-                String result = QiniuFile.loadFile(img.getBytes());
-                openRotation.setSchoolPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return openRotationMapper.add(openRotation);
     }
 
