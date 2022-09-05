@@ -69,7 +69,7 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'schoolPhoto', width: 200,sort: true, title: '轮播图', templet: '<div><img id="img" src="/{{d.schoolPhoto}}"></div>'},
+                {field: 'schoolPhoto', width: 200,sort: true, title: '轮播图', templet: '<div><img id="img" src="{{d.schoolPhoto}}"></div>'},
                 {field: 'sequence', width: 150, title: '轮播顺序', sort: true},
                 {field: 'shows', width: 150, title: '是否使用', sort: true,templet: function (d) {
                         if (d.shows == 0) {

@@ -88,8 +88,8 @@
                 {field: 'id', width: 80, title: 'ID', sort: true},
                 {field: 'studentName', width: 100, title: '学员姓名'},
                 {field: 'schoolName', width: 100, title: '所属校区', sort: true},
-                {field: 'picture', width: 100, title: '学员风采图片',sort: true,templet: '<div><img id="img" src="/{{d.picture}}"></div>'},
-                {field: 'video', width:320, height:240, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="/{{d.video}}"></video></div>'},
+                {field: 'picture', width: 100, title: '学员风采图片',sort: true,templet: '<div><img id="img" src="{{d.picture}}"></div>'},
+                {field: 'video', width:320, height:240, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="{{d.video}}"></video></div>'},
                 {field: 'shows', width: 100, title: '是否展示', sort: true ,templet: function (d) {
             if (d.shows == 0) {
                 return "否";

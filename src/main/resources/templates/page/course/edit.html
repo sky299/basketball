@@ -121,7 +121,7 @@
         $(function () {
             //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
             var parent_json = eval('('+parent.json+')');
-            $("img").attr("src","/"+parent_json.photo+"");
+            $("img").attr("src",""+parent_json.photo+"");
 
             var schoolName=parent_json.schoolName;
             var isShaky = parent_json.isShaky;
