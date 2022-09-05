@@ -36,7 +36,7 @@ public interface OpenRotationService {
      * @param img 图片
      * @return 成功条数
      */
-    public int add(OpenRotation openProblem, MultipartFile img);
+    public int add(OpenRotation openProblem);
 
     /**
      * 轮播图删除
