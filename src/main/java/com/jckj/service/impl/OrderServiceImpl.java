@@ -28,28 +28,4 @@ public class OrderServiceImpl implements OrderService {
     public Integer count(PageDto pageDto) {
         return orderMapper.count(pageDto);
     }
-
-    @Override
-    public TOrderInfo info(Integer id) {
-        return orderMapper.info(id);
-    }
-
-    @Override
-    public void add(TOrderInfo tOrderInfo) {
-        tOrderInfo.setStudentId(SequenceUtil.nextId());
-        tOrderInfo.setCreateTime(System.currentTimeMillis());
-        tOrderInfo.setUpdateTime(System.currentTimeMillis());
-        orderMapper.add(tOrderInfo);
-    }
-
-    @Override
-    public void update(TOrderInfo tOrderInfo) {
-        tOrderInfo.setUpdateTime(System.currentTimeMillis());
-        orderMapper.update(tOrderInfo);
-    }
-
-    @Override
-    public void remove(Integer id) {
-        orderMapper.remove(id);
-    }
 }

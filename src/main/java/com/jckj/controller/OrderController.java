@@ -20,10 +20,4 @@ public class OrderController {
     public JsonResult list(TOrderInfo tOrderInfo){
         return JsonResult.success(orderService.list(tOrderInfo).getList(),orderService.count(tOrderInfo));
     }
-
-    @PostMapping("add")
-    public JsonResult add(TOrderInfo tOrderInfo){
-        orderService.add(tOrderInfo);
-        return JsonResult.success();
-    }
 }

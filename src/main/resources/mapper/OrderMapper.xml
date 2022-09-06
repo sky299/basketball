@@ -30,11 +30,4 @@
         from t_order_info
         where is_delete = 0;
     </select>
-
-    <insert id="add" parameterType="com.jckj.model.TOrderInfo">
-        insert into t_order_info (id, order_id, user_id, enroll_id, student_id, school_name, is_delete, create_time,
-                                  update_time)
-        values (#{id}, #{orderId}, #{userId}, #{enrollId}, #{studentId}, #{schoolName}, #{isDelete}, #{createTime},
-                #{updateTime});
-    </insert>
 </mapper>
