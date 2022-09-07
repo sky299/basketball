@@ -16,15 +16,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WxSaltsInfoController {
     @Autowired
-    private WxSaltsService appSaltsService;
+    private WxSaltsService wxSaltsService;
 
     @RequestMapping("findAllByStuId")
     public JsonResult findAllByStuId(SaltsInfo saltsInfo) {
-        return JsonResult.success(appSaltsService.list(saltsInfo).getList());
+        return JsonResult.success(wxSaltsService.list(saltsInfo).getList());
     }
 
     @RequestMapping("addSalts")
     public JsonResult addSalts(SaltsInfo saltsInfo){
-        return JsonResult.success(appSaltsService.addSalts(saltsInfo));
+        return JsonResult.success(wxSaltsService.addSalts(saltsInfo));
     }
+
+    @RequestMapping("cutSalts")
+    public JsonResult cutSalts(SaltsInfo saltsInfo,String ids){
+        return JsonResult.success(wxSaltsService.cutSalts(saltsInfo,ids));
+    }
+
 }
