@@ -33,12 +33,10 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         long time = date.getTime();
         saltsInfo.setCreateTime(time);
         saltsInfo.setUpdateTime(time);
-        // TODO: student-学生课时加课
-        // TODO: student-学生课时减一
         if (saltsInfo.getSaltsType()){
-
+            // TODO: student-学生课时减一
         }else {
-
+            // TODO: student-学生课时加课
         }
         return appCourseInfoMapper.addSalts(saltsInfo);
     }
