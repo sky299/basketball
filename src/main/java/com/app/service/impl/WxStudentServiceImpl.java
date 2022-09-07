@@ -4,6 +4,7 @@ import com.jckj.dto.PageDto;
 import com.app.mapper.WxStudentMapper;
 import com.app.service.WxStudentService;
 import com.app.vo.PageVo;
+import com.jckj.model.TStudentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,5 +24,10 @@ public class WxStudentServiceImpl implements WxStudentService {
     @Override
     public Integer count(PageDto pageDto) {
         return wxStudentMapper.count(pageDto);
+    }
+
+    @Override
+    public TStudentInfo info(Integer id) {
+        return wxStudentMapper.info(id);
     }
 }

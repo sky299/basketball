@@ -12,4 +12,6 @@ public interface WxStudentMapper {
     List<TStudentInfo> list(PageDto pageDto);
 
     Integer count(PageDto pageDto);
+
+    TStudentInfo info(Integer id);
 }

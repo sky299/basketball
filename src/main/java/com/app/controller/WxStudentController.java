@@ -19,4 +19,9 @@ public class WxStudentController {
     public JsonResult list(TStudentInfo tStudentInfo){
         return JsonResult.success(wxStudentService.list(tStudentInfo));
     }
+
+    @PostMapping("info")
+    public JsonResult info(Integer id){
+        return JsonResult.success(wxStudentService.info(id));
+    }
 }
