@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
  * @date: 2022年8月12日 上午10:55:41
  */
 @SpringBootApplication
-//@MapperScan("com.jckj.mapper")
+@MapperScan("com.app.mapper")
 @EnableTransactionManagement
 public class Application {
 	private final static Logger logger = LoggerFactory.getLogger(Application.class);

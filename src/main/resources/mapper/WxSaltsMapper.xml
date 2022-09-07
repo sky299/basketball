@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.WxSaltsMapper">
+    <select id="findAll" parameterType="com.jckj.model.SaltsInfo" resultType="com.jckj.model.SaltsInfo">
+        select
+        id,
+        student_name studentName,
+        salts_time saltsTime,
+        salts_cause saltsCause,
+        salts_type saltsType,
+        salts_name saltsName
+        from t_salts_info
+        where
+        is_delete=0
+        and student_id=#{studentId}
+    </select>
+    <insert id="addSalts" parameterType="com.jckj.model.SaltsInfo">
+        insert into t_salts_info
+        (student_name,salts_time,salts_cause,salts_type,salts_name,student_id,create_time,update_time)
+        values
+        (#{studentName},#{saltsTime},#{saltsCause},#{saltsType},#{saltsName},#{studentId},#{createTime},#{updateTime})
+    </insert>
+</mapper>
