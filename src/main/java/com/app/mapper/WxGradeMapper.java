@@ -18,4 +18,13 @@ public interface WxGradeMapper {
      */
 
     public List<Grade> list(Grade grade);
+
+    /**
+     * 新增班级
+     * @param grade
+     * @return Integer
+     */
+
+    public Integer insert(Grade grade);
+
 }

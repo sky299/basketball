@@ -22,4 +22,9 @@ public class WxGradeController {
     public JsonResult list(Grade grade){
         return JsonResult.success(wxGradeService.list(grade));
     }
+
+    @RequestMapping("insert")
+    public JsonResult insert(Grade grade){
+        return JsonResult.success(wxGradeService.insert(grade));
+    }
 }

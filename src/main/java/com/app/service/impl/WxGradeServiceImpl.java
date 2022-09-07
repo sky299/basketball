@@ -29,4 +29,18 @@ public class WxGradeServiceImpl implements WxGradeService {
     public List<Grade> list(Grade grade) {
         return wxGradeMapper.list(grade);
     }
+
+    /**
+     * 新增班级
+     * @param grade
+     * @return Integer
+     */
+
+    @Override
+    public Integer insert(Grade grade) {
+        grade.setCreateTime(System.currentTimeMillis());
+        grade.setUpdateTime(System.currentTimeMillis());
+        Integer insert = wxGradeMapper.insert(grade);
+        return insert;
+    }
 }

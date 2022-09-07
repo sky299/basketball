@@ -18,4 +18,13 @@ public interface WxGradeService {
      */
 
     public List<Grade> list(Grade grade);
+
+    /**
+     * 添加
+     * @param grade
+     * @return Integer
+     */
+
+    public Integer insert(Grade grade);
+
 }
