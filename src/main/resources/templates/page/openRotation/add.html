@@ -20,8 +20,11 @@
         <label class="layui-form-label required">轮播图</label>
         <div class="layui-input-block">
             <button type="button" class="layui-btn" id="test1">
-                <i class="layui-icon">&#xe67c;</i>上传图片
+                <i class="layui-icon">&#xe67c;</i>上传文件
             </button>
+            <div class="layui-upload-list">
+                <img class="layui-upload-img" id="demo1" style="width: 92px;height: 92px;border: 1px">
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
@@ -48,27 +51,28 @@
 <script src="../../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
     var code = "";
+    var filetype = "";
     layui.use('upload', function(){
-        var upload = layui.upload;
+        var $ = layui.jquery
+        , upload = layui.upload;
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1' //绑定元素
             ,url: '/file/upload' //上传接口
             ,method:'post'
-            ,data:{}
-            ,before: function(obj){ //obj参数包含的信息，跟 choose回调完全一致，可参见上文。
+            ,accept:'file'
+            ,before: function(obj){
                 var files = obj.pushFile();
-                obj.preview(function(index, file, result){
-                    // console.log(index); //得到文件索引
-                    // console.log(file); //得到文件对象
-                    // console.log(result); //得到文件base64编码，比如图片
+                obj.preview(function(index,file,result){
+                    $('#demo1').attr('src', result);
+                    filetype = file.type;
                     layer.load(); //上传loading
                 });
             }
             ,done: function(res){
                 //上传完毕回调
                 layer.closeAll('loading'); //关闭loading
-                alert("图片上传成功");
+                alert("文件上传成功");
                 code=res.data;
             }
             ,error: function(res){
@@ -85,6 +89,7 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
+                alert(filetype);
                 var formData = new FormData();//form表单
                 formData.append("sequence",data.field.sequence);
                 if ($("#isShaky").val() == "否"){
@@ -92,7 +97,6 @@
                 }else {
                     formData.append("shows","1");
                 }
-                // var fileobj = $("#imgs")[0].files[0];
                 formData.append("schoolPhoto",code);
                 $.ajax({
                     url:"/openRotation/add",
