@@ -55,6 +55,18 @@ public class Grade extends PageDto{
      *修改时间
      */
     private Long updateTime;
+    /**
+     *修改时间
+     */
+    private int gradeCount;
+
+    public int getGradeCount() {
+        return gradeCount;
+    }
+
+    public void setGradeCount(int gradeCount) {
+        this.gradeCount = gradeCount;
+    }
 
     public Integer getId() {
         return id;
