@@ -1,4 +1,7 @@
-package com.app;
+package com;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -9,9 +12,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 
 /**
  * @author: ljp
@@ -19,7 +19,7 @@ import java.net.UnknownHostException;
  * @date: 2022年8月12日 上午10:55:41
  */
 @SpringBootApplication
-//@MapperScan("com.jckj.mapper")
+@MapperScan({"com.jckj.mapper","com.app.mapper"})
 @EnableTransactionManagement
 public class Application {
 	private final static Logger logger = LoggerFactory.getLogger(Application.class);
