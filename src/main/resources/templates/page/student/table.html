@@ -96,7 +96,7 @@
                     width: 100,
                     title: '学员生日',
                     sort: true,
-                    templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                    templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd')}}</div>"
                 },
                 {field: 'studentPhoto', width: 100, title: '头像', templet: '#imgtem'},
                 {field: 'studentEnroll', width: 100, title: '所在校区'},
@@ -187,10 +187,7 @@
                 let Y = date.getFullYear() + '-';
                 let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
                 let D = date.getDate() + ' ';
-                let h = date.getHours() + ':';
-                let m = date.getMinutes() + ':';
-                let s = date.getSeconds();
-                return Y + M + D + h + m + s;
+                return Y + M + D;
             }
             var data = obj.data;
             if (obj.event === 'edit') {
