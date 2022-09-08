@@ -14,6 +14,7 @@
         where
         is_delete=0
         and student_id=#{studentId}
+        <if test="saltsTime != null"> and salts_time > #{saltsTime}</if>
     </select>
     <insert id="addSalts" parameterType="com.jckj.model.SaltsInfo">
         insert into t_salts_info

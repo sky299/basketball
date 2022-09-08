@@ -19,8 +19,8 @@ public class WxSaltsInfoController {
     private WxSaltsService wxSaltsService;
 
     @RequestMapping("findAllByStuId")
-    public JsonResult findAllByStuId(SaltsInfo saltsInfo) {
-        return JsonResult.success(wxSaltsService.list(saltsInfo).getList());
+    public JsonResult findAllByStuId(SaltsInfo saltsInfo,String date) {
+        return JsonResult.success(wxSaltsService.list(saltsInfo,date).getList());
     }
 
     @RequestMapping("addSalts")

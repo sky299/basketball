@@ -2,12 +2,14 @@ package com.app.service.impl;
 
 import com.app.mapper.WxSaltsMapper;
 import com.app.service.WxSaltsService;
+import com.app.support.WxStudentSupport;
 import com.jckj.model.SaltsInfo;
+import com.jckj.util.RedisUtil;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,15 +19,35 @@ import java.util.List;
  * @describe:
  */
 @Service
-@Transactional
 public class WxSaltsServiceImpl implements WxSaltsService {
 
     @Resource
     private WxSaltsMapper wxCourseInfoMapper;
+    @Resource
+    private WxStudentSupport wxStudentSupport;
+//    private RedisUtil redisUtil =  new RedisUtil();
 
     @Override
-    public PageVo list(SaltsInfo saltsInfo) {
-        List<SaltsInfo> list = wxCourseInfoMapper.findAll(saltsInfo);
+    public PageVo list(SaltsInfo saltsInfo,String da) {
+        Calendar calendar = Calendar.getInstance();
+        List<SaltsInfo> list = null;
+        if (da.equals("今天")){
+            calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)-1,23,59,59);
+            long tt = calendar.getTime().getTime();
+            saltsInfo.setSaltsTime(tt);
+            list = wxCourseInfoMapper.findAll(saltsInfo);
+        }else {
+            if (da.equals("本周")){
+                calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONDAY), calendar.get(Calendar.DAY_OF_MONTH), 23, 59,59);
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+                calendar.add(Calendar.DATE,-1);
+                long time = calendar.getTime().getTime();
+                saltsInfo.setSaltsTime(time);
+                list = wxCourseInfoMapper.findAll(saltsInfo);
+            }else {
+                list = wxCourseInfoMapper.findAll(saltsInfo);
+            }
+        }
         return PageVo.successPage(list);
     }
 
@@ -35,28 +57,36 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         long time = date.getTime();
         saltsInfo.setCreateTime(time);
         saltsInfo.setUpdateTime(time);
-        saltsInfo.setSaltsName("小明");
+        saltsInfo.setStudentName("小明");
         saltsInfo.setSaltsTime(time);
         saltsInfo.setSaltsCause("误课加课");
         saltsInfo.setSaltsType(false);
         saltsInfo.setSaltsName(saltsInfo.getSaltsName());
         // TODO: student-学生课时加课
-        return wxCourseInfoMapper.addSalts(saltsInfo);
+        wxStudentSupport.addStudentCourseNum(saltsInfo.getStudentId());
+        int insert = wxCourseInfoMapper.addSalts(saltsInfo);
+        if (insert == 1){
+//            redisUtil.set(saltsInfo.getId()+"saltsInfo",saltsInfo);
+        }
+        return insert;
     }
 
     @Override
     public int cutSalts(SaltsInfo saltsInfo, String ids) {
+        //当前时间
         Date date = new Date();
         long time = date.getTime();
         String[] split = ids.split(",");
+        //成功条数
         int i = 0;
         for (String s : split) {
             // TODO: student-学生课时 param 学员id return 学员课时剩余数量
-            int studentCount = 10;
-            if (studentCount != 0) {
+            Integer studentCourseNum = wxStudentSupport.getStudentCourseNum(Integer.parseInt(s));
+            if (studentCourseNum != 0) {
                 SaltsInfo salts = new SaltsInfo();
                 // TODO：student-学员姓名(param 学员id return 学员姓名)
-                salts.setStudentName("tStudentInfo.getStudentName()");
+                String studentName = wxStudentSupport.getStudentName(Integer.parseInt(s));
+                salts.setStudentName(studentName);
                 salts.setSaltsTime(time);
                 salts.setSaltsCause("正常销课");
                 salts.setSaltsType(true);
@@ -66,8 +96,14 @@ public class WxSaltsServiceImpl implements WxSaltsService {
                 salts.setUpdateTime(time);
                 i += wxCourseInfoMapper.addSalts(salts);
                 // TODO: student-学生课时减一 param 学员id return 学员课时数量减一
+                wxStudentSupport.reduceStudentCourseNum(Integer.parseInt(s));
             }
         }
         return i;
     }
 }
+
+//if (update == 1) {
+//    redisUtil.remove(student.getSno()+"");
+//    redisUtil.set(student.getSno()+"",student);
+//}

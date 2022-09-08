@@ -14,7 +14,7 @@ public interface WxSaltsService {
      * @param saltsInfo 学员id
      * @return 记录
      */
-    PageVo list(SaltsInfo saltsInfo);
+    PageVo list(SaltsInfo saltsInfo,String date);
 
     /**
      * 加课时

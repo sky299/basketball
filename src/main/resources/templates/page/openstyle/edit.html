@@ -107,6 +107,7 @@
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
             formData.append("id",data.field.id);
+            formData.append("studentName",data.field.studentName);
             formData.append("schoolName",$("#schoolNames").val());
             var img = $("#imgs")[0].files[0];
             formData.append("img",img);
