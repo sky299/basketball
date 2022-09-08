@@ -17,7 +17,7 @@ public class WxStudentController {
 
     @PostMapping("list")
     public JsonResult list(TStudentInfo tStudentInfo){
-        return JsonResult.success(wxStudentService.list(tStudentInfo));
+        return JsonResult.success(wxStudentService.list(tStudentInfo).getList());
     }
 
     @PostMapping("info")
