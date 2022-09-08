@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.WxClassStudentMapper">
+    <select id="infoByStudentId" resultType="com.jckj.model.TRClassStudent" parameterType="int">
+        select id,
+               student_id         as studentId,
+               class_id           as classId,
+               student_course_num as studentCourseNum,
+               class_status       as classStatus,
+               is_delete          as isDelete,
+               create_time        as createTime,
+               update_time        as updateTime
+        from t_r_class_student
+        where id = #{id}
+    </select>
+
+    <update id="update" parameterType="com.jckj.model.TRClassStudent">
+        update t_r_class_student
+        set student_id         = #{studentId},
+            class_id           = #{classId},
+            student_course_num = #{studentCourseNum},
+            class_status       = #{classStatus},
+            is_delete          = #{isDelete},
+            create_time        = #{createTime},
+            update_time        = #{updateTime}
+        where id = #{id};
+    </update>
+</mapper>

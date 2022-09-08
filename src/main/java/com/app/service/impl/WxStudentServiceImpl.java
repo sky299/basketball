@@ -30,4 +30,9 @@ public class WxStudentServiceImpl implements WxStudentService {
     public TStudentInfo info(Integer id) {
         return wxStudentMapper.info(id);
     }
+
+    @Override
+    public void update(TStudentInfo tStudentInfo) {
+        wxStudentMapper.update(tStudentInfo);
+    }
 }

@@ -14,4 +14,6 @@ public interface WxStudentMapper {
     Integer count(PageDto pageDto);
 
     TStudentInfo info(Integer id);
+
+    void update(TStudentInfo tStudentInfo);
 }

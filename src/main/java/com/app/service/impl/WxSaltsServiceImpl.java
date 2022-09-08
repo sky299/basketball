@@ -3,9 +3,9 @@ package com.app.service.impl;
 import com.app.mapper.WxSaltsMapper;
 import com.app.service.WxSaltsService;
 import com.jckj.model.SaltsInfo;
-import com.jckj.model.TStudentInfo;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -17,7 +17,9 @@ import java.util.List;
  * @describe:
  */
 @Service
+@Transactional
 public class WxSaltsServiceImpl implements WxSaltsService {
+
     @Resource
     private WxSaltsMapper wxCourseInfoMapper;
 
@@ -54,7 +56,7 @@ public class WxSaltsServiceImpl implements WxSaltsService {
             if (studentCount != 0) {
                 SaltsInfo salts = new SaltsInfo();
                 // TODO：student-学员姓名(param 学员id return 学员姓名)
-                salts.setStudentName("小明");
+                salts.setStudentName("tStudentInfo.getStudentName()");
                 salts.setSaltsTime(time);
                 salts.setSaltsCause("正常销课");
                 salts.setSaltsType(true);

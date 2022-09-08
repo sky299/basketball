@@ -56,4 +56,16 @@
         from t_student_info
         where id = #{id};
     </select>
+
+    <update id="update" parameterType="com.jckj.model.TStudentInfo">
+        update t_student_info
+        set student_name   = #{studentName},
+            student_pay    = #{studentPay},
+            student_enroll = #{studentEnroll},
+            class_name     = #{className},
+            student_status = #{studentStatus},
+            update_time    = #{updateTime}
+        where id = #{id};
+    </update>
+
 </mapper>
