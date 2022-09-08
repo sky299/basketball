@@ -36,7 +36,6 @@
             <div class="layui-btn-container">
                 <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="add"> 添加 </button>
                 <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 批量删除 </button>
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="openExcel"> 导出 </button>
             </div>
         </script>
 
@@ -166,10 +165,6 @@
                         }
                     }
                 });
-            }else if(obj.event === 'openExcel'){//导出：使用poi技术导出excel
-                var page=$(".layui-laypage-skip").find("input").val() //当前页码值
-                var limit=$(".layui-laypage-limits").find("option:selected").val() //分页数目
-                window.location.href="/ssmredisshiro/import.do?page="+page+"&limit="+limit;
             }
         });
 
