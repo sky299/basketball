@@ -27,4 +27,11 @@ public class WxStudentSupport {
         trClassStudent.setUpdateTime(System.currentTimeMillis());
         wxClassStudentMapper.update(trClassStudent);
     }
+
+    public void reduceStudentCourseNum(Integer studentId){
+        TRClassStudent trClassStudent = wxClassStudentMapper.infoByStudentId(studentId);
+        trClassStudent.setStudentCourseNum(trClassStudent.getStudentCourseNum() - 1);
+        trClassStudent.setUpdateTime(System.currentTimeMillis());
+        wxClassStudentMapper.update(trClassStudent);
+    }
 }
