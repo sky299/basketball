@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.WxOpenCourseMapper">
+    <select id="findAll" parameterType="com.jckj.model.OpenCourse" resultType="com.jckj.model.OpenCourse">
+        select
+        id,
+        course_name courseName,
+        photo,
+        course_hour courseHour,
+        price,
+        start_time startTime,
+        end_time endTime
+        from t_open_course
+        where
+        is_delete=0
+        and school_name=#{schoolName}
+        and is_show=1
+        and course_state=1
+        and shaky_status=0
+    </select>
+<!--    <insert id="addSalts" parameterType="com.jckj.model.OpenCourse">-->
+<!--        insert into t_salts_info-->
+<!--        (student_name,salts_time,salts_cause,salts_type,salts_name,student_id,create_time,update_time)-->
+<!--        values-->
+<!--        (#{studentName},#{saltsTime},#{saltsCause},#{saltsType},#{saltsName},#{studentId},#{createTime},#{updateTime})-->
+<!--    </insert>-->
+<!--    <insert id="addMien" parameterType="com.jckj.model.OpenCourse">-->
+<!--        insert into-->
+<!--        t_mien_info-->
+<!--        (student_id,mien_photo,mien_video,mien_status,school_name,create_time,update_time)-->
+<!--        values-->
+<!--        (#{studentId},#{mienPhoto},#{mienVideo},#{mienStatus},#{schoolName},#{createTime},#{updateTime})-->
+<!--    </insert>-->
+</mapper>
