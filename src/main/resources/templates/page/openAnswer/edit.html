@@ -19,8 +19,13 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">答案</label>
         <div class="layui-input-block">
-            <input id="id" name="id" readonly>
             <input type="text" id="answer" name="answer" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label required">问题</label>
+        <div class="layui-input-block">
+            <select id="problem" ></select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -37,10 +42,34 @@
             layer = layui.layer,
             $ = layui.$;
 
+        var id;
+        $(function () {
+            //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
+            var parent_json = eval('('+parent.json+')');
+            id = parent_json.id;
+            var html = "";
+            //问题资源
+            $.ajax({
+                type:'post',
+                url: '/openProblem/findAll',
+                dataType:'JSON',
+                success: function (data) {
+                    var problems = data.data;
+                    //加载数据
+                    for (var i = 0; i < problems.length; i++) {
+                            html += '<option value="' + problems[i].id + '">' + problems[i].problem + '</option>'
+                    }
+                    $("#problem").html(html);
+                    form.render('select');
+                }
+            });
+        });
+
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
+            formData.append("id",id);
             formData.append("answer",data.field.answer);
+            formData.append("problemId",$("#problem").val());
                 $.ajax({
                     url:"/openanswer/update",
                     type:"post",

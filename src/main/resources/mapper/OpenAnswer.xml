@@ -7,21 +7,11 @@
     <select id="find" parameterType="com.jckj.model.OpenAnswer" resultType="com.jckj.model.OpenAnswer">
         select
         id,
+        problem_id problemId,
         answer
         from t_open_answer
         where is_delete=0
     </select>
-<!--    <select id="findById" resultType="com.jckj.model.OpenAnswer">-->
-<!--        select-->
-<!--        id,-->
-<!--        integral_number integralNumber-->
-<!--        from t_open_integral-->
-<!--        where is_delete=0-->
-<!--        and id=#{id}-->
-<!--    </select>-->
-<!--    <select id="count" resultType="java.lang.Integer">-->
-<!--        select count(1) from t_open_integral where is_delete=0-->
-<!--    </select>-->
 
     <!-- 新增 -->
     <insert id="add" parameterType="com.jckj.model.OpenAnswer">
@@ -35,6 +25,7 @@
     <update id="update" parameterType="com.jckj.model.OpenAnswer">
         update t_open_answer set
         answer=#{answer},
+        problem_id=#{problemId},
         update_time=#{updateTime}
         where id=#{id}
     </update>
