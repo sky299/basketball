@@ -19,42 +19,38 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">校区名称</label>
         <div class="layui-input-block">
-            <input id="id" name="id" readonly>
-            <input type="text" id="schoolName" name="schoolName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
+            <input type="text" id="schoolName" name="schoolName" lay-verify="required" lay-reqtext="校区名称" placeholder="校区名称" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">描述</label>
         <div class="layui-input-block">
-            <input type="text" id="describes" name="describes" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
+            <input type="text" id="describes" name="describes" lay-reqtext="描述" placeholder="请输入课程课时" lay-verify="required" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">校区照片</label>
         <div class="layui-input-block">
-            <input id="schoolPhoto" name="schoolPhoto" readonly>
             <img id="img" src="">
-<!--            <video width="320" height="240" controls loop src="/WeChat_20220831130256.mp4"></video>-->
-            <input type="file" id="imgs" name="img" lay-reqtext="课程头像" value="" class="layui-input">
+            <input type="file" id="imgs" name="img" lay-reqtext="课程头像" lay-verify="required" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" id="phone" name="phone" lay-reqtext="课程介绍" value="" class="layui-input">
+            <input type="text" id="phone" name="phone" lay-reqtext="联系电话" lay-verify="required|phone" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">地址</label>
         <div class="layui-input-block">
-            <input type="text" id="address" name="address" lay-reqtext="课程价格" value="" class="layui-input">
+            <input type="text" id="address" name="address" lay-reqtext="地址" lay-verify="required" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">是否展示</label>
         <div class="layui-input-block">
             <select id="shows" ></select>
-<!--            <input type="text" id="isShaky" name="isShaky" value="" class="layui-input">-->
         </div>
     </div>
     <div class="layui-form-item">
@@ -71,26 +67,12 @@
             layer = layui.layer,
             $ = layui.$;
 
-    layui.use('laydate',function () {
-        var laydate = layui.laydate;
-        laydate.render({
-             elem:'#courseTime',
-             type:'datetime'
-        }),
-        laydate.render({
-            elem:'#tocourseBiginTime',
-            type:'datetime'
-        }),
-        laydate.render({
-            elem:'#tocourseFinishTime',
-            type:'datetime'
-        })
-    });
+        var id;
         $(function () {
             //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
             var parent_json = eval('('+parent.json+')');
             $("img").attr("src",""+parent_json.schoolPhoto+"");
-
+            id = parent_json.id;
             var shows = parent_json.shows;
             if (shows == 0){
                 $("#shows").html('<option value="否">否</option><option value="是">是</option>');
@@ -102,7 +84,7 @@
 
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
+            formData.append("id",id);
             formData.append("schoolName",data.field.schoolName);
 
             formData.append("describes",data.field.describes);

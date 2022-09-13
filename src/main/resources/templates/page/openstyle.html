@@ -19,27 +19,9 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">用户姓名</label>
+                            <label class="layui-form-label">学员姓名</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="username" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户性别</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="sex" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">用户城市</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="city" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">是否展示</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="shows" autocomplete="off" class="layui-input">
+                                <input type="text" name="studentName" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -85,11 +67,11 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'studentName', width: 100, title: '学员姓名'},
-                {field: 'schoolName', width: 100, title: '所属校区', sort: true},
-                {field: 'picture', width: 100, sort: true, title: '学员风采图片',templet: '<div><img id="img" src="{{d.picture}}"></div>'},
+                {field: 'studentName', width: 150, title: '学员姓名'},
+                {field: 'schoolName', width: 150, title: '所属校区', sort: true},
+                {field: 'picture', width: 150, sort: true, title: '学员风采图片',templet: '<div><img id="img" src="{{d.picture}}"></div>'},
                 {field: 'video', width:320, sort: true, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="{{d.video}}"></video></div>'},
-                {field: 'shows', width: 100, title: '是否展示', sort: true ,templet: function (d) {
+                {field: 'shows', width: 150, title: '是否展示', sort: true ,templet: function (d) {
             if (d.shows == 0) {
                 return "否";
             } else {
@@ -106,10 +88,6 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -117,7 +95,7 @@
                     curr: 1
                 }
                 , where: {
-                    shows: data.field.shows
+                    studentName: data.field.studentName
                 }
             }, 'data');
 

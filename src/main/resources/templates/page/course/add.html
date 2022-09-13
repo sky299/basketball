@@ -19,44 +19,43 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">课程名</label>
         <div class="layui-input-block">
-            <input type="text" id="courseName" name="courseName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
+            <input type="text" id="courseName" name="courseName" lay-verify="required" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">课程课时</label>
         <div class="layui-input-block">
-            <input type="text" id="courseTime" name="courseTime" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
+            <input type="text" id="courseTime" name="courseTime" lay-verify="required" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">课程头像</label>
         <div class="layui-input-block">
-            <img id="photo">
             <input type="file" id="img" name="img" lay-reqtext="课程头像" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">课程介绍</label>
         <div class="layui-input-block">
-            <input type="text" id="courseIntroduce" name="courseIntroduce" lay-reqtext="课程介绍"value="" class="layui-input">
+            <input type="text" id="courseIntroduce" name="courseIntroduce" lay-verify="required" lay-reqtext="课程介绍"value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">课程价格</label>
         <div class="layui-input-block">
-            <input type="text" id="coursePrice" name="coursePrice" lay-reqtext="课程价格" value="" class="layui-input">
+            <input type="text" id="coursePrice" name="coursePrice" lay-verify="required" lay-reqtext="课程价格" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">上课开始时间</label>
         <div class="layui-input-block">
-            <input type="text" id="tocourseBiginTime" name="tocourseBiginTime" lay-reqtext="上课开始时间" value="" class="layui-input">
+            <input type="date" id="tocourseBiginTime" name="tocourseBiginTime" lay-verify="required" lay-reqtext="上课开始时间" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">上课结束时间</label>
         <div class="layui-input-block">
-            <input type="text" id="tocourseFinishTime" name="tocourseFinishTime" lay-reqtext="上课结束时间" value="" class="layui-input">
+            <input type="date" id="tocourseFinishTime" name="tocourseFinishTime" lay-verify="required" lay-reqtext="上课结束时间" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -68,19 +67,25 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">活动课程</label>
         <div class="layui-input-block">
-            <input type="text" id="isShaky" name="isShaky" value="" class="layui-input">
+            <select id="isShaky" >
+                <option value="否">否</option>
+                <option value="是">是</option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">课程状态</label>
         <div class="layui-input-block">
-            <input type="text" id="courseState" name="courseState" value="" class="layui-input">
+            <select id="courseState" >
+                <option value="上架">上架</option>
+                <option value="下架">下架</option>
+            </select>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">校区名</label>
         <div class="layui-input-block">
-            <input type="text" id="schoolName" name="schoolName" lay-verify="required" lay-reqtext="校区名" value="" class="layui-input">
+            <select id="schoolNames" ></select>
         </div>
     </div>
     <div class="layui-form-item">
@@ -95,14 +100,22 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-        layui.use('laydate',function () {
-            var laydate = layui.laydate;
-            laydate.render({
-                elem:'#send_time_str',
-                type:'datetime'
-            })
+        //校区资源
+        var html = "";
+        $.ajax({
+            type:'post',
+            url: '/school/list',
+            dataType:'JSON',
+            success: function (data) {
+                var school = data.data;
+                //加载数据
+                for (var i = 0; i < school.length; i++) {
+                    html += '<option value="' + school[i].schoolName + '">' + school[i].schoolName + '</option>'
+                }
+                $("#schoolNames").html(html);
+                form.render('select');
+            }
         });
-
         //监听提交
         form.on('submit(saveBtn)', function (data) {
                 var formData = new FormData();//form表单
@@ -110,34 +123,48 @@
                 formData.append("courseTime",data.field.courseTime);
                 formData.append("courseIntroduce",data.field.courseIntroduce);
                 formData.append("coursePrice",data.field.coursePrice);
-                formData.append("tocourseBiginTime",data.field.tocourseBiginTime);
-                formData.append("tocourseFinishTime",data.field.tocourseFinishTime);
-                formData.append("enrollTotal",data.field.enrollTotal);
-                formData.append("isShaky",data.field.isShaky);
-                formData.append("courseState",data.field.courseState);
-                formData.append("schoolName",data.field.schoolName);
-                var fileobj = $("#img")[0].files[0];
-                formData.append("img",fileobj);
-                $.ajax({
-                    url:"/course/add",
-                    type:"post",
-                    data:formData,
-                    processData:false,
-                    contentType:false,
-                    success:function (data) {
-                        if (data.data==1){
-                            var index = layer.alert("添加成功", {
-                            title: '添加成功'
-                        }, function () {
-                            // 关闭弹出层
-                            layer.close(index);
-                            var iframeIndex = parent.layer.getFrameIndex(window.name);
-                            parent.layer.close(iframeIndex);
-                            parent.layui.table.reload("currentTableId");
-                        });
-                        }
+                var tocourseBiginTime = new Date(data.field.tocourseBiginTime).getTime();
+                formData.append("tocourseBiginTime",tocourseBiginTime);
+                var tocourseFinishTime = new Date(data.field.tocourseFinishTime).getTime();
+                if (tocourseFinishTime > tocourseBiginTime){
+                    formData.append("tocourseFinishTime",tocourseFinishTime);
+                    formData.append("enrollTotal",data.field.enrollTotal);
+                    if ($("#isShaky").val() == "否"){
+                        formData.append("isShaky","0");
+                    }else {
+                        formData.append("isShaky","1");
                     }
-                });
+                    if ($("#courseState").val() == "上架"){
+                        formData.append("courseState","0");
+                    }else {
+                        formData.append("courseState","1");
+                    }
+                    formData.append("schoolName",$("#schoolNames").val());
+                    var fileobj = $("#img")[0].files[0];
+                    formData.append("img",fileobj);
+                    $.ajax({
+                        url:"/course/add",
+                        type:"post",
+                        data:formData,
+                        processData:false,
+                        contentType:false,
+                        success:function (data) {
+                            if (data.data==1){
+                                var index = layer.alert("添加成功", {
+                                    title: '添加成功'
+                                }, function () {
+                                    // 关闭弹出层
+                                    layer.close(index);
+                                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(iframeIndex);
+                                    parent.layui.table.reload("currentTableId");
+                                });
+                            }
+                        }
+                    });
+                }else {
+                    alert("不能在开始时间之前");
+                }
             return false;
         });
 

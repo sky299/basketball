@@ -1,5 +1,6 @@
 package com.app.service;
 
+import com.jckj.model.Mien;
 import com.jckj.model.SaltsInfo;
 import com.jckj.vo.PageVo;
 
@@ -30,4 +31,11 @@ public interface WxSaltsService {
      * @return 成功条数
      */
     int cutSalts(SaltsInfo saltsInfo,String ids);
+
+    /**
+     *公共风采上传
+     * @param mien 风采对象
+     * @return 返回成功条数
+     */
+    int addMien(Mien mien);
 }

@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import com.app.service.WxSaltsService;
+import com.jckj.model.Mien;
 import com.jckj.model.SaltsInfo;
 import com.jckj.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class WxSaltsInfoController {
     @RequestMapping("cutSalts")
     public JsonResult cutSalts(SaltsInfo saltsInfo,String ids){
         return JsonResult.success(wxSaltsService.cutSalts(saltsInfo,ids));
+    }
+
+    @RequestMapping("addMien")
+    public JsonResult addMien(Mien mien){
+        return JsonResult.success(wxSaltsService.addMien(mien));
     }
 
 }

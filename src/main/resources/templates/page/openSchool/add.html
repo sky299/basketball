@@ -19,13 +19,13 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">校区名称</label>
         <div class="layui-input-block">
-            <input type="text" id="schoolName" name="schoolName" lay-reqtext="课程名不能为空" placeholder="请输入课程名" value="" class="layui-input">
+            <input type="text" id="schoolName" name="schoolName" lay-reqtext="课程名不能为空" lay-verify="required" placeholder="请输入校区名" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">描述</label>
         <div class="layui-input-block">
-            <input type="text" id="describes" name="describes" lay-reqtext="课程课时" placeholder="请输入课程课时" value="" class="layui-input">
+            <input type="text" id="describes" name="describes" lay-reqtext="描述" placeholder="描述" lay-verify="required" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -37,13 +37,13 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">联系电话</label>
         <div class="layui-input-block">
-            <input type="text" id="phone" name="phone" lay-reqtext="课程介绍"value="" class="layui-input">
+            <input type="text" id="phone" name="phone" lay-reqtext="联系电话" lay-verify="required|phone" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label required">地址</label>
         <div class="layui-input-block">
-            <input type="text" id="address" name="address" lay-reqtext="课程价格" value="" class="layui-input">
+            <input type="text" id="address" name="address" lay-reqtext="地址" lay-verify="required" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

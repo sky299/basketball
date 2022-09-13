@@ -14,7 +14,7 @@
         from t_salts_info
         where
         is_delete=0
-        <if test="studentId != null ">and student_id=#{studentId}</if>
+        <if test="studentName != null ">and student_name like '%${studentName}%'</if>
     </select>
     <select id="count" parameterType="com.jckj.model.SaltsInfo" resultType="java.lang.Integer">
         select count(1) from t_salts_info where is_delete=0 <if test="studentId != null ">and student_id=#{studentId}</if>

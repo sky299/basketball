@@ -69,19 +69,19 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'schoolName', width: 50, title: '校区名称'},
-                {field: 'describes', width: 100, title: '描述', sort: true},
+                {field: 'schoolName', width: 150, title: '校区名称'},
+                {field: 'describes', width: 150, title: '描述', sort: true},
                 {field: 'schoolPhoto', width: 100, title: '校区照片', templet: '<div><img id="img" src="{{d.schoolPhoto}}"></div>'},
-                {field: 'phone', width: 100, title: '联系电话'},
-                {field: 'address', title: '地址', width: 80},
-                {field: 'shows', width: 50, title: '是否展示', sort: true,templet: function (d) {
+                {field: 'phone', width: 150, title: '联系电话'},
+                {field: 'address', title: '地址', width: 200},
+                {field: 'shows', width: 150, title: '是否展示', sort: true,templet: function (d) {
                         if (d.shows == 0) {
                             return "否";
                         } else {
                             return "是";
                         }
                     }},
-                {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -91,10 +91,6 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
-            layer.alert(result, {
-                title: '最终的搜索信息'
-            });
 
             //执行搜索重载
             table.reload('currentTableId', {

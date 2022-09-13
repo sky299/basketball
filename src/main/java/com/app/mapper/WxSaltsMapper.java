@@ -1,5 +1,6 @@
 package com.app.mapper;
 
+import com.jckj.model.Mien;
 import com.jckj.model.SaltsInfo;
 import org.springframework.stereotype.Repository;
 
@@ -17,11 +18,18 @@ public interface WxSaltsMapper {
      * @param saltsInfo 学员id
      * @return 记录
      */
-    public List<SaltsInfo> findAll(SaltsInfo saltsInfo);
+    List<SaltsInfo> findAll(SaltsInfo saltsInfo);
     /**
      * 销课功能
      * @param saltsInfo 销课类型
      * @return 成功条数
      */
-    public int addSalts(SaltsInfo saltsInfo);
+    int addSalts(SaltsInfo saltsInfo);
+
+    /**
+     * 风采添加
+     * @param mien 风采对象
+     * @return 成功条数
+     */
+    int addMien(Mien mien);
 }

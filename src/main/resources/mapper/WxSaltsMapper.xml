@@ -22,4 +22,11 @@
         values
         (#{studentName},#{saltsTime},#{saltsCause},#{saltsType},#{saltsName},#{studentId},#{createTime},#{updateTime})
     </insert>
+    <insert id="addMien" parameterType="com.jckj.model.Mien">
+        insert into
+        t_mien_info
+        (student_id,mien_photo,mien_video,mien_status,school_name,create_time,update_time)
+        values
+        (#{studentId},#{mienPhoto},#{mienVideo},#{mienStatus},#{schoolName},#{createTime},#{updateTime})
+    </insert>
 </mapper>

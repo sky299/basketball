@@ -17,10 +17,8 @@
 <body>
 <div class="layui-form layuimini-form">
     <div class="layui-form-item">
-        <input id="id" name="id" readonly>
         <label class="layui-form-label required">关于我们</label>
         <div class="layui-input-block">
-            <input id="about" name="about" readonly>
             <img id="img" src="">
 <!--            <video width="320" height="240" controls loop src="/WeChat_20220831130256.mp4"></video>-->
             <input type="file" id="imgs" name="img" lay-reqtext="课程头像" value="" class="layui-input">
@@ -40,15 +38,17 @@
             layer = layui.layer,
             $ = layui.$;
 
+        var id ;
         $(function () {
             //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
             var parent_json = eval('('+parent.json+')');
             $("img").attr("src",""+parent_json.about+"");
+            id = parent_json.id;
         });
 
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
+            formData.append("id",id);
             var fileobj = $("#imgs")[0].files[0];
             formData.append("img",fileobj);
                 $.ajax({

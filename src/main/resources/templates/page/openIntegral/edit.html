@@ -19,7 +19,6 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">积分获取方式</label>
         <div class="layui-input-block">
-            <input id="id" name="id" readonly>
             <input type="text" id="integralNumber" name="integralNumber" value="" class="layui-input">
         </div>
     </div>
@@ -37,9 +36,16 @@
             layer = layui.layer,
             $ = layui.$;
 
+        var id ;
+        $(function () {
+            //从父层获取值，json是父层的全局js变量。eval是将该string类型的json串变为标准的json串
+            var parent_json = eval('('+parent.json+')');
+            id = parent_json.id;
+        });
+
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
-            formData.append("id",data.field.id);
+            formData.append("id",id);
             formData.append("integralNumber",data.field.integralNumber);
                 $.ajax({
                     url:"/openIntegral/update",

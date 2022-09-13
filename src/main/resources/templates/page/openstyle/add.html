@@ -81,6 +81,7 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var formData = new FormData();//form表单
+            formData.append("studentName",$("#studentName").val());
             formData.append("schoolName",$("#schoolNames").val());
             var img = $("#imgs")[0].files[0];
             formData.append("img",img);

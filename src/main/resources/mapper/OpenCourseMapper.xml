@@ -71,7 +71,7 @@
         <if test="startTime != null">start_time=#{startTime},</if>
         <if test="endTime != null">end_time=#{endTime},</if>
         <if test="payNumber != null">pay_number=#{payNumber},</if>
-        <if test="schoolName != null">school_name=#{coursschoolNameeName},</if>
+        <if test="schoolName != null">school_name=#{schoolName},</if>
         <if test="shows != null">is_show=#{shows},</if>
         update_time=#{updateTime}
         where id=#{id}

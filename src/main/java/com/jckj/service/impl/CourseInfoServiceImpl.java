@@ -54,6 +54,8 @@ public class CourseInfoServiceImpl implements CourseInfoService {
                 //上传到七牛云
                 String result = QiniuFile.loadFile(img.getBytes());
                 courseInfo.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }else {
+                courseInfo.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/FiJV0oXj7ZgeJf0GlO2T9RM0F9cC");
             }
         } catch (IOException e) {
             e.printStackTrace();

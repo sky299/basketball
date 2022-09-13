@@ -3,6 +3,7 @@ package com.app.service.impl;
 import com.app.mapper.WxSaltsMapper;
 import com.app.service.WxSaltsService;
 import com.app.support.WxStudentSupport;
+import com.jckj.model.Mien;
 import com.jckj.model.SaltsInfo;
 import com.jckj.util.RedisUtil;
 import com.jckj.vo.PageVo;
@@ -21,23 +22,26 @@ import java.util.List;
 @Service
 public class WxSaltsServiceImpl implements WxSaltsService {
 
+    String today = "today";
+    String week = "week";
+
     @Resource
     private WxSaltsMapper wxCourseInfoMapper;
     @Resource
     private WxStudentSupport wxStudentSupport;
-//    private RedisUtil redisUtil =  new RedisUtil();
+    private RedisUtil redisUtil =  new RedisUtil();
 
     @Override
     public PageVo list(SaltsInfo saltsInfo,String da) {
         Calendar calendar = Calendar.getInstance();
         List<SaltsInfo> list = null;
-        if (da.equals("今天")){
+        if (da.equals(today)){
             calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)-1,23,59,59);
             long tt = calendar.getTime().getTime();
             saltsInfo.setSaltsTime(tt);
             list = wxCourseInfoMapper.findAll(saltsInfo);
         }else {
-            if (da.equals("本周")){
+            if (da.equals(week)){
                 calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONDAY), calendar.get(Calendar.DAY_OF_MONTH), 23, 59,59);
                 calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                 calendar.add(Calendar.DATE,-1);
@@ -57,7 +61,9 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         long time = date.getTime();
         saltsInfo.setCreateTime(time);
         saltsInfo.setUpdateTime(time);
-        saltsInfo.setStudentName("小明");
+        // TODO：student-学员姓名(param 学员id return 学员姓名)
+        String studentName = wxStudentSupport.getStudentName(saltsInfo.getStudentId());
+        saltsInfo.setStudentName(studentName);
         saltsInfo.setSaltsTime(time);
         saltsInfo.setSaltsCause("误课加课");
         saltsInfo.setSaltsType(false);
@@ -66,7 +72,7 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         wxStudentSupport.addStudentCourseNum(saltsInfo.getStudentId());
         int insert = wxCourseInfoMapper.addSalts(saltsInfo);
         if (insert == 1){
-//            redisUtil.set(saltsInfo.getId()+"saltsInfo",saltsInfo);
+            redisUtil.set(saltsInfo.getId()+"saltsInfo",saltsInfo);
         }
         return insert;
     }
@@ -101,9 +107,15 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         }
         return i;
     }
+
+    @Override
+    public int addMien(Mien mien) {
+        mien.setCreateTime(System.currentTimeMillis());
+        mien.setUpdateTime(System.currentTimeMillis());
+        int i = wxCourseInfoMapper.addMien(mien);
+        return i;
+    }
 }
 
-//if (update == 1) {
-//    redisUtil.remove(student.getSno()+"");
-//    redisUtil.set(student.getSno()+"",student);
-//}
+//    redisUtil.remove(id);
+//    redisUtil.set(id,student);
