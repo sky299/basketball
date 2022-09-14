@@ -27,7 +27,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">所在校区</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="studentEnroll" autocomplete="off" class="layui-input">
+                                <input type="text" name="studentSchool" autocomplete="off" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-inline">
@@ -99,7 +99,7 @@
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd')}}</div>"
                 },
                 {field: 'studentPhoto', width: 100, title: '头像', templet: '#imgtem'},
-                {field: 'studentEnroll', width: 100, title: '所在校区'},
+                {field: 'studentSchool', width: 100, title: '所在校区'},
                 {field: 'gender', width: 80, title: '性别', sort: true},
                 {field: 'className', width: 80, title: '所在班级'},
                 {field: 'studentStatus', width: 80, title: '分班状态'},
@@ -120,7 +120,7 @@
                 }
                 , where: {
                     studentName: data.field.studentName,
-                    studentEnroll: data.field.studentEnroll,
+                    studentSchool: data.field.studentSchool,
                     className: data.field.className,
                     studentStatus: data.field.studentStatus
                 }
@@ -204,7 +204,7 @@
                         body.find('#id').val(data.id);
                         body.find('#studentName').val(data.studentName);
                         body.find('#studentPay').val(toDateString(data.studentPay));
-                        body.find('#studentEnroll').val(data.studentEnroll);
+                        body.find('#studentSchool').val(data.studentSchool);
                         body.find('#className').val(data.className);
                         var numbers = body.find("#studentStatus").find("option");
                         for (var j = 0; j < numbers.length; j++) {

@@ -34,7 +34,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">所在校区</label>
         <div class="layui-input-block">
-            <input type="text" name="studentEnroll" lay-verify="required" lay-reqtext="所在校区不能为空" class="layui-input">
+            <input type="text" name="studentSchool" lay-verify="required" lay-reqtext="所在校区不能为空" class="layui-input">
         </div>
     </div>
 
@@ -96,7 +96,7 @@
             var formData = new FormData();
             formData.append("studentName", data.field.studentName);
             formData.append("studentPay", studentPay);
-            formData.append("studentEnroll", data.field.studentEnroll);
+            formData.append("studentSchool", data.field.studentSchool);
             formData.append("photo", $("#studentPhoto")[0].files[0]);
             formData.append("gender", data.field.gender);
             formData.append("className", data.field.className);
