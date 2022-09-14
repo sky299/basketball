@@ -90,7 +90,7 @@
                     'id': data.field.id,
                     'studentName': data.field.studentName,
                     'studentPay': studentPay,
-                    'studentEnroll': data.field.studentEnroll,
+                    'studentSchool': data.field.studentSchool,
                     'className': data.field.className,
                     'studentStatus': data.field.studentStatus
                 }),
@@ -99,14 +99,16 @@
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
+                    window.location.reload()
                 },
                 error: function (data) {
-
+                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(iframeIndex);
+                    window.location.reload()
                 }
             })
             return false;
         });
-
     });
 </script>
 </body>
