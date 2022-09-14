@@ -17,7 +17,12 @@
                create_time  as createTime,
                update_time  as updateTime
         from t_enroll_info
-        where is_delete = 0
+        <trim prefix="where" suffixOverrides="and">
+            is_delete = 0
+            <if test="schoolName != null and schoolName != ''">
+                and school_name like concat('%',#{schoolName},'%')
+            </if>
+        </trim>
         order by id desc limit #{dataNum}, #{limit};
     </select>
 
