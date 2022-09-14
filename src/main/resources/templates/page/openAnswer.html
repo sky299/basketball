@@ -51,6 +51,7 @@
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
                 {field: 'answer', width: 200,sort: true, title: '答案'},
+                {field: 'problemId', width: 200,sort: true, title: '问题'},
                 {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
@@ -136,7 +137,6 @@
                     content: '../page/openAnswer/edit.html',
                     success:function() {
                         var body = layer.getChildFrame('body',index);
-                        body.find('#id').val(data.id);
                         body.find('#answer').val(data.answer);
                     }
                 });

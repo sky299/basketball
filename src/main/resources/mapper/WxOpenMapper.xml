@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.WxOpenMapper">
+    <select id="findAllPhotoInfo" resultType="com.jckj.model.PhotoInfo">
+        select id, about from t_photo_info where is_delete=0
+    </select>
+    <select id="findAllOpenIntegral" parameterType="com.jckj.model.OpenIntegral" resultType="com.jckj.model.OpenIntegral">
+        select
+        id,
+        integral_number integralNumber
+        from t_open_integral
+        where is_delete=0
+    </select>
+    <select id="findAllOpenRotation" parameterType="com.jckj.model.OpenRotation" resultType="com.jckj.model.OpenRotation">
+        select
+        id,
+        school_photo schoolPhoto,
+        is_show shows,
+        sequence
+        from t_open_rotation
+        where is_delete=0
+    </select>
+</mapper>

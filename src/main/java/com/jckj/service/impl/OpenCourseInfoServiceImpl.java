@@ -51,6 +51,8 @@ public class OpenCourseInfoServiceImpl implements OpenCourseInfoService {
                 //上传到七牛云
                 String result = QiniuFile.loadFile(img.getBytes());
                 openCourse.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/" + result);
+            }else {
+                openCourse.setPhoto("http://rhh643m33.hn-bkt.clouddn.com/FiJV0oXj7ZgeJf0GlO2T9RM0F9cC");
             }
         } catch (IOException e) {
             e.printStackTrace();

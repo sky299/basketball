@@ -19,8 +19,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label required">问题</label>
         <div class="layui-input-block">
-            <input type="file" id="problem" name="problem" value="" class="layui-input">
-            <button >上传</button>
+            <input type="text" id="problem" name="problem" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -35,7 +34,6 @@
         var form = layui.form,
             layer = layui.layer,
             $ = layui.$;
-
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {

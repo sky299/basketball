@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * @author 小江
@@ -74,7 +73,7 @@ public class WxSaltsServiceImpl implements WxSaltsService {
         wxStudentSupport.addStudentCourseNum(saltsInfo.getStudentId());
         int insert = wxCourseInfoMapper.addSalts(saltsInfo);
         if (insert == 1){
-            redisUtil.set(saltsInfo.getId()+"saltsInfo",saltsInfo);
+//            redisUtil.set(saltsInfo.getId()+"saltsInfo",saltsInfo);
         }
         return insert;
     }
