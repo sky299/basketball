@@ -138,6 +138,9 @@
                     shadeClose: true,
                     area: ['100%', '100%'],
                     content: 'add.html',
+                    end: function (){
+                        location.reload()
+                    }
                 });
                 $(window).on("resize", function () {
                     layer.full(index);
@@ -155,8 +158,16 @@
                             url: 'bathDelete',
                             data: {'id': id},
                             success: function (data) {
-                                obj.del();
                                 layer.close(index);
+                                table.reload('currentTableId',{
+                                    url: 'list',
+                                    page: {
+                                        curr: 1
+                                    }
+                                });
+                            },
+                            error: function (data) {
+                                alert("后台错误")
                             }
                         });
                     });
@@ -182,7 +193,7 @@
                 let date = new Date(timestamp);
                 let Y = date.getFullYear() + '-';
                 let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-                let D = date.getDate() + ' ';
+                let D = date.getDate();
                 return Y + M + D;
             }
 
@@ -204,6 +215,9 @@
                         body.find('#welfare').val(data.welfare);
                         body.find('#userPwd').val(data.userPwd);
                         body.find('#userPhone').val(data.userPhone);
+                    },
+                    end: function (){
+                        location.reload()
                     }
                 });
                 $(window).on("resize", function () {
@@ -219,7 +233,7 @@
                         obj.del();
                     },
                     error: function () {
-
+                        alert("后台错误")
                     }
                 })
             }

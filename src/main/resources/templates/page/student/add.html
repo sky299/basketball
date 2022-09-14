@@ -110,12 +110,9 @@
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
-                    window.location.reload()
                 },
                 error: function (data) {
-                    var iframeIndex = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(iframeIndex);
-                    window.location.reload()
+                    alert("后台错误")
                 }
             })
             return false;

@@ -98,14 +98,12 @@
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
-                    layui.table.reload()
                 },
                 error: function (data) {
-
+                    alert("后台错误")
                 }
             })
         });
-
     });
 </script>
 </body>
