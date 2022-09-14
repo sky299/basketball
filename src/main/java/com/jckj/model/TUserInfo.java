@@ -10,7 +10,7 @@ public class TUserInfo extends PageDto {
 
     private String userName;
 
-    private String birthday;
+    private Long birthday;
 
     private Integer welfare;
 
@@ -52,11 +52,11 @@ public class TUserInfo extends PageDto {
         this.userName = userName;
     }
 
-    public String getBirthday() {
+    public Long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Long birthday) {
         this.birthday = birthday;
     }
 

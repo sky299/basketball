@@ -90,7 +90,7 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'studentName', width: 100, title: '学员姓名'},
+                {field: 'studentName', width: 100, title: '学员姓名', sort: true},
                 {
                     field: 'studentPay',
                     width: 100,
@@ -98,12 +98,12 @@
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.studentPay, 'yyyy-MM-dd')}}</div>"
                 },
-                {field: 'studentPhoto', width: 100, title: '头像', templet: '#imgtem'},
-                {field: 'studentSchool', width: 100, title: '所在校区'},
+                {field: 'studentPhoto', width: 100, title: '头像', templet: '#imgtem', sort: true},
+                {field: 'studentSchool', width: 100, title: '所在校区', sort: true},
                 {field: 'gender', width: 80, title: '性别', sort: true},
-                {field: 'className', width: 80, title: '所在班级'},
-                {field: 'studentStatus', width: 80, title: '分班状态'},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
+                {field: 'className', width: 80, title: '所在班级', sort: true},
+                {field: 'studentStatus', width: 80, title: '分班状态', sort: true},
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center", sort: true}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,

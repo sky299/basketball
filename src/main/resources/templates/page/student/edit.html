@@ -40,6 +40,13 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label required">学员头像</label>
+        <div class="layui-input-block">
+            <input type="file" name="studentPhoto" id="studentPhoto" lay-verify="required" lay-reqtext="请上传头像" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label required">所在校区</label>
         <div class="layui-input-block">
             <input type="text" name="studentSchool" id="studentSchool" lay-verify="required" lay-reqtext="所在校区不能为空"
@@ -77,25 +84,31 @@
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
-            $ = layui.$;
+            $ = layui.$,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#studentPay'
+        })
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var birthday = $("#studentPay").val()
             var studentPay = new Date(birthday).getTime()
+            var formData = new FormData();
+            formData.append("id", data.field.id);
+            formData.append("studentName", data.field.studentName);
+            formData.append("studentPay", studentPay);
+            formData.append("studentSchool", data.field.studentSchool);
+            formData.append("photo", $("#studentPhoto")[0].files[0]);
+            formData.append("className", data.field.className);
+            formData.append("studentStatus", data.field.studentStatus);
             $.ajax({
                 type: 'post',
                 url: 'update',
-                data: JSON.stringify({
-                    'id': data.field.id,
-                    'studentName': data.field.studentName,
-                    'studentPay': studentPay,
-                    'studentSchool': data.field.studentSchool,
-                    'className': data.field.className,
-                    'studentStatus': data.field.studentStatus
-                }),
-                dataType: 'json',
-                contentType: "application/json",
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);

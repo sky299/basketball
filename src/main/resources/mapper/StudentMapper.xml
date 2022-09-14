@@ -76,6 +76,7 @@
         set student_name   = #{studentName},
             student_pay    = #{studentPay},
             student_school = #{studentSchool},
+            student_photo  = #{studentPhoto},
             class_name     = #{className},
             student_status = #{studentStatus},
             update_time    = #{updateTime}

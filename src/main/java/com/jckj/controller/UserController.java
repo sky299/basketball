@@ -29,7 +29,8 @@ public class UserController {
     }
 
     @PostMapping("update")
-    public JsonResult update(@RequestBody TUserInfo tUserInfo) throws IOException {
+    public JsonResult update(TUserInfo tUserInfo, @RequestParam("photo") MultipartFile photo) throws IOException {
+        tUserInfo.setUserPhoto(QiniuFile.loadFile(photo.getBytes()));
         userService.update(tUserInfo);
         return JsonResult.success();
     }

@@ -49,6 +49,14 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label required">头像</label>
+        <div class="layui-input-block">
+            <input type="file" name="userPhoto" id="userPhoto" lay-verify="required" lay-reqtext="请上传头像"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label required">用户积分</label>
         <div class="layui-input-block">
             <input type="text" name="welfare" id="welfare" lay-verify="required" lay-reqtext="用户积分不能为空"
@@ -76,25 +84,32 @@
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer,
-            $ = layui.$;
+            $ = layui.$,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#birthday'
+        })
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             var birthday = $("#birthday").val()
             var userPay = new Date(birthday).getTime()
+
+            var formData = new FormData();
+            formData.append("id", data.field.id);
+            formData.append("userName", data.field.userName);
+            formData.append("birthday", userPay);
+            formData.append("welfare", data.field.welfare);
+            formData.append("userPwd", data.field.userPwd);
+            formData.append("photo", $("#userPhoto")[0].files[0]);
+            formData.append("userPhone", data.field.userPhone);
             $.ajax({
                 type: 'post',
                 url: 'update',
-                data: JSON.stringify({
-                    'id': data.field.id,
-                    'userName': data.field.userName,
-                    'birthday': userPay,
-                    'welfare': data.field.welfare,
-                    'userPwd': data.field.userPwd,
-                    'userPhone': data.field.userPhone
-                }),
-                dataType: "json",
-                contentType: "application/json",
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
@@ -102,7 +117,7 @@
                 error: function (data) {
                     alert("后台错误")
                 }
-            })
+            });
         });
     });
 </script>
