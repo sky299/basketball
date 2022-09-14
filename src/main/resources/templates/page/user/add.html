@@ -119,10 +119,12 @@
                 success: function (data) {
                     var iframeIndex = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(iframeIndex);
-                    layui.table.reload()
+                    window.location.reload()
                 },
                 error: function (data) {
-
+                    var iframeIndex = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(iframeIndex);
+                    window.location.reload()
                 }
             })
             return false;
