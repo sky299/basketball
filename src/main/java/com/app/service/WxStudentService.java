@@ -10,7 +10,7 @@ public interface WxStudentService {
 
     Integer count(PageDto pageDto);
 
-    TStudentInfo info(Integer id);
+    TStudentInfo info(String studentId);
 
     void update(TStudentInfo tStudentInfo);
 }

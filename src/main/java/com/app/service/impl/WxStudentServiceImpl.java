@@ -27,12 +27,13 @@ public class WxStudentServiceImpl implements WxStudentService {
     }
 
     @Override
-    public TStudentInfo info(Integer id) {
-        return wxStudentMapper.info(id);
+    public TStudentInfo info(String studentId) {
+        return wxStudentMapper.info(studentId);
     }
 
     @Override
     public void update(TStudentInfo tStudentInfo) {
+        tStudentInfo.setUpdateTime(System.currentTimeMillis());
         wxStudentMapper.update(tStudentInfo);
     }
 }

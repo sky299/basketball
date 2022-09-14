@@ -58,9 +58,9 @@ public class SaltsInfo extends PageDto implements Serializable {
     /**
      * 学生id
      */
-   private Integer studentId;
+   private String studentId;
 
-    public SaltsInfo(Integer id, String studentName, Long saltsTime, String saltsCause, Boolean saltsType, Boolean isDelete, Long createTime, Long updateTime, String saltsName,Integer studentId) {
+    public SaltsInfo(Integer id, String studentName, Long saltsTime, String saltsCause, Boolean saltsType, Boolean isDelete, Long createTime, Long updateTime, String saltsName,String studentId) {
         this.id = id;
         this.studentName = studentName;
         this.saltsTime = saltsTime;
@@ -148,11 +148,11 @@ public class SaltsInfo extends PageDto implements Serializable {
         this.saltsName = saltsName;
     }
 
-    public Integer getStudentId() {
+    public String getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(Integer studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 }

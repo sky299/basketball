@@ -8,11 +8,11 @@ public class TOrderInfo extends PageDto {
 
     private String orderId;
 
-    private String userId;
+    private String userPhone;
 
-    private String enrollId;
+    private Integer enrollId;
 
-    private String studentId;
+    private String studentName;
 
     private String schoolName;
 
@@ -38,28 +38,12 @@ public class TOrderInfo extends PageDto {
         this.orderId = orderId;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getEnrollId() {
+    public Integer getEnrollId() {
         return enrollId;
     }
 
-    public void setEnrollId(String enrollId) {
+    public void setEnrollId(Integer enrollId) {
         this.enrollId = enrollId;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
     }
 
     public String getSchoolName() {
@@ -92,5 +76,21 @@ public class TOrderInfo extends PageDto {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 }

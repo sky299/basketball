@@ -40,7 +40,7 @@
         where is_delete = 0;
     </select>
 
-    <select id="info" parameterType="int" resultType="com.jckj.model.TStudentInfo">
+    <select id="info" parameterType="string" resultType="com.jckj.model.TStudentInfo">
         select id,
                student_id     as studentId,
                student_name   as studentName,
@@ -54,7 +54,7 @@
                create_time    as createTime,
                update_time    as updateTime
         from t_student_info
-        where id = #{id};
+        where student_id = #{studentId};
     </select>
 
     <update id="update" parameterType="com.jckj.model.TStudentInfo">

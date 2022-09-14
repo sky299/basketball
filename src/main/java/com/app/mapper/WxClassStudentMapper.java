@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WxClassStudentMapper {
 
-    TRClassStudent infoByStudentId(Integer studentId);
+    TRClassStudent findByStudentId(String studentId);
 
     void update(TRClassStudent trClassStudent);
 }

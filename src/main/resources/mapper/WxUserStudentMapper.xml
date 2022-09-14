@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.mapper.WxUserStudentMapper">
+    <select id="findByUserPhone" parameterType="string" resultType="com.jckj.model.TRUserStudent">
+        select id,
+               rid,
+               user_phone  as userPhone,
+               student_id  as studentId,
+               relation,
+               create_time as createTime,
+               update_time as updateTime
+        from t_r_user_student
+        where user_phone = #{userPhone};
+    </select>
+</mapper>

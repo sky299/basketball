@@ -21,7 +21,7 @@ public class WxStudentSupport {
      * @param studentId
      * @return
      */
-    public String getStudentName(Integer studentId) {
+    public String getStudentName(String studentId) {
         TStudentInfo tStudentInfo = wxStudentMapper.info(studentId);
         return tStudentInfo.getStudentName();
     }
@@ -31,8 +31,8 @@ public class WxStudentSupport {
      * @param studentId
      * @return
      */
-    public Integer getStudentCourseNum(Integer studentId){
-        TRClassStudent trClassStudent = wxClassStudentMapper.infoByStudentId(studentId);
+    public Integer getStudentCourseNum(String studentId){
+        TRClassStudent trClassStudent = wxClassStudentMapper.findByStudentId(studentId);
         return trClassStudent.getStudentCourseNum();
     }
 
@@ -40,8 +40,8 @@ public class WxStudentSupport {
      * 增加学员课时
      * @param studentId
      */
-    public void addStudentCourseNum(Integer studentId) {
-        TRClassStudent trClassStudent = wxClassStudentMapper.infoByStudentId(studentId);
+    public void addStudentCourseNum(String studentId) {
+        TRClassStudent trClassStudent = wxClassStudentMapper.findByStudentId(studentId);
         trClassStudent.setStudentCourseNum(trClassStudent.getStudentCourseNum() + 1);
         trClassStudent.setUpdateTime(System.currentTimeMillis());
         wxClassStudentMapper.update(trClassStudent);
@@ -51,8 +51,8 @@ public class WxStudentSupport {
      * 减少学员课时
      * @param studentId
      */
-    public void reduceStudentCourseNum(Integer studentId){
-        TRClassStudent trClassStudent = wxClassStudentMapper.infoByStudentId(studentId);
+    public void reduceStudentCourseNum(String studentId){
+        TRClassStudent trClassStudent = wxClassStudentMapper.findByStudentId(studentId);
         trClassStudent.setStudentCourseNum(trClassStudent.getStudentCourseNum() - 1);
         trClassStudent.setUpdateTime(System.currentTimeMillis());
         wxClassStudentMapper.update(trClassStudent);

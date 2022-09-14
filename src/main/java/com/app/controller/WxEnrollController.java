@@ -25,4 +25,9 @@ public class WxEnrollController {
         wxEnrollService.insert(enroll);
         return JsonResult.success();
     }
+
+    @PostMapping("signUp")
+    public JsonResult signUp(Enroll enroll){
+        return JsonResult.success(wxEnrollService.signUp(enroll));
+    }
 }

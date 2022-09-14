@@ -15,8 +15,8 @@ public class WxClassStudentServiceImpl implements WxClassStudentService {
     private WxClassStudentMapper wxClassStudentMapper;
 
     @Override
-    public TRClassStudent infoByStudentId(Integer studentId) {
-        return wxClassStudentMapper.infoByStudentId(studentId);
+    public TRClassStudent findByStudentId(String studentId) {
+        return wxClassStudentMapper.findByStudentId(studentId);
     }
 
     @Override
