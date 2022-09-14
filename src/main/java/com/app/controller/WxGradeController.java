@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2022/9/7 10:49
  * @description:
  */
-@RequestMapping("wx")
+@RequestMapping("wx/grade")
 @RestController
 public class WxGradeController {
     @Autowired

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * @date 2022/9/13 16:15
  * @describe:
  */
-@RequestMapping("wxOpwnCourse")
+@RequestMapping("wx/OpenCourse")
 @RestController
 public class WxOpenCourseCoutroller {
     @Resource

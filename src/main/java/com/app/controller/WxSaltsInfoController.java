@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022/9/6 16:52
  * @describe:
  */
-@RequestMapping("wxSaltsInfo")
+@RequestMapping("wx/SaltsInfo")
 @RestController
 public class WxSaltsInfoController {
     @Autowired

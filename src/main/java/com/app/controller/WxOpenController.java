@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  * @date 2022/9/13 16:57
  * @describe:
  */
-@RequestMapping("wxOpwn")
+@RequestMapping("wx/open")
 @RestController
 public class WxOpenController {
 
