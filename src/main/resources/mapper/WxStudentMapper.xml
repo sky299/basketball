@@ -7,7 +7,7 @@
         student_id as studentId,
         student_name as studentName,
         student_pay as studentPay,
-        student_enroll as studentEnroll,
+        student_school as studentSchool,
         student_photo as studentPhoto,
         gender,
         class_name as className,
@@ -21,8 +21,8 @@
             <if test="studentName != null and studentName != ''">
                 and student_name like concat('%',#{studentName},'%')
             </if>
-            <if test="studentEnroll != null and studentEnroll != ''">
-                and student_enroll like concat('%',#{studentEnroll},'%')
+            <if test="studentSchool != null and studentSchool != ''">
+                and student_school like concat('%',#{studentSchool},'%')
             </if>
             <if test="className != null and className != ''">
                 and class_name like concat('%',#{className},'%')
@@ -45,7 +45,7 @@
                student_id     as studentId,
                student_name   as studentName,
                student_pay    as studentPay,
-               student_enroll as studentEnroll,
+               student_school as studentSchool,
                student_photo  as studentPhoto,
                gender,
                class_name     as className,
@@ -61,11 +61,42 @@
         update t_student_info
         set student_name   = #{studentName},
             student_pay    = #{studentPay},
-            student_enroll = #{studentEnroll},
+            student_school = #{studentSchool},
             class_name     = #{className},
             student_status = #{studentStatus},
             update_time    = #{updateTime}
         where id = #{id};
     </update>
 
+    <select id="findByStudentNameAndStudentSchool" parameterType="string" resultType="com.jckj.model.TStudentInfo">
+        select id,
+        student_id as studentId,
+        student_name as studentName,
+        student_pay as studentPay,
+        student_school as studentSchool,
+        student_photo as studentPhoto,
+        gender,
+        class_name as className,
+        student_status as studentStatus,
+        is_delete as isDelete,
+        create_time as createTime,
+        update_time as updateTime
+        from t_student_info
+        <trim prefix="where" suffixOverrides="and">
+            is_delete = 0
+            <if test="studentName != null and studentName != ''">
+                and student_name like concat('%',#{studentName},'%')
+            </if>
+            <if test="studentSchool != null and studentSchool != ''">
+                and student_school like concat('%',#{studentSchool},'%')
+            </if>
+        </trim>
+    </select>
+
+    <insert id="insert" parameterType="com.jckj.model.TStudentInfo">
+        insert into t_student_info (student_id, student_name, student_pay, student_school, student_photo, gender,
+                                    class_name, student_status, create_time, update_time)
+        values (#{studentId}, #{studentName}, #{studentPay}, #{studentSchool}, #{studentPhoto}, #{gender}, #{className},
+                #{studentStatus}, #{createTime}, #{updateTime});
+    </insert>
 </mapper>

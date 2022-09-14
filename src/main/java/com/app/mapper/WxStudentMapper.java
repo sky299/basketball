@@ -16,4 +16,8 @@ public interface WxStudentMapper {
     TStudentInfo info(String studentId);
 
     void update(TStudentInfo tStudentInfo);
+
+    TStudentInfo findByStudentNameAndStudentSchool(String studentName,String studentSchool);
+
+    void insert(TStudentInfo tStudentInfo);
 }

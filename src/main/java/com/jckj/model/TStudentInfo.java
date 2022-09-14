@@ -12,7 +12,7 @@ public class TStudentInfo extends PageDto {
 
     private Long studentPay;
 
-    private String studentEnroll;
+    private String studentSchool;
 
     private String studentPhoto;
 
@@ -60,12 +60,12 @@ public class TStudentInfo extends PageDto {
         this.studentPay = studentPay;
     }
 
-    public String getStudentEnroll() {
-        return studentEnroll;
+    public String getStudentSchool() {
+        return studentSchool;
     }
 
-    public void setStudentEnroll(String studentEnroll) {
-        this.studentEnroll = studentEnroll;
+    public void setStudentSchool(String studentSchool) {
+        this.studentSchool = studentSchool;
     }
 
     public String getStudentPhoto() {
