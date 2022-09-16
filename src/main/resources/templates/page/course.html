@@ -84,8 +84,8 @@
                 {field: 'photo', width: 100, title: '课程头像', templet: '<div><img id="img" src="{{d.photo}}"></div>'},
                 {field: 'courseIntroduce', title: '课程介绍', width: 100},
                 {field: 'coursePrice', width: 150, title: '课程价格', sort: true},
-                {field: 'tocourseBiginTime', width: 150, title: '上课开始时间', sort: true,templet: "<div>{{layui.util.toDateString(d.tocourseBiginTime, 'yyyy-MM-dd')}}</div>"},
-                {field: 'tocourseFinishTime', width: 150, title: '上课结束时间',templet: "<div>{{layui.util.toDateString(d.tocourseFinishTime, 'yyyy-MM-dd')}}</div>"},
+                {field: 'tocourseBiginTime', width: 150, title: '课程开始时间', sort: true,templet: "<div>{{layui.util.toDateString(d.tocourseBiginTime, 'yyyy-MM-dd')}}</div>"},
+                {field: 'tocourseFinishTime', width: 150, title: '课程结束时间',templet: "<div>{{layui.util.toDateString(d.tocourseFinishTime, 'yyyy-MM-dd')}}</div>"},
                 {field: 'enrollTotal', width: 150, title: '购买人数', sort: true},
                 {field: 'isShaky', width: 150, title: '是否为活动课程', sort: true,templet: function (d) {
                         if (d.isShaky == 0) {
