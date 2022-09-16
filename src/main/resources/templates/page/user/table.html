@@ -96,7 +96,7 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'userPwd', width: 100, title: '密码', sort: true},
+                {field: 'userPwd', width: 100, title: '密码'},
                 {
                     field: 'birthday',
                     width: 100,
@@ -104,13 +104,13 @@
                     sort: true,
                     templet: "<div>{{layui.util.toDateString(d.birthday, 'yyyy-MM-dd')}}</div>"
                 },
-                {field: 'userPhoto', width: 100, title: '头像', templet: '#imgtem', sort: true},
-                {field: 'userName', width: 100, title: '姓名', sort: true},
-                {field: 'welfare', width: 100, title: '积分', sort: true},
-                {field: 'userRole', width: 100, title: '用户类型', sort: true},
-                {field: 'userSex', width: 100, title: '性别', sort: true},
-                {field: 'userPhone', width: 100, title: '手机号', sort: true},
-                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center", sort: true}
+                {field: 'userPhoto', width: 100, title: '头像', templet: '#imgtem'},
+                {field: 'userName', width: 100, title: '姓名'},
+                {field: 'welfare', width: 100, title: '积分'},
+                {field: 'userRole', width: 100, title: '用户类型'},
+                {field: 'userSex', width: 100, title: '性别'},
+                {field: 'userPhone', width: 100, title: '手机号'},
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
