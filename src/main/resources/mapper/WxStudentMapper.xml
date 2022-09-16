@@ -45,7 +45,6 @@
                student_id     as studentId,
                student_name   as studentName,
                student_pay    as studentPay,
-               student_school as studentSchool,
                student_photo  as studentPhoto,
                gender,
                class_name     as className,

@@ -45,6 +45,16 @@
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
 <!--            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>-->
         </script>
+        <style type="text/css">
+            .layui-table-cell{
+                text-align: center;
+                height: auto;
+                white-space: normal;
+            }
+            .layui-table img{
+                max-width: 100px;
+            }
+        </style>
 
     </div>
 </div>
@@ -69,8 +79,8 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'about', width: 100, title: '关于我们',sort: true,templet: '<div><img id="img" src="{{d.about}}"></div>'},
-                {title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
+                {field: 'about', width: 150, title: '关于我们',sort: true,templet: '<div><img id="img" src="{{d.about}}"></div>'},
+                {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
