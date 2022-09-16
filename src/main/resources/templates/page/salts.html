@@ -69,18 +69,18 @@
             cols: [[
                 {type: "checkbox", width: 50},
                 {field: 'id', width: 80, title: 'ID', sort: true},
-                {field: 'studentName', width: 100,sort: true ,title: '学员姓名'},
+                {field: 'studentName', width: 150,sort: true ,title: '学员姓名'},
                 {field: 'saltsTime', width: 200, title: '销课时间', sort: true,templet: "<div>{{layui.util.toDateString(d.salts_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"},
                 {field: 'saltsCause', width: 200, sort: true, title: '销课原因'},
-                {field: 'saltsType', title: '销课类型', width: 100, sort:true, templet: function (d) {
+                {field: 'saltsType', title: '销课类型', width: 150, sort:true, templet: function (d) {
                         if (d.salts_type == 0) {
                             return "销课";
                         } else {
                             return "加课";
                         }
                     }},
-                {field: 'saltsName', width: 100, title: '销课人', sort: true},
-                {field: 'studentId', width: 100, title: '学生id', sort: true}
+                {field: 'saltsName', width: 150, title: '销课人', sort: true},
+                {field: 'studentId', width: 150, title: '学生id', sort: true}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,

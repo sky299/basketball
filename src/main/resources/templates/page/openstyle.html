@@ -45,6 +45,17 @@
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
+
+        <style type="text/css">
+            .layui-table-cell{
+                text-align: center;
+                height: auto;
+                white-space: normal;
+            }
+            .layui-table img{
+                max-width: 100px;
+            }
+        </style>
     </div>
 </div>
 <script src="../lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
@@ -70,7 +81,7 @@
                 {field: 'studentName', width: 150, title: '学员姓名'},
                 {field: 'schoolName', width: 150, title: '所属校区', sort: true},
                 {field: 'picture', width: 150, sort: true, title: '学员风采图片',templet: '<div><img id="img" src="{{d.picture}}"></div>'},
-                {field: 'video', width:320, sort: true, title: '学员风采视频',templet: '<div><video width="320" height="240" controls loop src="{{d.video}}"></video></div>'},
+                {field: 'video', width:320, sort: true, title: '学员风采视频',templet: '<div><video width="210" height="120" controls loop src="{{d.video}}"></video></div>'},
                 {field: 'shows', width: 150, title: '是否展示', sort: true ,templet: function (d) {
             if (d.shows == 0) {
                 return "否";

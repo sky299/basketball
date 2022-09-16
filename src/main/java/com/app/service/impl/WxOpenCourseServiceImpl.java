@@ -22,7 +22,7 @@ public class WxOpenCourseServiceImpl implements WxOpenCourseService {
     @Override
     public PageVo list(OpenCourse openCourse, HttpSession session) {
         String school = (String) session.getAttribute("school");
-        openCourse.setSchoolName(school);
+//        openCourse.setSchoolName(school);
         List<OpenCourse> all = wxCourseMapper.findAll(openCourse);
         return PageVo.successPage(all);
     }
