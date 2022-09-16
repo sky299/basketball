@@ -19,11 +19,11 @@ public class StudentController {
 
     @RequestMapping("list")
     public JsonResult list(TStudentInfo tStudentInfo) {
-        return JsonResult.success(studentService.list(tStudentInfo).getList(),studentService.count(tStudentInfo));
+        return JsonResult.success(studentService.list(tStudentInfo).getList(), studentService.count(tStudentInfo));
     }
 
     @RequestMapping("info")
-    public JsonResult info(Integer id){
+    public JsonResult info(Integer id) {
         return JsonResult.success(studentService.info(id));
     }
 
@@ -35,20 +35,22 @@ public class StudentController {
     }
 
     @PostMapping("update")
-    public JsonResult update(TStudentInfo tStudentInfo, @RequestParam("photo") MultipartFile photo) throws IOException {
-        tStudentInfo.setStudentPhoto(QiniuFile.loadFile(photo.getBytes()));
+    public JsonResult update(TStudentInfo tStudentInfo, @RequestParam(value = "photo", required = false) MultipartFile photo) throws IOException {
+        if (!photo.isEmpty() || photo.getSize() > 0) {
+            tStudentInfo.setStudentPhoto(QiniuFile.loadFile(photo.getBytes()));
+        }
         studentService.update(tStudentInfo);
         return JsonResult.success();
     }
 
     @PostMapping("remove")
-    public JsonResult remove(Integer id){
+    public JsonResult remove(Integer id) {
         studentService.remove(id);
         return JsonResult.success();
     }
 
     @PostMapping("bathDelete")
-    public JsonResult bathDelete(String id){
+    public JsonResult bathDelete(String id) {
         String[] split = id.split(",");
         for (String s : split) {
             studentService.remove(Integer.parseInt(s));

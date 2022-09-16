@@ -29,8 +29,10 @@ public class UserController {
     }
 
     @PostMapping("update")
-    public JsonResult update(TUserInfo tUserInfo, @RequestParam("photo") MultipartFile photo) throws IOException {
-        tUserInfo.setUserPhoto(QiniuFile.loadFile(photo.getBytes()));
+    public JsonResult update(TUserInfo tUserInfo, @RequestParam(value = "photo", required = false) MultipartFile photo) throws IOException {
+        if (!photo.isEmpty() || photo.getSize() > 0) {
+            tUserInfo.setUserPhoto(QiniuFile.loadFile(photo.getBytes()));
+        }
         userService.update(tUserInfo);
         return JsonResult.success();
     }
@@ -43,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping("bathDelete")
-    public JsonResult bathDelete(String id){
+    public JsonResult bathDelete(String id) {
         String[] split = id.split(",");
         for (String s : split) {
             userService.remove(Integer.parseInt(s));
