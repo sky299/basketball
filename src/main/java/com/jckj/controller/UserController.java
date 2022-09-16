@@ -30,8 +30,11 @@ public class UserController {
 
     @PostMapping("update")
     public JsonResult update(TUserInfo tUserInfo, @RequestParam(value = "photo", required = false) MultipartFile photo) throws IOException {
-        if (!photo.isEmpty() || photo.getSize() > 0) {
+        if (null != photo) {
             tUserInfo.setUserPhoto(QiniuFile.loadFile(photo.getBytes()));
+        }else {
+            TUserInfo userInfo = userService.info(tUserInfo.getId());
+            tUserInfo.setUserPhoto(userInfo.getUserPhoto());
         }
         userService.update(tUserInfo);
         return JsonResult.success();

@@ -227,12 +227,7 @@
                         body.find('#studentPay').val(toDateString(data.studentPay));
                         body.find('#studentSchool').val(data.studentSchool);
                         body.find('#className').val(data.className);
-                        var numbers = body.find("#studentStatus").find("option");
-                        for (var j = 0; j < numbers.length; j++) {
-                            if ($(numbers[j]).val() == data.studentStatus) {
-                                $(numbers[j]).attr("selected", "true");
-                            }
-                        }
+                        body.find('#studentStatus').val(data.studentStatus);
                     },
                     end: function (){
                         location.reload()

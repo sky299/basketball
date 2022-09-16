@@ -62,13 +62,9 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label required">分班状态</label>
+        <label class="layui-form-label required">分班状态(0为未分班，1为已分班)</label>
         <div class="layui-input-block">
-            <select name="studentStatus" id="studentStatus">
-                <option value="-1"></option>
-                <option value="0">未分班</option>
-                <option value="1">已分班</option>
-            </select>
+            <input type="text" name="studentStatus" id="studentStatus" lay-verify="required" lay-reqtext="分班状态不能为空" class="layui-input">
         </div>
     </div>
 

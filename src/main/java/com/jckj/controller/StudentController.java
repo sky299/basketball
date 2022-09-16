@@ -36,8 +36,11 @@ public class StudentController {
 
     @PostMapping("update")
     public JsonResult update(TStudentInfo tStudentInfo, @RequestParam(value = "photo", required = false) MultipartFile photo) throws IOException {
-        if (!photo.isEmpty() || photo.getSize() > 0) {
+        if (null != photo) {
             tStudentInfo.setStudentPhoto(QiniuFile.loadFile(photo.getBytes()));
+        }else {
+            TStudentInfo studentInfo = studentService.info(tStudentInfo.getId());
+            tStudentInfo.setStudentPhoto(studentInfo.getStudentPhoto());
         }
         studentService.update(tStudentInfo);
         return JsonResult.success();
