@@ -13,4 +13,9 @@
         from t_r_user_student
         where user_phone = #{userPhone};
     </select>
+
+    <insert id="insert" parameterType="com.jckj.model.TRUserStudent">
+        insert into t_r_user_student (rid, user_phone, student_id, relation, create_time, update_time)
+        values (#{rid}, #{userPhone}, #{studentId}, #{relation}, #{createTime}, #{updateTime});
+    </insert>
 </mapper>

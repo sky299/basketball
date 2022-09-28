@@ -24,4 +24,11 @@ public class WxUserStudentServiceImpl implements WxUserStudentService {
         TRUserStudent trUserStudent = wxUserStudentMapper.findByUserPhone(userPhone);
         return wxStudentMapper.info(trUserStudent.getStudentId());
     }
+
+    @Override
+    public void insert(TRUserStudent trUserStudent) {
+        trUserStudent.setCreateTime(System.currentTimeMillis());
+        trUserStudent.setUpdateTime(System.currentTimeMillis());
+        wxUserStudentMapper.insert(trUserStudent);
+    }
 }

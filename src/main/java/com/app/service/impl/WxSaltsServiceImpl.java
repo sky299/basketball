@@ -5,7 +5,6 @@ import com.app.service.WxSaltsService;
 import com.app.support.WxStudentSupport;
 import com.jckj.model.Mien;
 import com.jckj.model.SaltsInfo;
-import com.jckj.util.RedisUtil;
 import com.jckj.vo.PageVo;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,6 @@ public class WxSaltsServiceImpl implements WxSaltsService {
     private WxSaltsMapper wxCourseInfoMapper;
     @Resource
     private WxStudentSupport wxStudentSupport;
-    private RedisUtil redisUtil =  new RedisUtil();
 
     @Override
     public PageVo list(SaltsInfo saltsInfo,String da) {

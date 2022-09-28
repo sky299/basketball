@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 public interface WxUserStudentMapper {
 
     TRUserStudent findByUserPhone(String phone);
+
+    void insert(TRUserStudent trUserStudent);
 }

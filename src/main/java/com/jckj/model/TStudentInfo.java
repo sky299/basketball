@@ -2,7 +2,7 @@ package com.jckj.model;
 
 import com.jckj.dto.PageDto;
 
-public class TStudentInfo extends PageDto {
+public class TStudentInfo extends PageDto{
 
     private Integer id;
 
